@@ -69,9 +69,9 @@ terminal inicio;
       terminal imprimir_nl  ;
 
 non terminal INIT, INSTRUCCIONES, INSTRUCCION, DECLARACION ,BLOQUE,IMPRIMIR, IMPRIMIRLN, ASIGNACION,METODO,FUNCION,METODOsp,FUNCIONsp,CONDICIONIF,CICLO,RETURN,CALL,E,error,
-COND_WHILE, COMPARACIONES,AUMENTO,TIPODATO_DECLARACION,PARAMETROS,PARS,PAR,PARAMETROSLL,PARSLL, FUNCIONsp, METODOsp, RETURN,ES,IDS,COMP,F,VARIABLE,TIPO_DECLARACION_CONST;
+COND_WHILE, COMPARACIONES,AUMENTO,TIPODATO_DECLARACION,PARAMETROS,PARS,PAR,PARAMETROSLL,PARSLL, FUNCIONsp, METODOsp, RETURN,ES,IDS,COMP,F,VARIABLE;
 start with INIT;
-INIT::= INSTRUCCIONES {:System.out.println("Fin de analisis de entrada");:} ;
+INIT::= INSTRUCCIONES {return $1} ;
 
 
 INSTRUCCIONES ::=   INSTRUCCIONES INSTRUCCION { $1.push($2); $$=$1; console.log("s ")}
@@ -80,6 +80,7 @@ INSTRUCCIONES ::=   INSTRUCCIONES INSTRUCCION { $1.push($2); $$=$1; console.log(
 
 
 INSTRUCCION ::= DECLARACION   { $$=$1;console.log("reconocio declaracion ") }
+            | BLOQUE        { console.log("reconocio bloque") }
             | IMPRIMIR      { $$=$1;console.log("reconocio PRINT ") }
             | IMPRIMIRLN    { console.log("reconocio PRINTLN ") }
             | ASIGNACION    { $$=$1;console.log("reconocio asignacion ") }
@@ -96,12 +97,11 @@ INSTRUCCION ::= DECLARACION   { $$=$1;console.log("reconocio declaracion ") }
             | error   punto_y_coma  { console.log("Error sintactico en la linea "+(yylineno+1)); }
 ;
 //INSTRUCCIONES CICLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOS
-CICLO::= para  abre_parentesis DECLARACION_INTERNA ',' COMPARACIONES ',' AUMENTO ')' BLOQUE {console.log("reconocio CICLO FOR ") }
-    | mientras abre_parentesis COND_WHILE cierra_parentesis INSTRUCCIONES fin_mientras {console.log("reconocio CICLO WHILE ")}
-    | repetir INSTRUCCIONES hasta_que abre_parentesis COND_WHILE cierra_parentesis punto_y_coma {console.log("reconocio CICLO DO-WHILE ")}
+CICLO::= para  '(' DECLARACION_INTERNA ',' COMPARACIONES ',' AUMENTO ')' BLOQUE {console.log("reconocio CICLO FOR ") }
+    | 'pr_while' '(' COND_WHILE ')' BLOQUE {console.log("reconocio CICLO WHILE ")}
+    | 'pr_do' BLOQUE 'pr_while' '(' COND_WHILE ')' ';' {console.log("reconocio CICLO DO-WHILE ")}
     ;
-COND_WHILE::= true
-          | false
+COND_WHILE::= 'expreR_bool'
           |  COMPARACIONES
 ;
 
@@ -113,9 +113,9 @@ AUMENTO::= ASIGNACION {}
 
 
 //CONDICION IF
-CONDICIONIF::= si abre_parentesis COMPARACIONES cierra_parentesis INSTRUCCIONES de_lo_contrario INSTRUCCIONES fin_si { System.out.println("encontro condicional iF"));
+CONDICIONIF::= 'pr_if' '(' COMPARACIONES ')' BLOQUE 'pr_else' BLOQUE  { console.log("reconoci una sentencia if");
                                                        }
-| si abre_parentesis COMPARACIONES cierra_parentesis INSTRUCCIONES fin_si
+| 'pr_if' '(' COMPARACIONES ')' BLOQUE
 
 ;
 
@@ -125,38 +125,38 @@ CONDICIONIF::= si abre_parentesis COMPARACIONES cierra_parentesis INSTRUCCIONES 
 
 
 //FUNCIONES Y METODOS CON PARAMETROS
-FUNCION::= TIPODATO_DECLARACION VARIABLE PARAMETROS INTRUCCIONES fin_funcion
+FUNCION::= TIPODATO_DECLARACION 'id' PARAMETROS BLOQUE
 ;
-METODO ::= metodo VARIABLE PARAMETROS INSTRUCCIONES fin_metodo
+METODO ::= 'pr_void' 'id' PARAMETROS BLOQUE
 ;
-PARAMETROS ::= abre_parentesis PARS cierra_parentesis
+PARAMETROS ::= '(' PARS ')'
 ;
-PARS ::= PARS coma PAR
+PARS ::= PARS ',' PAR
      | PAR
 ;
-PAR ::= TIPODATO_DECLARACION VARIABLE
+PAR ::= TIPODATO_DECLARACION 'id'
 ;
-PARAMETROSLL ::= abre_parentesis PARSLL cierra_parentesis
+PARAMETROSLL ::= '(' PARSLL ')'
 ;
-PARSLL ::= PARSLL coma E
+PARSLL ::= PARSLL ',' E
      | E
 ;
 
 //sin parametros
 
-FUNCIONsp::= TIPODATO_DECLARACION VARIABLE abre_parentesis cierra_parentesis INSTRUCCIONES fin_funcion {}
+FUNCIONsp::= TIPODATO_DECLARACION 'id' '(' ')'BLOQUE
 ;
-METODOsp ::= metodo VARIABLE abre_parentesis cierra_parentesis INSTRUCCIONES fin_metodo {}
+METODOsp ::= 'pr_void' 'id' '(' ')' BLOQUE
 ;
 //EL RETURN
 
-RETURN ::= retornar E punto_y_coma {}
-        | retornar  punto_y_coma {}
+RETURN ::= 'pr_return' E ';'
+        | 'pr_return' ';'
 ;
 
 //LLAMADA DE FUNCION O METODOS
-CALL::= ejecutar VARIABLE PARAMETROSLL punto_y_coma {}
-    | ejecutar VARIABLE abre_parentesis cierra_parentesis punto_y_coma {}
+CALL::= 'pr_call' 'id' PARAMETROSLL ';'
+    | 'pr_call' 'id' '('')'';'
 
 ;
 
@@ -165,19 +165,19 @@ CALL::= ejecutar VARIABLE PARAMETROSLL punto_y_coma {}
 
 //INSTRUCCION IMPRIMIR UNA Y VARIAS LINEAS
 
-IMPRIMIR ::= imprimir  abre_parentesis E cierra_parentesis punto_y_coma {$$ = new imprimir($3,@1.first_line, @1.first_column );}
+IMPRIMIR ::= 'pr_print' '(' E ')' ';' {$$ = new imprimir($3,@1.first_line, @1.first_column );}
 ;
-IMPRIMIRLN ::= imprimir_nl abre_parentesis E cierra_parentesis punto_y_coma {$$ = new imprimir($3,@1.first_line, @1.first_column );}
+IMPRIMIRLN ::= 'pr_println' '(' E ')' ';'
 ;
 
 
 //ASIGNACION DE VARIABLES YA DECLARADAS (CAMBIO DE VALOR)
-ASIGNACION ::= IDS flechita E punto_y_coma {$$= new Asignacion($1,$3, @1.first_line, @1.first_column);}
-            | IDS flechita VARIABLE punto_y_coma{$$= new Asignacion($1,$3, @1.first_line, @1.first_column);}
+ASIGNACION ::= 'id' '=' 'E' ';' {$$= new Asignacion($1,$3, @1.first_line, @1.first_column);}
+            | 'id' '=' 'id' ';'{$$= new Asignacion($1,$3, @1.first_line, @1.first_column);}
             ;
 
 //DECLARACION DE VARIABLES NO DECLARADAS SINGULAR O EN CONJUNTO, FINALES O NO FINALES, INCLUYE EXPRESIONES
-ES ::= ES coma E {$1.push($3); $$=$1;}
+ES ::= ES ',' E {$1.push($3); $$=$1;}
     | E {$$ = [$1]}
     ;
 
