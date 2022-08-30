@@ -40,9 +40,11 @@
     comilla = \u0022
     cejilla = \u0027
     //punto = "."|"+"
-    id = ({letra}|{digito}|{guion})+
-    frase = ({comilla}({id})+{comilla})
+    id = ({letra}|{digito})+
+    frase = ({comilla}({id}|{WhiteSpace})+{comilla})
     frasecita = ({cejilla}({id})+{cejilla})
+    number = {digito}+"."?{digito}*
+
 
     //
     //conjNUM = ({digito}|{letra})({WhiteSpace}?","{WhiteSpace}?({digito}|{letra}))+
@@ -61,13 +63,13 @@
     final = "fin"
     numero = "numero"
     cadena = "cadena"
-    boolean = "boolean"
+    bulean = "boolean"
     caracter = "caracter"
     DecIntegerLiteral = 0 | [1-9][0-9]*
 
     numero = "numero"
     cadena ="cadena"
-    boolean = "boolean"
+
     verdadero = "verdadero"
     falso = "falso"
     caracter = "caracter"
@@ -133,39 +135,39 @@
 %%
 
     /* keywords */
-    <YYINITIAL> {inicio}           { //System.out.println("Reconocio token: <abre_llave>lexema:"+yytext());
-                                          return new Symbol(Simbolos.abre_llave,yycolumn, yyline, yytext()); }
-    <YYINITIAL> {final}          { //System.out.println("Reconocio token: <cierra_llave>lexema:"+yytext());
-                                              return new Symbol(Simbolos.cierra_llave,yycolumn, yyline, yytext()); }
-    <YYINITIAL> "CONJ"            { //System.out.println("Reconocio token: <conjpr>lexema:"+yytext());
-                                              return new Symbol(Simbolos.conjpr,yycolumn, yyline, yytext()); }
+    <YYINITIAL> {inicio}           { return new Symbol(Simbolos.inicio,yycolumn, yyline, yytext()); }
+    <YYINITIAL> {final}          {  return new Symbol(Simbolos.final,yycolumn, yyline, yytext()); }
 
     <YYINITIAL> {
       /* identifiers */
-      "->"                            {//System.out.println("Reconocio token: <flecha>lexema:"+yytext());
-                                                                            return new Symbol(Simbolos.flecha,yycolumn, yyline, yytext()); }
-      {id}                   { //System.out.println("Reconocio token: <id>lexema:"+yytext());
-                               return new Symbol(Simbolos.id,yycolumn, yyline, yytext()); }
-      {frase}                   { //System.out.println("Reconocio token: <frase>lexema:"+yytext());
-                                     return new Symbol(Simbolos.frase,yycolumn, yyline, yytext()); }
-      {conjunto}                   { //System.out.println("Reconocio token: <conjunto>lexema:"+yytext());
-                                     return new Symbol(Simbolos.conjunto,yycolumn, yyline, yytext()); }
-      {ER}                   { //System.out.println("Reconocio token: <expreg>lexema:"+yytext());
-                                     return new Symbol(Simbolos.expreg,yycolumn, yyline, yytext()); }
+      {flechita}                           {return new Symbol(Simbolos.flechita,yycolumn, yyline, yytext()); }
+      {id}                   { return new Symbol(Simbolos.id,yycolumn, yyline, yytext()); }
+      {frase}                   {return new Symbol(Simbolos.frase,yycolumn, yyline, yytext()); }
+    {guion}                   { return new Symbol(Simbolos.guion,yycolumn, yyline, yytext()); }
+    {numero}                   {  return new Symbol(Simbolos.numero,yycolumn, yyline, yytext()); }
+    {number}                   { return new Symbol(Simbolos.number,yycolumn, yyline, yytext()); }
+    {cadena}                   { return new Symbol(Simbolos.cadena,yycolumn, yyline, yytext()); }
+    {frase}                   { return new Symbol(Simbolos.frase,yycolumn, yyline, yytext()); }
+      {bulean}                   { return new Symbol(Simbolos.bulean,yycolumn, yyline, yytext()); }
+      {number}                   { return new Symbol(Simbolos.number,yycolumn, yyline, yytext()); }
+      {number}                   { return new Symbol(Simbolos.number,yycolumn, yyline, yytext()); }
+      {number}                   { return new Symbol(Simbolos.number,yycolumn, yyline, yytext()); }
+      {number}                   { return new Symbol(Simbolos.number,yycolumn, yyline, yytext()); }
+      {number}                   { return new Symbol(Simbolos.number,yycolumn, yyline, yytext()); }
+      {number}                   { return new Symbol(Simbolos.number,yycolumn, yyline, yytext()); }
 
-      /* literals */
-      {DecIntegerLiteral}            { //System.out.println("Reconocio token: <DecIntegerLiteral>lexema:"+yytext());
-                                return new Symbol(Simbolos.DecIntegerLiteral,yycolumn, yyline, yytext()); }
 
 
-      /* operators */
-      ":"                            { //System.out.println("Reconocio token: <dos_puntos>lexema:"+yytext());
-                                                                      return new Symbol(Simbolos.dos_puntos,yycolumn, yyline, yytext()); }
-      ";"                            { //System.out.println("Reconocio token: <separador>lexema:"+yytext());
-                                                                      return new Symbol(Simbolos.separador,yycolumn, yyline, yytext()); }
 
-      "%%"                            {//System.out.println("Reconocio token: <separador_region>lexema:"+yytext());
-                                                                            return new Symbol(Simbolos.separador_region,yycolumn, yyline, yytext()); }
+
+
+
+
+
+
+
+
+
 
       /* comments */
       {Comment}                      { /* ignore */ }

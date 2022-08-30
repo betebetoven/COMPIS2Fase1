@@ -1,0 +1,52 @@
+package analizadores;
+import java_cup.runtime.Symbol;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+terminal id;
+terminal dos_puntos;
+terminal conjpr;
+terminal flecha;
+terminal DecIntegerLiteral;
+terminal separador;
+terminal abre_llave;
+terminal cierra_llave;
+terminal separador_region;
+terminal frase;
+terminal conjunto;
+terminal expreg;
+non terminal INICIO,E, declaraciones, dcj, der ,cj,er, implementaciones,imp;
+start with INICIO;
+INICIO::= E {:System.out.println("Fin de analisis de entrada");:}
+;
+E::= abre_llave declaraciones separador_region separador_region implementaciones cierra_llave
+;
+declaraciones ::= dcj der
+;
+dcj ::= dcj cj
+| cj
+;
+cj ::= conjpr  dos_puntos id flecha conjunto separador
+;
+der ::= der er
+| er
+;
+er ::= id flecha expreg:ER1 separador{: //System.out.println("ENCONTRO UNA EXPRESION REGULAR AAAAA:   "+ER1);
+                                             try {
+                                                        FileWriter myWriter = new FileWriter("./ERS.txt");
+                                                              myWriter.write(String.valueOf(ER1));
+                                                              myWriter.close();
+
+                                                        analizador_lexico2 lexico = new analizador_lexico2(new BufferedReader(new FileReader("./ERS.txt")));
+                                                        Analizador_sintactico2 sintactico = new Analizador_sintactico2(lexico);
+                                                        sintactico.parse();
+                                                    } catch (Exception e) {
+                                                    }:}
+;
+implementaciones ::= implementaciones imp
+| imp
+;
+imp ::= id dos_puntos frase separador
+;
+
+
