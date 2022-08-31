@@ -33,5 +33,52 @@ imprimir("me lleva la verga");
 fin_segun
 
 
+para _hola_ -> 10 hasta 30 hacer
+imprimir(20.5);
+fin_para
+//Estructura de ciclo para con salto definido
+para _hola_ -> _hola_ hasta _hola_  con_incremental
+20 hacer
+imprimir(20.5);
+fin_para
+
+
+repetir
+imprimir(20.5);
+imprimir(20.5);
+imprimir(20.5);
+imprimir(20.5);
+imprimir(20.5);
+hasta_que ( _a_ mas _b_ es_igual _c_);
+
+mientras (_a_ mas _b_ es_igual _c_) hacer
+imprimir(20.5);
+fin_mientras
+
+metodo _alberto_ ()
+imprimir(20.5);
+retornar();
+fin_metodo
+
+
+metodo _alberto_ con_parametros (cadena _a_ , numero _c_)
+imprimir(20.5);
+retornar();
+fin_metodo
+
+funcion _kkita_ cadena()
+imprimir(20.5);
+fin_funcion
+
+funcion _kkita_ cadena con_parametros(cadena _a_, numero _c_)
+imprimir(20.5);
+fin_funcion
+
+//ejecutar sin parámetros
+ejecutar _kkita_();
+
+//ejecutar con parámetros
+ejecutar _kkita_(1,2,3,4,"holamundo",verdadero,falso);
+
 
 final

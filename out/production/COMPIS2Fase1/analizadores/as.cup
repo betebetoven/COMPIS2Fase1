@@ -100,7 +100,7 @@ INSTRUCCION ::= DECLARACION   {:System.out.println("ENCONTRO DECLARACION");:}
 //INSTRUCCIONES CICLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOS
 CICLO::= para  E flechita E hasta E hacer INSTRUCCIONES fin_para
     | para  E flechita E hasta E con_incremental number hacer INSTRUCCIONES fin_para
-    | mientras abre_parentesis COND_WHILE cierra_parentesis INSTRUCCIONES fin_mientras
+    | mientras abre_parentesis COND_WHILE cierra_parentesis hacer INSTRUCCIONES fin_mientras
     | repetir INSTRUCCIONES hasta_que abre_parentesis COND_WHILE cierra_parentesis punto_y_coma
     ;
 COND_WHILE::= verdadero
@@ -159,8 +159,8 @@ METODOsp ::= metodo E abre_parentesis cierra_parentesis INSTRUCCIONES fin_metodo
 ;
 //EL RETURN
 
-RETURN ::= retornar E punto_y_coma
-        | retornar  punto_y_coma
+RETURN ::= retornar abre_parentesis E cierra_parentesis punto_y_coma
+        | retornar abre_parentesis cierra_parentesis punto_y_coma
 ;
 
 //LLAMADA DE FUNCION O METODOS
