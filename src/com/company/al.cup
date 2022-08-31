@@ -67,54 +67,55 @@ terminal inicio;
       terminal ejecutar;
       terminal imprimir  ;
       terminal imprimir_nl  ;
+      terminal con_incremental;
 
-non terminal INIT, INSTRUCCIONES, INSTRUCCION, DECLARACION ,BLOQUE,IMPRIMIR, IMPRIMIRLN, ASIGNACION,METODO,FUNCION,METODOsp,FUNCIONsp,CONDICIONIF,CICLO,RETURN,CALL,E,error,
-COND_WHILE, COMPARACIONES,AUMENTO,TIPODATO_DECLARACION,PARAMETROS,PARS,PAR,PARAMETROSLL,PARSLL, FUNCIONsp, METODOsp, RETURN,ES,IDS,COMP,F,VARIABLE,TIPO_DECLARACION_CONST;
+non terminal INIT, INSTRUCCIONES, INSTRUCCION, DECLARACION ,BLOQUE,IMPRIMIR, IMPRIMIRLN, ASIGNACION,METODO,FUNCION,METODOsp,FUNCIONsp,CONDICIONIF,CICLO,RETURN,CALL,E,error,COND_WHILE, COMPARACIONES,AUMENTO,TIPODATO_DECLARACION,PARAMETROS,PARS,PAR,PARAMETROSLL,PARSLL, RETURN,ES,IDS,COMP,F,VARIABLE,TIPO_DECLARACION_CONST,BLOQUE_PRINCIPAL;
 start with INIT;
-INIT::= INSTRUCCIONES {:System.out.println("Fin de analisis de entrada");:} ;
+INIT::= BLOQUE_PRINCIPAL {:System.out.println("Fin de analisis de entrada");:} ;
 
+BLOQUE_PRINCIPAL ::= inicio INSTRUCCIONES final {:System.out.println("TERMINO BLOQUE PRINCIPAL");:}
+;
 
-INSTRUCCIONES ::=   INSTRUCCIONES INSTRUCCION { $1.push($2); $$=$1; console.log("s ")}
-              |   INSTRUCCION               {$$ = [$1]; console.log("s ") }
+INSTRUCCIONES ::=   INSTRUCCIONES INSTRUCCION
+              |   INSTRUCCION
               ;
 
 
-INSTRUCCION ::= DECLARACION   { $$=$1;console.log("reconocio declaracion ") }
-            | IMPRIMIR      { $$=$1;console.log("reconocio PRINT ") }
-            | IMPRIMIRLN    { console.log("reconocio PRINTLN ") }
-            | ASIGNACION    { $$=$1;console.log("reconocio asignacion ") }
-            | METODO        {  console.log("reconocio metodo")}
-            | FUNCION       { console.log("reconocio funcion") }
-            | METODOsp        {  console.log("reconocio metodo sin parametros")}
-            | FUNCIONsp       { console.log("reconocio funcion sin parametros") }
-            | CONDICIONIF   { console.log("reconocio condicion if") }
-            | CICLO         {console.log("reconocio  ciclo")}
-            | RETURN   {console.log("reconocio  RETURN")}
-            | CALL      {console.log("reconocio  LLAMADA")}
-            |DECLARACION_ARRAY {$$=$1;console.log("reconocio delcaracion array")}
-            |E punto_y_coma {console.log("reconocio instruccion expresion")}
-            | error   punto_y_coma  { console.log("Error sintactico en la linea "+(yylineno+1)); }
+INSTRUCCION ::= DECLARACION   {:System.out.println("ENCONTRO DECLARACION");:}
+            | IMPRIMIR      {:System.out.println("encontro impresion linea simple");:}
+            | IMPRIMIRLN    {:System.out.println("encontro impresion multipe linea");:}
+            | ASIGNACION    {:System.out.println("encontro ASIGNACION");:}
+            | METODO        {:System.out.println("encontro METODO");:}
+            | FUNCION       {:System.out.println("encontro FUNCION");:}
+            | METODOsp        {:System.out.println("encontro METODOSP");:}
+            | FUNCIONsp       {:System.out.println("encontro FUNCIONSP");:}
+            | CONDICIONIF   {:System.out.println("encontro CONDICION IF");:}
+            | CICLO         {:System.out.println("encontro CICLO");:}
+            | RETURN   {:System.out.println("encontro RETURN");:}
+            | CALL      {:System.out.println("encontro LLAMADA");:}
+            |E punto_y_coma {:System.out.println("encontro impresion linea simple");:}
+            //| error   punto_y_coma  {:System.out.println("encontro un erro que asco");:}
 ;
 //INSTRUCCIONES CICLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOS
-CICLO::= para  abre_parentesis DECLARACION_INTERNA ',' COMPARACIONES ',' AUMENTO ')' BLOQUE {console.log("reconocio CICLO FOR ") }
-    | mientras abre_parentesis COND_WHILE cierra_parentesis INSTRUCCIONES fin_mientras {console.log("reconocio CICLO WHILE ")}
-    | repetir INSTRUCCIONES hasta_que abre_parentesis COND_WHILE cierra_parentesis punto_y_coma {console.log("reconocio CICLO DO-WHILE ")}
+CICLO::= para  VARIABLE flechita E hasta E hacer INSTRUCCIONES fin_para
+    | para  VARIABLE flechita E hasta E con_incremental number hacer INSTRUCCIONES fin_para
+    | mientras abre_parentesis COND_WHILE cierra_parentesis INSTRUCCIONES fin_mientras
+    | repetir INSTRUCCIONES hasta_que abre_parentesis COND_WHILE cierra_parentesis punto_y_coma
     ;
 COND_WHILE::= true
           | false
           |  COMPARACIONES
 ;
 
-AUMENTO::= ASIGNACION {}
-        | E {}
+AUMENTO::= ASIGNACION
+        | E
 ;
 
 
 
 
 //CONDICION IF
-CONDICIONIF::= si abre_parentesis COMPARACIONES cierra_parentesis INSTRUCCIONES de_lo_contrario INSTRUCCIONES fin_si { System.out.println("encontro condicional iF"));
-                                                       }
+CONDICIONIF::= si abre_parentesis COMPARACIONES cierra_parentesis INSTRUCCIONES de_lo_contrario INSTRUCCIONES fin_si
 | si abre_parentesis COMPARACIONES cierra_parentesis INSTRUCCIONES fin_si
 
 ;
@@ -144,19 +145,19 @@ PARSLL ::= PARSLL coma E
 
 //sin parametros
 
-FUNCIONsp::= TIPODATO_DECLARACION VARIABLE abre_parentesis cierra_parentesis INSTRUCCIONES fin_funcion {}
+FUNCIONsp::= TIPODATO_DECLARACION VARIABLE abre_parentesis cierra_parentesis INSTRUCCIONES fin_funcion
 ;
-METODOsp ::= metodo VARIABLE abre_parentesis cierra_parentesis INSTRUCCIONES fin_metodo {}
+METODOsp ::= metodo VARIABLE abre_parentesis cierra_parentesis INSTRUCCIONES fin_metodo
 ;
 //EL RETURN
 
-RETURN ::= retornar E punto_y_coma {}
-        | retornar  punto_y_coma {}
+RETURN ::= retornar E punto_y_coma
+        | retornar  punto_y_coma
 ;
 
 //LLAMADA DE FUNCION O METODOS
-CALL::= ejecutar VARIABLE PARAMETROSLL punto_y_coma {}
-    | ejecutar VARIABLE abre_parentesis cierra_parentesis punto_y_coma {}
+CALL::= ejecutar VARIABLE PARAMETROSLL punto_y_coma
+    | ejecutar VARIABLE abre_parentesis cierra_parentesis punto_y_coma
 
 ;
 
@@ -165,71 +166,70 @@ CALL::= ejecutar VARIABLE PARAMETROSLL punto_y_coma {}
 
 //INSTRUCCION IMPRIMIR UNA Y VARIAS LINEAS
 
-IMPRIMIR ::= imprimir  abre_parentesis E cierra_parentesis punto_y_coma {$$ = new imprimir($3,@1.first_line, @1.first_column );}
+IMPRIMIR ::= imprimir  abre_parentesis E cierra_parentesis punto_y_coma
 ;
-IMPRIMIRLN ::= imprimir_nl abre_parentesis E cierra_parentesis punto_y_coma {$$ = new imprimir($3,@1.first_line, @1.first_column );}
+IMPRIMIRLN ::= imprimir_nl abre_parentesis E cierra_parentesis punto_y_coma
 ;
 
 
 //ASIGNACION DE VARIABLES YA DECLARADAS (CAMBIO DE VALOR)
-ASIGNACION ::= IDS flechita E punto_y_coma {$$= new Asignacion($1,$3, @1.first_line, @1.first_column);}
-            | IDS flechita VARIABLE punto_y_coma{$$= new Asignacion($1,$3, @1.first_line, @1.first_column);}
+ASIGNACION ::= IDS flechita E punto_y_coma
+            | IDS flechita VARIABLE punto_y_coma
             ;
 
 //DECLARACION DE VARIABLES NO DECLARADAS SINGULAR O EN CONJUNTO, FINALES O NO FINALES, INCLUYE EXPRESIONES
-ES ::= ES coma E {$1.push($3); $$=$1;}
-    | E {$$ = [$1]}
+ES ::= ES coma E
+    | E
     ;
 
 
 
 
-TIPODATO_DECLARACION  ::=  numero {$$=Type.NUMBER}
-                       | bulean    {$$=Type.BOOLEAN}
-                       | cadena {$$=Type.STRING}
+TIPODATO_DECLARACION  ::=  numero
+                       | bulean
+                       | cadena
                        ;
 
-DECLARACION ::= TIPO_DECLARACION_CONST  TIPODATO_DECLARACION IDS con_valor E punto_y_coma {$$=new Declaracion(true,$2, $3,$5, @1.first_line, @1.first_column)}
-            |
-            TIPODATO_DECLARACION IDS con_valor E punto_y_coma  {$$=new Declaracion(false,$1, $2,$4, @1.first_line, @1.first_column)}
+DECLARACION ::= TIPO_DECLARACION_CONST  TIPODATO_DECLARACION IDS con_valor E punto_y_coma
+            |   TIPODATO_DECLARACION IDS con_valor E punto_y_coma
             ;
-DECLARACION_INTERNA ::= TIPODATO_DECLARACION IDS con_valor E {}
+DECLARACION_INTERNA ::= TIPODATO_DECLARACION IDS con_valor E
             ;
 
-IDS ::= IDS coma VARIABLE{$1.push($3); $$=$1;}
-    | VARIABLE {$$ = [$1]}
+IDS ::= IDS coma VARIABLE
+    | VARIABLE
     ;
-VARIABLE ::= guion id guion {}
+VARIABLE ::= guion id guion
 ;
-COMPARACIONES::= not COMPARACIONES  {}
-            |  COMPARACIONES and COMP {}
-            |  COMPARACIONES or COMP {}
-            |   COMP  {$$=$1;}
+COMPARACIONES::= not COMPARACIONES
+            |  COMPARACIONES and COMP
+            |  COMPARACIONES or COMP
+            |   COMP
 ;
-COMP::=  E menor E {}
-    |  E mayor_o_igual E  {}
-    |  E menor_o_igual E  {}
-    |  E mayor E     {}
-    |  E es_diferente E   {}
-    |  E es_igual E   {}
+COMP::=  E menor E
+    |  E mayor_o_igual E
+    |  E menor_o_igual E
+    |  E mayor E
+    |  E es_diferente E
+    |  E es_igual E
 ;
-E::= E mas E  {}
-    |  E menos E  {}
-    |  E potencia E  {}
-    |  E por E  {}
-    |  E dividido E  {}
-    |  E mod E  {}
-    |  E mas mas {}
-    |  E menos menos {}
-    |  F   {}
+E::= E mas E
+    |  E menos E
+    |  E potencia E
+    |  E por E
+    |  E dividido E
+    |  E mod E
+    |  E mas mas
+    |  E menos menos
+    |  F
 ;
 
-F::= number {}
-    |true {}
-    |false {}
-    |frase {}
-    |frasecita {}
-    | VARIABLE {}
+F::= number
+    |true
+    |false
+    |frase
+    |frasecita
+    | VARIABLE
 ;
 // INSSTRUCCION FOR
 

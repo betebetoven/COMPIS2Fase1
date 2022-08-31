@@ -98,6 +98,7 @@
     ingresar = "ingresar"
     como = "como"
     con_valor = "con_valor"
+    con_incremental = "con_incremental"
     punto_y_coma = ";"
     coma = ","
     //nombres de variables inician y terminan en guin bajo
@@ -202,7 +203,7 @@
       {ejecutar}                   { return new Symbol(Simbolos.ejecutar,yycolumn, yyline, yytext()); }
       {imprimir}                   { return new Symbol(Simbolos.imprimir,yycolumn, yyline, yytext()); }
       {imprimir_nl}                   { return new Symbol(Simbolos.imprimir_nl,yycolumn, yyline, yytext()); }
-
+      {con_incremental}                 { return new Symbol(Simbolos.con_incremental,yycolumn, yyline, yytext()); }
       /* comments */
       {Comment}                      { /* ignore */ }
 
