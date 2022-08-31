@@ -1,0 +1,234 @@
+package analizadores;
+import java_cup.runtime.Symbol;
+
+terminal inicio;
+    terminal finall;
+      terminal flechita;
+      terminal id   ;
+    terminal guion  ;
+    terminal numero ;
+    terminal number ;
+    terminal cadena ;
+    terminal frase ;
+      terminal bulean ;
+      terminal verdadero ;
+      terminal falso    ;
+      terminal caracter ;
+      terminal frasecita ;
+      terminal mas   ;
+      terminal menos  ;
+      terminal por ;
+      terminal dividido ;
+      terminal abre_corchete  ;
+      terminal cierra_corchete   ;
+      terminal potencia    ;
+      terminal mod    ;
+      terminal abre_parentesis ;
+      terminal cierra_parentesis;
+      terminal mayor;
+      terminal menor;
+      terminal mayor_o_igual ;
+      terminal menor_o_igual ;
+      terminal es_igual ;
+      terminal es_diferente ;
+      terminal or     ;
+      terminal and ;
+      terminal not ;
+      terminal ingresar  ;
+      terminal como;
+      terminal con_valor;
+      terminal punto_y_coma;
+      terminal coma ;
+      terminal si ;
+      terminal o_si  ;
+      terminal abre_pregunta ;
+      terminal cierra_pregunta;
+      terminal de_lo_contrario;
+      terminal entonces;
+      terminal fin_segun ;
+      terminal fin_si;
+      terminal para;
+      terminal hasta ;
+      terminal fin_para;
+      terminal hacer;
+      terminal mientras ;
+      terminal fin_mientras ;
+      terminal repetir ;
+      terminal hasta_que;
+      terminal retornar;
+      terminal metodo ;
+      terminal fin_metodo ;
+      terminal con_parametros ;
+      terminal funcion ;
+      terminal fin_funcion ;
+      terminal ejecutar;
+      terminal imprimir  ;
+      terminal imprimir_nl  ;
+      terminal con_incremental;
+      terminal segun;
+
+non terminal INIT, INSTRUCCIONES,OPCION,IFANIDADOS, SWITCH,OPCIONES, INSTRUCCION, DECLARACION ,IMPRIMIR, IMPRIMIRLN, ASIGNACION,METODO,FUNCION,METODOsp,FUNCIONsp,CONDICIONIF,CICLO,RETURN,CALL,E,COND_WHILE, COMPARACIONES,TIPODATO_DECLARACION,PARAMETROS,PARS,PAR,PARAMETROSLL,PARSLL,IDS,COMP,F,VARIABLE,BLOQUE_PRINCIPAL;
+start with INIT;
+INIT::= BLOQUE_PRINCIPAL {:System.out.println("Fin de analisis de entrada");:} ;
+
+BLOQUE_PRINCIPAL ::= inicio INSTRUCCIONES finall {:System.out.println("TERMINO BLOQUE PRINCIPAL");:}
+                | inicio {:System.out.println("TERMINO BLOQUE PRINCIPAL");:}
+;
+
+INSTRUCCIONES ::=   INSTRUCCIONES INSTRUCCION
+              |   INSTRUCCION
+              ;
+
+
+INSTRUCCION ::= DECLARACION   {:System.out.println("ENCONTRO DECLARACION");:}
+            | IMPRIMIR      {:System.out.println("encontro impresion linea simple");:}
+            | IMPRIMIRLN    {:System.out.println("encontro impresion multipe linea");:}
+            | ASIGNACION    {:System.out.println("encontro ASIGNACION");:}
+            | METODO        {:System.out.println("encontro METODO");:}
+            | FUNCION       {:System.out.println("encontro FUNCION");:}
+            | METODOsp        {:System.out.println("encontro METODOSP");:}
+            | FUNCIONsp       {:System.out.println("encontro FUNCIONSP");:}
+            | CONDICIONIF   {:System.out.println("encontro CONDICION IF");:}
+            | CICLO         {:System.out.println("encontro CICLO");:}
+            | RETURN   {:System.out.println("encontro RETURN");:}
+            | CALL      {:System.out.println("encontro LLAMADA");:}
+
+;
+
+//INSTRUCCIONES CICLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOS
+CICLO::= para  E flechita E hasta E hacer INSTRUCCIONES fin_para
+    | para  E flechita E hasta E con_incremental number hacer INSTRUCCIONES fin_para
+    | mientras abre_parentesis COND_WHILE cierra_parentesis INSTRUCCIONES fin_mientras
+    | repetir INSTRUCCIONES hasta_que abre_parentesis COND_WHILE cierra_parentesis punto_y_coma
+    ;
+COND_WHILE::= verdadero
+          | falso
+          |  COMPARACIONES
+;
+SWITCH ::= segun E  hacer OPCIONES de_lo_contrario entonces INSTRUCCIONES fin_segun
+;
+OPCIONES::= OPCIONES OPCION
+            | OPCION
+;
+OPCION ::= abre_pregunta  E cierra_pregunta entonces INSTRUCCIONES
+;
+
+
+
+
+//CONDICION IF
+CONDICIONIF::= si abre_parentesis COMPARACIONES cierra_parentesis entonces INSTRUCCIONES fin_si
+                | si abre_parentesis COMPARACIONES cierra_parentesis entonces INSTRUCCIONES IFANIDADOS fin_si
+;
+IFANIDADOS ::= IFANIDADOS  o_si abre_parentesis COMPARACIONES cierra_parentesis entonces INSTRUCCIONES
+                | IFANIDADOS  de_lo_contrario INSTRUCCIONES
+                |  o_si abre_parentesis COMPARACIONES cierra_parentesis entonces INSTRUCCIONES
+                | de_lo_contrario INSTRUCCIONES
+;
+
+
+
+
+
+
+//FUNCIONES Y METODOS CON PARAMETROS
+FUNCION::= funcion E TIPODATO_DECLARACION  con_parametros PARAMETROS INSTRUCCIONES fin_funcion
+;
+METODO ::= metodo E con_parametros PARAMETROS INSTRUCCIONES fin_metodo
+;
+PARAMETROS ::= abre_parentesis PARS cierra_parentesis
+;
+PARS ::= PARS coma PAR
+     | PAR
+;
+PAR ::= TIPODATO_DECLARACION E
+;
+PARAMETROSLL ::= abre_parentesis PARSLL cierra_parentesis
+;
+PARSLL ::= PARSLL coma E
+     | E
+;
+
+//sin parametros
+
+FUNCIONsp::= funcion E TIPODATO_DECLARACION  abre_parentesis cierra_parentesis INSTRUCCIONES fin_funcion
+;
+METODOsp ::= metodo E abre_parentesis cierra_parentesis INSTRUCCIONES fin_metodo
+;
+//EL RETURN
+
+RETURN ::= retornar E punto_y_coma
+        | retornar  punto_y_coma
+;
+
+//LLAMADA DE FUNCION O METODOS
+CALL::= ejecutar E PARAMETROSLL punto_y_coma
+    | ejecutar E abre_parentesis cierra_parentesis punto_y_coma
+
+;
+
+
+
+
+//INSTRUCCION IMPRIMIR UNA Y VARIAS LINEAS
+
+IMPRIMIR ::= imprimir  abre_parentesis E cierra_parentesis punto_y_coma
+;
+IMPRIMIRLN ::= imprimir_nl abre_parentesis E cierra_parentesis punto_y_coma
+;
+
+
+//ASIGNACION DE VARIABLES YA DECLARADAS (CAMBIO DE VALOR)
+ASIGNACION ::= IDS flechita E punto_y_coma
+            ;
+
+//DECLARACION DE VARIABLES NO DECLARADAS SINGULAR O EN CONJUNTO, FINALES O NO FINALES, INCLUYE EXPRESIONES
+
+
+
+
+TIPODATO_DECLARACION  ::=  numero
+                       | bulean
+                       | cadena
+                       | caracter
+                       ;
+
+DECLARACION ::= ingresar IDS  como TIPODATO_DECLARACION con_valor E punto_y_coma
+            ;
+
+IDS ::= IDS coma E
+    | E
+    ;
+VARIABLE ::= guion id guion
+;
+COMPARACIONES::= not abre_parentesis COMPARACIONES cierra_parentesis
+            |  COMPARACIONES and COMP
+            |  COMPARACIONES or COMP
+            |   COMP
+;
+COMP::=  E menor E
+    |  E mayor_o_igual E
+    |  E menor_o_igual E
+    |  E mayor E
+    |  E es_diferente E
+    |  E es_igual E
+;
+E::= E mas F
+    |  E menos F
+    |  E potencia abre_corchete F cierra_corchete
+    |  E por F
+    |  E dividido F
+    |  E mod F
+    |  F
+;
+
+F::= number
+    |verdadero
+    |falso
+    |frase
+    |frasecita
+    | VARIABLE
+;
+// INSSTRUCCION FOR
+
+
