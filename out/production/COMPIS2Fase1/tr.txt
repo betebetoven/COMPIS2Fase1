@@ -1,1 +1,10 @@
 inicio
+imprimir("hola mundo");
+imprimir_nl(_variable_);
+/*no deberia reocnocer
+esto*/
+//ni esto tamopoco
+imprimir("hola mundo");
+ingresar _HOLA_ como boolean con_valor falso;
+
+final

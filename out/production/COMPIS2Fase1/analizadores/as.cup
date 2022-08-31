@@ -5,6 +5,7 @@ terminal inicio;
     terminal finall;
       terminal flechita;
       terminal id   ;
+      terminal variable;
     terminal guion  ;
     terminal numero ;
     terminal number ;
@@ -72,7 +73,7 @@ start with INIT;
 INIT::= BLOQUE_PRINCIPAL {:System.out.println("Fin de analisis de entrada");:} ;
 
 BLOQUE_PRINCIPAL ::= inicio INSTRUCCIONES finall {:System.out.println("TERMINO BLOQUE PRINCIPAL");:}
-                | inicio {:System.out.println("TERMINO BLOQUE PRINCIPAL");:}
+
 ;
 
 INSTRUCCIONES ::=   INSTRUCCIONES INSTRUCCION
@@ -199,7 +200,7 @@ DECLARACION ::= ingresar IDS  como TIPODATO_DECLARACION con_valor E punto_y_coma
 IDS ::= IDS coma E
     | E
     ;
-VARIABLE ::= guion id guion
+VARIABLE ::= variable
 ;
 COMPARACIONES::= not abre_parentesis COMPARACIONES cierra_parentesis
             |  COMPARACIONES and COMP
