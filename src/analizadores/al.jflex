@@ -165,10 +165,11 @@
     <YYINITIAL>   ","                   { return new Symbol(Simbolos.coma,yycolumn, yyline, yytext()); }
     <YYINITIAL>   "si"                   { return new Symbol(Simbolos.si,yycolumn, yyline, yytext()); }
     <YYINITIAL>   "o_si"                   { return new Symbol(Simbolos.o_si,yycolumn, yyline, yytext()); }
-    <YYINITIAL>   "abre_pregunta"                  { return new Symbol(Simbolos.abre_pregunta,yycolumn, yyline, yytext()); }
-    <YYINITIAL>   "cierra_pregunta"                   { return new Symbol(Simbolos.cierra_pregunta,yycolumn, yyline, yytext()); }
+    <YYINITIAL>   \u00BF                  { return new Symbol(Simbolos.abre_pregunta,yycolumn, yyline, yytext()); }
+    <YYINITIAL>   \u003F                   { return new Symbol(Simbolos.cierra_pregunta,yycolumn, yyline, yytext()); }
     <YYINITIAL>   "de_lo_contrario"                   { return new Symbol(Simbolos.de_lo_contrario,yycolumn, yyline, yytext()); }
     <YYINITIAL>   "entonces"                   { return new Symbol(Simbolos.entonces,yycolumn, yyline, yytext()); }
+      <YYINITIAL>  "segun"                   { return new Symbol(Simbolos.segun,yycolumn, yyline, yytext()); }
     <YYINITIAL>  "fin_segun"                   { return new Symbol(Simbolos.fin_segun,yycolumn, yyline, yytext()); }
     <YYINITIAL>   "fin_si"                  { return new Symbol(Simbolos.fin_si,yycolumn, yyline, yytext()); }
     <YYINITIAL>   "para"                   { return new Symbol(Simbolos.para,yycolumn, yyline, yytext()); }

@@ -6,5 +6,32 @@ esto*/
 //ni esto tamopoco
 imprimir("hola mundo");
 ingresar _HOLA_ como boolean con_valor falso;
+ingresar _hola_, _perez_, _ruano_ como numero con_valor 10;
+ingresar _hola_  como numero con_valor 10.5;
+ingresar _hola_  como numero con_valor 10;
+ingresar _hola_  como cadena con_valor "hola mundo";
+ingresar _hola_  como caracter con_valor 'p';
+ _hola_  -> 10.5;
+  _hola_, _hola_, _perez_, _ruano_  -> _juanito_;
+  si(_hola_ menor 10 and 10 mas 5 mayor _juan_) entonces
+  imprimir("si funciono");
+  o_si (_hola_ menor 10 and 10 mas 5 mayor _juan_) entonces
+  imprimir("no se preocupe jefa que si sale la carrera");
+  de_lo_contrario
+  imprimir("me lleva la verga");
+  fin_si
+
+  segun _entrada_ hacer
+  ¿ 10 ? entonces
+  imprimir("me lleva la verga");
+  ¿ "papaya" ? entonces
+  imprimir("me lleva la verga");
+  ¿verdadero ? entonces
+  imprimir("me lleva la verga");
+  de_lo_contrario entonces
+imprimir("me lleva la verga");
+fin_segun
+
+
 
 final

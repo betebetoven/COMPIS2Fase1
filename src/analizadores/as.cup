@@ -93,6 +93,7 @@ INSTRUCCION ::= DECLARACION   {:System.out.println("ENCONTRO DECLARACION");:}
             | CICLO         {:System.out.println("encontro CICLO");:}
             | RETURN   {:System.out.println("encontro RETURN");:}
             | CALL      {:System.out.println("encontro LLAMADA");:}
+            | SWITCH    {:System.out.println("encontro SWITCH");:}
 
 ;
 
