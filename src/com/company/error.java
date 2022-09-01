@@ -1,5 +1,7 @@
 package com.company;
 
+import java.util.ArrayList;
+
 public class error {
     String lexema, tipo, descripcion;
     int linea, columna;
@@ -11,6 +13,21 @@ public class error {
         this.linea = linea;
         this.columna = columna;
 
+    }
+    public void imprime(ArrayList p, int indent)
+    {
+        for(Object k: p )
+        {
+            if (k.getClass()== ArrayList.class)
+                imprime(ArrayList.class.cast(k),indent+1);
+            else
+            {
+                String inde = "";
+                for(int i = 0;i<indent;i++)
+                    inde+="   ";
+                System.out.println(inde+k.toString());
+            }
+        }
     }
 
     @Override

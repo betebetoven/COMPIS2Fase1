@@ -14,7 +14,15 @@ public class Main {
         try {
             //String j;
             //j.getBytes(StandardCharsets.UTF_8)
+            String p = "";
+            Object j = p ;
+            String no = j.toString();
+            j.getClass().cast(j);
 
+            ArrayList<String> popa = new ArrayList<>();
+            Object pepe = popa;
+            ArrayList<String>segundo = ArrayList.class.cast(pepe);
+            System.out.println(pepe.toString());
             al lexico = new al(new BufferedReader(new FileReader("C:\\Users\\Alberto\\Desktop\\cys\\COMPIS2Fase1\\src\\tr.txt")));
 
             System.out.println("ahora va al sintactico");
@@ -30,5 +38,7 @@ public class Main {
         }
 
 
+
     }
+
 }
