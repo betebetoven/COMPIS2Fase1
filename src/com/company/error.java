@@ -24,7 +24,7 @@ public class error {
             {
                 String inde = "";
                 for(int i = 0;i<indent;i++)
-                    inde+="   ";
+                    inde+="     ";
                 System.out.println(inde+k.toString());
             }
         }

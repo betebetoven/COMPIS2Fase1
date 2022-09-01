@@ -829,7 +829,7 @@ class CUP$as$actions {
 		int _INSTRUCCION2left = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).left;
 		int _INSTRUCCION2right = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).right;
 		Object _INSTRUCCION2 = (Object)((java_cup.runtime.Symbol) CUP$as$stack.peek()).value;
-		ArrayList<Object> instrucciones = ArrayList.class.cast(_Aray);; instrucciones.add(_INSTRUCCION2);RESULT = instrucciones;
+		ArrayList<Object> instrucciones = ArrayList.class.cast(_Aray);if (_INSTRUCCION2.getClass() == ArrayList.class) instrucciones.addAll(ArrayList.class.cast(_INSTRUCCION2)); else  instrucciones.add(_INSTRUCCION2);RESULT = instrucciones;
               CUP$as$result = parser.getSymbolFactory().newSymbol("INSTRUCCIONES",1, ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-1)), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;
@@ -841,7 +841,7 @@ class CUP$as$actions {
 		int _INSTRUCCIONleft = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).left;
 		int _INSTRUCCIONright = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).right;
 		Object _INSTRUCCION = (Object)((java_cup.runtime.Symbol) CUP$as$stack.peek()).value;
-		 ArrayList<Object> instrucciones = new ArrayList<>(); instrucciones.add(_INSTRUCCION);RESULT = instrucciones;
+		 ArrayList<Object> instrucciones = new ArrayList<>();if (_INSTRUCCION.getClass() == ArrayList.class) instrucciones.addAll(ArrayList.class.cast(_INSTRUCCION)); else instrucciones.add(_INSTRUCCION);RESULT = instrucciones;
               CUP$as$result = parser.getSymbolFactory().newSymbol("INSTRUCCIONES",1, ((java_cup.runtime.Symbol)CUP$as$stack.peek()), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;
@@ -934,7 +934,10 @@ class CUP$as$actions {
           case 13: // INSTRUCCION ::= CONDICIONIF 
             {
               Object RESULT =null;
-		System.out.println("encontro CONDICION IF");
+		int _INSleft = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).left;
+		int _INSright = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).right;
+		Object _INS = (Object)((java_cup.runtime.Symbol) CUP$as$stack.peek()).value;
+		ArrayList<Object> ins = ArrayList.class.cast(_INS);System.out.println("encontro CONDICION IF");RESULT = ins;
               CUP$as$result = parser.getSymbolFactory().newSymbol("INSTRUCCION",6, ((java_cup.runtime.Symbol)CUP$as$stack.peek()), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;
@@ -1078,7 +1081,13 @@ class CUP$as$actions {
           case 29: // CONDICIONIF ::= si abre_parentesis COMPARACIONES cierra_parentesis entonces INSTRUCCIONES fin_si 
             {
               Object RESULT =null;
-
+		int _Cleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-4)).left;
+		int _Cright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-4)).right;
+		Object _C = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-4)).value;
+		int _INSleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-1)).left;
+		int _INSright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-1)).right;
+		Object _INS = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-1)).value;
+		ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "if("+_C+"):";cond.add(ifins);cond.add(ins); RESULT = cond;
               CUP$as$result = parser.getSymbolFactory().newSymbol("CONDICIONIF",15, ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-6)), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;
@@ -1414,7 +1423,10 @@ String FIM = instruccion+_E.toString(); RESULT = FIM;
           case 61: // COMPARACIONES ::= not abre_parentesis COMPARACIONES cierra_parentesis 
             {
               Object RESULT =null;
-
+		int _Eleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-1)).left;
+		int _Eright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-1)).right;
+		Object _E = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-1)).value;
+		String FE ="!("+ _E.toString()+ ")"; RESULT = FE;
               CUP$as$result = parser.getSymbolFactory().newSymbol("COMPARACIONES",21, ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-3)), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;
@@ -1423,7 +1435,13 @@ String FIM = instruccion+_E.toString(); RESULT = FIM;
           case 62: // COMPARACIONES ::= COMPARACIONES and COMP 
             {
               Object RESULT =null;
-
+		int _Eleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-2)).left;
+		int _Eright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-2)).right;
+		Object _E = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-2)).value;
+		int _Fleft = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).left;
+		int _Fright = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).right;
+		Object _F = (Object)((java_cup.runtime.Symbol) CUP$as$stack.peek()).value;
+		String FE = _E.toString()+ "and"+_F.toString(); RESULT = FE;
               CUP$as$result = parser.getSymbolFactory().newSymbol("COMPARACIONES",21, ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-2)), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;
@@ -1432,7 +1450,13 @@ String FIM = instruccion+_E.toString(); RESULT = FIM;
           case 63: // COMPARACIONES ::= COMPARACIONES or COMP 
             {
               Object RESULT =null;
-
+		int _Eleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-2)).left;
+		int _Eright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-2)).right;
+		Object _E = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-2)).value;
+		int _Fleft = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).left;
+		int _Fright = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).right;
+		Object _F = (Object)((java_cup.runtime.Symbol) CUP$as$stack.peek()).value;
+		String FE = _E.toString()+ "or"+_F.toString(); RESULT = FE;
               CUP$as$result = parser.getSymbolFactory().newSymbol("COMPARACIONES",21, ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-2)), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;
@@ -1441,7 +1465,10 @@ String FIM = instruccion+_E.toString(); RESULT = FIM;
           case 64: // COMPARACIONES ::= COMP 
             {
               Object RESULT =null;
-
+		int _Eleft = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).left;
+		int _Eright = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).right;
+		Object _E = (Object)((java_cup.runtime.Symbol) CUP$as$stack.peek()).value;
+		String FE = _E.toString(); RESULT = FE;
               CUP$as$result = parser.getSymbolFactory().newSymbol("COMPARACIONES",21, ((java_cup.runtime.Symbol)CUP$as$stack.peek()), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;
@@ -1450,7 +1477,13 @@ String FIM = instruccion+_E.toString(); RESULT = FIM;
           case 65: // COMP ::= E menor E 
             {
               Object RESULT =null;
-
+		int _Eleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-2)).left;
+		int _Eright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-2)).right;
+		Object _E = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-2)).value;
+		int _Fleft = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).left;
+		int _Fright = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).right;
+		Object _F = (Object)((java_cup.runtime.Symbol) CUP$as$stack.peek()).value;
+		String FE = _E.toString()+ "<"+_F.toString(); RESULT = FE;
               CUP$as$result = parser.getSymbolFactory().newSymbol("COMP",29, ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-2)), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;
@@ -1459,7 +1492,13 @@ String FIM = instruccion+_E.toString(); RESULT = FIM;
           case 66: // COMP ::= E mayor_o_igual E 
             {
               Object RESULT =null;
-
+		int _Eleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-2)).left;
+		int _Eright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-2)).right;
+		Object _E = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-2)).value;
+		int _Fleft = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).left;
+		int _Fright = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).right;
+		Object _F = (Object)((java_cup.runtime.Symbol) CUP$as$stack.peek()).value;
+		String FE = _E.toString()+ ">="+_F.toString(); RESULT = FE;
               CUP$as$result = parser.getSymbolFactory().newSymbol("COMP",29, ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-2)), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;
@@ -1468,7 +1507,13 @@ String FIM = instruccion+_E.toString(); RESULT = FIM;
           case 67: // COMP ::= E menor_o_igual E 
             {
               Object RESULT =null;
-
+		int _Eleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-2)).left;
+		int _Eright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-2)).right;
+		Object _E = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-2)).value;
+		int _Fleft = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).left;
+		int _Fright = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).right;
+		Object _F = (Object)((java_cup.runtime.Symbol) CUP$as$stack.peek()).value;
+		String FE = _E.toString()+ "<="+_F.toString(); RESULT = FE;
               CUP$as$result = parser.getSymbolFactory().newSymbol("COMP",29, ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-2)), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;
@@ -1477,7 +1522,13 @@ String FIM = instruccion+_E.toString(); RESULT = FIM;
           case 68: // COMP ::= E mayor E 
             {
               Object RESULT =null;
-
+		int _Eleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-2)).left;
+		int _Eright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-2)).right;
+		Object _E = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-2)).value;
+		int _Fleft = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).left;
+		int _Fright = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).right;
+		Object _F = (Object)((java_cup.runtime.Symbol) CUP$as$stack.peek()).value;
+		String FE = _E.toString()+ ">"+_F.toString(); RESULT = FE;
               CUP$as$result = parser.getSymbolFactory().newSymbol("COMP",29, ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-2)), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;
@@ -1486,7 +1537,13 @@ String FIM = instruccion+_E.toString(); RESULT = FIM;
           case 69: // COMP ::= E es_diferente E 
             {
               Object RESULT =null;
-
+		int _Eleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-2)).left;
+		int _Eright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-2)).right;
+		Object _E = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-2)).value;
+		int _Fleft = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).left;
+		int _Fright = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).right;
+		Object _F = (Object)((java_cup.runtime.Symbol) CUP$as$stack.peek()).value;
+		String FE = _E.toString()+ "!="+_F.toString(); RESULT = FE;
               CUP$as$result = parser.getSymbolFactory().newSymbol("COMP",29, ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-2)), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;
@@ -1495,7 +1552,13 @@ String FIM = instruccion+_E.toString(); RESULT = FIM;
           case 70: // COMP ::= E es_igual E 
             {
               Object RESULT =null;
-
+		int _Eleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-2)).left;
+		int _Eright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-2)).right;
+		Object _E = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-2)).value;
+		int _Fleft = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).left;
+		int _Fright = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).right;
+		Object _F = (Object)((java_cup.runtime.Symbol) CUP$as$stack.peek()).value;
+		String FE = _E.toString()+ "=="+_F.toString(); RESULT = FE;
               CUP$as$result = parser.getSymbolFactory().newSymbol("COMP",29, ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-2)), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;

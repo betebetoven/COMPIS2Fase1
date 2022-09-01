@@ -12,7 +12,32 @@ ingresar _hola_  como cadena con_valor "hola mundo";
 ingresar _hola_  como caracter con_valor 'p';
 imprimir_nl(_hola_);
 
- _ruano_  -> 10.5;
+ _ruano_  -> 10.5 mas 6 ;
   _hola_, _perez_ -> _ruano_;
   imprimir_nl(_hola_);
+  si ( _hola_ mayor 10) entonces
+  si ( _hola_ mayor 10) entonces
+    imprimir("si funciono");
+    fin_si
+    si ( _hola_ mayor 10) entonces
+        imprimir("si funciono");
+        fin_si
+        si ( _hola_ mayor 10) entonces
+            imprimir("si funciono");
+            fin_si
+
+    fin_si
+si ( _hola_ mayor 10) entonces
+  si ( _hola_ mayor 10) entonces
+    imprimir("si funciono");
+    fin_si
+    si ( _hola_ mayor 10) entonces
+        imprimir("si funciono");
+        fin_si
+        si ( _hola_ mayor 10) entonces
+            imprimir("si funciono");
+            fin_si
+
+    fin_si
+imprimir("regresa indentacion");
 final

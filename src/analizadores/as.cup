@@ -78,8 +78,8 @@ BLOQUE_PRINCIPAL ::= inicio INSTRUCCIONES:_INSTRUCCIONES finall {:System.out.pri
 
 ;
 
-INSTRUCCIONES ::=   INSTRUCCIONES:_Aray INSTRUCCION:_INSTRUCCION2 {:ArrayList<Object> instrucciones = ArrayList.class.cast(_Aray);; instrucciones.add(_INSTRUCCION2);RESULT = instrucciones;:}
-              |   INSTRUCCION:_INSTRUCCION {: ArrayList<Object> instrucciones = new ArrayList<>(); instrucciones.add(_INSTRUCCION);RESULT = instrucciones;:}
+INSTRUCCIONES ::=   INSTRUCCIONES:_Aray INSTRUCCION:_INSTRUCCION2 {:ArrayList<Object> instrucciones = ArrayList.class.cast(_Aray);if (_INSTRUCCION2.getClass() == ArrayList.class) instrucciones.addAll(ArrayList.class.cast(_INSTRUCCION2)); else  instrucciones.add(_INSTRUCCION2);RESULT = instrucciones;:}
+              |   INSTRUCCION:_INSTRUCCION {: ArrayList<Object> instrucciones = new ArrayList<>();if (_INSTRUCCION.getClass() == ArrayList.class) instrucciones.addAll(ArrayList.class.cast(_INSTRUCCION)); else instrucciones.add(_INSTRUCCION);RESULT = instrucciones;:}
               ;
 
 
@@ -91,7 +91,7 @@ INSTRUCCION ::= DECLARACION:_D   {:String Fimpr = _D.toString();System.out.print
             | FUNCION       {:System.out.println("encontro FUNCION");:}
             | METODOsp        {:System.out.println("encontro METODOSP");:}
             | FUNCIONsp       {:System.out.println("encontro FUNCIONSP");:}
-            | CONDICIONIF   {:System.out.println("encontro CONDICION IF");:}
+            | CONDICIONIF:_INS   {:ArrayList<Object> ins = ArrayList.class.cast(_INS);System.out.println("encontro CONDICION IF");RESULT = ins;:}
             | CICLO         {:System.out.println("encontro CICLO");:}
             | RETURN   {:System.out.println("encontro RETURN");:}
             | CALL      {:System.out.println("encontro LLAMADA");:}
@@ -121,7 +121,7 @@ OPCION ::= abre_pregunta  E cierra_pregunta entonces INSTRUCCIONES
 
 
 //CONDICION IF
-CONDICIONIF::= si abre_parentesis COMPARACIONES cierra_parentesis entonces INSTRUCCIONES fin_si
+CONDICIONIF::= si abre_parentesis COMPARACIONES:_C cierra_parentesis entonces INSTRUCCIONES:_INS fin_si {:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "if("+_C+"):";cond.add(ifins);cond.add(ins); RESULT = cond;:}
                 | si abre_parentesis COMPARACIONES cierra_parentesis entonces INSTRUCCIONES IFANIDADOS fin_si
 ;
 IFANIDADOS ::= IFANIDADOS  o_si abre_parentesis COMPARACIONES cierra_parentesis entonces INSTRUCCIONES
@@ -223,17 +223,17 @@ IDS ::= IDS:_IDS coma E:_E {:ArrayList<Object> ides = ArrayList.class.cast(_IDS)
     ;
 VARIABLE ::= variable:_variable{:String r = _variable.toString(); RESULT = r;:}
 ;
-COMPARACIONES::= not abre_parentesis COMPARACIONES cierra_parentesis
-            |  COMPARACIONES and COMP
-            |  COMPARACIONES or COMP
-            |   COMP
+COMPARACIONES::= not abre_parentesis COMPARACIONES:_E cierra_parentesis {:String FE ="!("+ _E.toString()+ ")"; RESULT = FE;:}
+            |  COMPARACIONES:_E and COMP:_F {:String FE = _E.toString()+ "and"+_F.toString(); RESULT = FE;:}
+            |  COMPARACIONES:_E or COMP:_F {:String FE = _E.toString()+ "or"+_F.toString(); RESULT = FE;:}
+            |   COMP:_E {:String FE = _E.toString(); RESULT = FE;:}
 ;
-COMP::=  E menor E
-    |  E mayor_o_igual E
-    |  E menor_o_igual E
-    |  E mayor E
-    |  E es_diferente E
-    |  E es_igual E
+COMP::=  E:_E menor E:_F {:String FE = _E.toString()+ "<"+_F.toString(); RESULT = FE;:}
+    |  E:_E mayor_o_igual E:_F {:String FE = _E.toString()+ ">="+_F.toString(); RESULT = FE;:}
+    |  E:_E menor_o_igual E:_F {:String FE = _E.toString()+ "<="+_F.toString(); RESULT = FE;:}
+    |  E:_E mayor E:_F {:String FE = _E.toString()+ ">"+_F.toString(); RESULT = FE;:}
+    |  E:_E es_diferente E:_F {:String FE = _E.toString()+ "!="+_F.toString(); RESULT = FE;:}
+    |  E:_E es_igual E:_F {:String FE = _E.toString()+ "=="+_F.toString(); RESULT = FE;:}
 ;
 E::= E:_E mas F:_F {:String FE = _E.toString()+ "+"+_F.toString(); RESULT = FE;:}
     |  E:_E menos F:_F {:String FE = _E.toString()+ "-"+_F.toString(); RESULT = FE;:}
