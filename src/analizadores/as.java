@@ -1096,7 +1096,16 @@ class CUP$as$actions {
           case 30: // CONDICIONIF ::= si abre_parentesis COMPARACIONES cierra_parentesis entonces INSTRUCCIONES IFANIDADOS fin_si 
             {
               Object RESULT =null;
-
+		int _Cleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-5)).left;
+		int _Cright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-5)).right;
+		Object _C = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-5)).value;
+		int _INSleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-2)).left;
+		int _INSright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-2)).right;
+		Object _INS = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-2)).value;
+		int _INFANIDADOSleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-1)).left;
+		int _INFANIDADOSright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-1)).right;
+		Object _INFANIDADOS = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-1)).value;
+		ArrayList<Object> condan= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "if("+_C+"):";condan.add(ifins);condan.add(ins); condan.addAll(ArrayList.class.cast(_INFANIDADOS));RESULT = condan;
               CUP$as$result = parser.getSymbolFactory().newSymbol("CONDICIONIF",15, ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-7)), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;
@@ -1105,7 +1114,16 @@ class CUP$as$actions {
           case 31: // IFANIDADOS ::= IFANIDADOS o_si abre_parentesis COMPARACIONES cierra_parentesis entonces INSTRUCCIONES 
             {
               Object RESULT =null;
-
+		int _INFANIDADOSleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-6)).left;
+		int _INFANIDADOSright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-6)).right;
+		Object _INFANIDADOS = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-6)).value;
+		int _Cleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-3)).left;
+		int _Cright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-3)).right;
+		Object _C = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-3)).value;
+		int _INSleft = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).left;
+		int _INSright = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).right;
+		Object _INS = (Object)((java_cup.runtime.Symbol) CUP$as$stack.peek()).value;
+		ArrayList<Object> condan= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);condan.addAll(ArrayList.class.cast(_INFANIDADOS));String ifins = "elif("+_C+"):";condan.add(ifins);condan.add(ins); RESULT = condan;
               CUP$as$result = parser.getSymbolFactory().newSymbol("IFANIDADOS",3, ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-6)), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;
@@ -1114,7 +1132,13 @@ class CUP$as$actions {
           case 32: // IFANIDADOS ::= IFANIDADOS de_lo_contrario INSTRUCCIONES 
             {
               Object RESULT =null;
-
+		int _INFANIDADOSleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-2)).left;
+		int _INFANIDADOSright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-2)).right;
+		Object _INFANIDADOS = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-2)).value;
+		int _INSleft = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).left;
+		int _INSright = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).right;
+		Object _INS = (Object)((java_cup.runtime.Symbol) CUP$as$stack.peek()).value;
+		ArrayList<Object> condan= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);condan.addAll(ArrayList.class.cast(_INFANIDADOS));String ifins = "else:";condan.add(ifins);condan.add(ins); RESULT = condan;
               CUP$as$result = parser.getSymbolFactory().newSymbol("IFANIDADOS",3, ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-2)), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;
@@ -1123,7 +1147,13 @@ class CUP$as$actions {
           case 33: // IFANIDADOS ::= o_si abre_parentesis COMPARACIONES cierra_parentesis entonces INSTRUCCIONES 
             {
               Object RESULT =null;
-
+		int _Cleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-3)).left;
+		int _Cright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-3)).right;
+		Object _C = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-3)).value;
+		int _INSleft = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).left;
+		int _INSright = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).right;
+		Object _INS = (Object)((java_cup.runtime.Symbol) CUP$as$stack.peek()).value;
+		ArrayList<Object> conelse= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "elif("+_C+"):";conelse.add(ifins);conelse.add(ins); RESULT = conelse;
               CUP$as$result = parser.getSymbolFactory().newSymbol("IFANIDADOS",3, ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-5)), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;
@@ -1132,7 +1162,10 @@ class CUP$as$actions {
           case 34: // IFANIDADOS ::= de_lo_contrario INSTRUCCIONES 
             {
               Object RESULT =null;
-
+		int _INSleft = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).left;
+		int _INSright = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).right;
+		Object _INS = (Object)((java_cup.runtime.Symbol) CUP$as$stack.peek()).value;
+		ArrayList<Object> contr= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "else:";contr.add(ifins);contr.add(ins); RESULT = contr;
               CUP$as$result = parser.getSymbolFactory().newSymbol("IFANIDADOS",3, ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-1)), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;

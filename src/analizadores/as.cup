@@ -122,12 +122,12 @@ OPCION ::= abre_pregunta  E cierra_pregunta entonces INSTRUCCIONES
 
 //CONDICION IF
 CONDICIONIF::= si abre_parentesis COMPARACIONES:_C cierra_parentesis entonces INSTRUCCIONES:_INS fin_si {:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "if("+_C+"):";cond.add(ifins);cond.add(ins); RESULT = cond;:}
-                | si abre_parentesis COMPARACIONES cierra_parentesis entonces INSTRUCCIONES IFANIDADOS fin_si
+                | si abre_parentesis COMPARACIONES:_C cierra_parentesis entonces INSTRUCCIONES:_INS IFANIDADOS:_INFANIDADOS fin_si {:ArrayList<Object> condan= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "if("+_C+"):";condan.add(ifins);condan.add(ins); condan.addAll(ArrayList.class.cast(_INFANIDADOS));RESULT = condan;:}
 ;
-IFANIDADOS ::= IFANIDADOS  o_si abre_parentesis COMPARACIONES cierra_parentesis entonces INSTRUCCIONES
-                | IFANIDADOS  de_lo_contrario INSTRUCCIONES
-                |  o_si abre_parentesis COMPARACIONES cierra_parentesis entonces INSTRUCCIONES
-                | de_lo_contrario INSTRUCCIONES
+IFANIDADOS ::= IFANIDADOS:_INFANIDADOS  o_si abre_parentesis COMPARACIONES:_C cierra_parentesis entonces INSTRUCCIONES:_INS {:ArrayList<Object> condan= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);condan.addAll(ArrayList.class.cast(_INFANIDADOS));String ifins = "elif("+_C+"):";condan.add(ifins);condan.add(ins); RESULT = condan;:}
+                | IFANIDADOS:_INFANIDADOS  de_lo_contrario INSTRUCCIONES:_INS {:ArrayList<Object> condan= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);condan.addAll(ArrayList.class.cast(_INFANIDADOS));String ifins = "else:";condan.add(ifins);condan.add(ins); RESULT = condan;:}
+                |  o_si abre_parentesis COMPARACIONES:_C cierra_parentesis entonces INSTRUCCIONES:_INS {:ArrayList<Object> conelse= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "elif("+_C+"):";conelse.add(ifins);conelse.add(ins); RESULT = conelse;:}
+                | de_lo_contrario INSTRUCCIONES:_INS {:ArrayList<Object> contr= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "else:";contr.add(ifins);contr.add(ins); RESULT = contr;:}
 ;
 
 

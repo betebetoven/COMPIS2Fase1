@@ -34,10 +34,26 @@ si ( _hola_ mayor 10) entonces
     si ( _hola_ mayor 10) entonces
         imprimir("si funciono");
         fin_si
-        si ( _hola_ mayor 10) entonces
+        si ( _hola_ menor 10) entonces
             imprimir("si funciono");
+        o_si(_hola_ mayor 10) entonces
+            imprimir("si funciono el else");
+         o_si(_hola_ mayor 10) entonces
+                    imprimir("si funciono el else");
+          o_si(_hola_ mayor 10) entonces
+                     imprimir("si funciono el else");
+          de_lo_contrario
+            imprimir("esto no tiene que salir");
             fin_si
 
     fin_si
+    si ( _hola_ menor 10) entonces
+    imprimir("aca no tiene que pasar");
+    o_si( _hola_ es_igual 100) entonces
+    imprimir("aca no tiene que pasar");
+    de_lo_contrario
+    imprimir("si funciona el else simple jeje");
+    fin_si
+
 imprimir("regresa indentacion");
 final
