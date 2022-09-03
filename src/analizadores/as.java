@@ -1069,7 +1069,13 @@ class CUP$as$actions {
           case 20: // CICLO ::= mientras abre_parentesis COND_WHILE cierra_parentesis hacer INSTRUCCIONES fin_mientras 
             {
               Object RESULT =null;
-
+		int _Cleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-4)).left;
+		int _Cright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-4)).right;
+		Object _C = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-4)).value;
+		int _INSleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-1)).left;
+		int _INSright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-1)).right;
+		Object _INS = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-1)).value;
+		ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "while( "+_C.toString()+"):";cond.add(ifins);cond.add(ins); RESULT = cond;
               CUP$as$result = parser.getSymbolFactory().newSymbol("CICLO",16, ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-6)), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;
@@ -1087,7 +1093,7 @@ class CUP$as$actions {
           case 22: // COND_WHILE ::= verdadero 
             {
               Object RESULT =null;
-
+		String Fe = " True "; RESULT = Fe;
               CUP$as$result = parser.getSymbolFactory().newSymbol("COND_WHILE",20, ((java_cup.runtime.Symbol)CUP$as$stack.peek()), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;
@@ -1096,7 +1102,7 @@ class CUP$as$actions {
           case 23: // COND_WHILE ::= falso 
             {
               Object RESULT =null;
-
+		String Fe = " False "; RESULT = Fe;
               CUP$as$result = parser.getSymbolFactory().newSymbol("COND_WHILE",20, ((java_cup.runtime.Symbol)CUP$as$stack.peek()), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;
@@ -1105,7 +1111,10 @@ class CUP$as$actions {
           case 24: // COND_WHILE ::= COMPARACIONES 
             {
               Object RESULT =null;
-
+		int _Eleft = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).left;
+		int _Eright = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).right;
+		Object _E = (Object)((java_cup.runtime.Symbol) CUP$as$stack.peek()).value;
+		String Fe = _E.toString(); RESULT = Fe;
               CUP$as$result = parser.getSymbolFactory().newSymbol("COND_WHILE",20, ((java_cup.runtime.Symbol)CUP$as$stack.peek()), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;
@@ -1332,7 +1341,7 @@ class CUP$as$actions {
 		int _Eleft = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).left;
 		int _Eright = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).right;
 		Object _E = (Object)((java_cup.runtime.Symbol) CUP$as$stack.peek()).value;
-		String Fe = _E.toString(); RESULT = _E;
+		String Fe = _E.toString(); RESULT = Fe;
               CUP$as$result = parser.getSymbolFactory().newSymbol("PAR",25, ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-1)), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;

@@ -102,12 +102,12 @@ INSTRUCCION ::= DECLARACION:_D   {:String Fimpr = _D.toString();System.out.print
 //INSTRUCCIONES CICLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOS
 CICLO::= para  E:_A flechita E:_B hasta E:_C hacer INSTRUCCIONES:_INS fin_para {:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "for "+_A.toString()+" in range("+_B.toString()+","+_C.toString()+"):";cond.add(ifins);cond.add(ins); RESULT = cond;:}
     | para  E:_A flechita E:_B hasta E:_C con_incremental number:_D hacer INSTRUCCIONES:_INS fin_para {:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "for "+_A.toString()+" in range("+_B.toString()+","+_C.toString()+","+_D+"):";cond.add(ifins);cond.add(ins); RESULT = cond;:}
-    | mientras abre_parentesis COND_WHILE cierra_parentesis hacer INSTRUCCIONES fin_mientras
+    | mientras abre_parentesis COND_WHILE:_C cierra_parentesis hacer INSTRUCCIONES:_INS fin_mientras {:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "while( "+_C.toString()+"):";cond.add(ifins);cond.add(ins); RESULT = cond;:}
     | repetir INSTRUCCIONES hasta_que abre_parentesis COND_WHILE cierra_parentesis punto_y_coma
     ;
-COND_WHILE::= verdadero
-          | falso
-          |  COMPARACIONES
+COND_WHILE::= verdadero  {:String Fe = " True "; RESULT = Fe;:}
+          | falso    {:String Fe = " False "; RESULT = Fe;:}
+          |  COMPARACIONES:_E   {:String Fe = _E.toString(); RESULT = Fe;:}
 ;
 SWITCH ::= segun E  hacer OPCIONES de_lo_contrario entonces INSTRUCCIONES fin_segun
 ;
@@ -156,7 +156,7 @@ PARAMETROS ::= abre_parentesis PARS:_IDS cierra_parentesis{:
 PARS ::= PARS:_IDS coma PAR:_E {:ArrayList<Object> ides = ArrayList.class.cast(_IDS); ides.add(_E.toString());RESULT = ides;:}
      | PAR:_E {: ArrayList<Object> ides = new ArrayList<>(); ides.add(_E.toString());RESULT = ides;:}
 ;
-PAR ::= TIPODATO_DECLARACION E:_E {:String Fe = _E.toString(); RESULT = _E;:}
+PAR ::= TIPODATO_DECLARACION E:_E {:String Fe = _E.toString(); RESULT = Fe;:}
 ;
 PARAMETROSLL ::= abre_parentesis PARSLL:_IDS cierra_parentesis {:
                                                               String instruccion="";
