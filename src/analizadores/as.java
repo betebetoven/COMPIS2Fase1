@@ -1000,7 +1000,10 @@ class CUP$as$actions {
           case 16: // INSTRUCCION ::= CALL 
             {
               Object RESULT =null;
-		System.out.println("encontro LLAMADA");
+		int _Cleft = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).left;
+		int _Cright = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).right;
+		Object _C = (Object)((java_cup.runtime.Symbol) CUP$as$stack.peek()).value;
+		String Fimpr = _C.toString();System.out.println("encontro LLAMADA");RESULT= Fimpr;
               CUP$as$result = parser.getSymbolFactory().newSymbol("INSTRUCCION",6, ((java_cup.runtime.Symbol)CUP$as$stack.peek()), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;

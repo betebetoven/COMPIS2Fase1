@@ -69,4 +69,5 @@ imprimir(ejecutar _kkita_("alberto","hernandez"););
 
 
 imprimir("regresa indentacion");
+ejecutar _alberto_();
 final

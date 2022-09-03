@@ -94,7 +94,7 @@ INSTRUCCION ::= DECLARACION:_D   {:String Fimpr = _D.toString();System.out.print
             | CONDICIONIF:_INS   {:ArrayList<Object> ins = ArrayList.class.cast(_INS);System.out.println("encontro CONDICION IF");RESULT = ins;:}
             | CICLO         {:System.out.println("encontro CICLO");:}
             | RETURN:_C   {:String Fimpr = _C.toString();System.out.println("encontro RETURN");RESULT= Fimpr;:}
-            | CALL      {:System.out.println("encontro LLAMADA");:}
+            | CALL:_C      {:String Fimpr = _C.toString();System.out.println("encontro LLAMADA");RESULT= Fimpr;:}
             | SWITCH    {:System.out.println("encontro SWITCH");:}
 
 ;
