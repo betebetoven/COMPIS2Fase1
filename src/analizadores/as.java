@@ -1084,7 +1084,13 @@ class CUP$as$actions {
           case 21: // CICLO ::= repetir INSTRUCCIONES hasta_que abre_parentesis COND_WHILE cierra_parentesis punto_y_coma 
             {
               Object RESULT =null;
-
+		int _INSleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-5)).left;
+		int _INSright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-5)).right;
+		Object _INS = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-5)).value;
+		int _Cleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-2)).left;
+		int _Cright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-2)).right;
+		Object _C = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-2)).value;
+		ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "while(True):";cond.add(ifins);cond.add(ins);String fifi = "     if ("+_C.toString()+"):";String brek= "          break";cond.add(fifi);cond.add(brek); RESULT = cond;
               CUP$as$result = parser.getSymbolFactory().newSymbol("CICLO",16, ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-6)), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;

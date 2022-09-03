@@ -85,4 +85,11 @@ imprimir(_a_ mas _b_);
 _a_ -> _a_ mas _b_;
 fin_mientras
 
+
+_pepe_ -> 0;
+repetir
+imprimir( "pepe " mas _pepe_);
+_pepe_ -> _pepe_ mas 1;
+hasta_que (_pepe_ es_igual 25);
+
 final

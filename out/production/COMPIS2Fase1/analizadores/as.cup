@@ -103,7 +103,7 @@ INSTRUCCION ::= DECLARACION:_D   {:String Fimpr = _D.toString();System.out.print
 CICLO::= para  E:_A flechita E:_B hasta E:_C hacer INSTRUCCIONES:_INS fin_para {:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "for "+_A.toString()+" in range("+_B.toString()+","+_C.toString()+"):";cond.add(ifins);cond.add(ins); RESULT = cond;:}
     | para  E:_A flechita E:_B hasta E:_C con_incremental number:_D hacer INSTRUCCIONES:_INS fin_para {:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "for "+_A.toString()+" in range("+_B.toString()+","+_C.toString()+","+_D+"):";cond.add(ifins);cond.add(ins); RESULT = cond;:}
     | mientras abre_parentesis COND_WHILE:_C cierra_parentesis hacer INSTRUCCIONES:_INS fin_mientras {:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "while( "+_C.toString()+"):";cond.add(ifins);cond.add(ins); RESULT = cond;:}
-    | repetir INSTRUCCIONES hasta_que abre_parentesis COND_WHILE cierra_parentesis punto_y_coma
+    | repetir INSTRUCCIONES:_INS hasta_que abre_parentesis COND_WHILE:_C cierra_parentesis punto_y_coma {:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "while(True):";cond.add(ifins);cond.add(ins);String fifi = "     if ("+_C.toString()+"):";String brek= "          break";cond.add(fifi);cond.add(brek); RESULT = cond;:}
     ;
 COND_WHILE::= verdadero  {:String Fe = " True "; RESULT = Fe;:}
           | falso    {:String Fe = " False "; RESULT = Fe;:}
