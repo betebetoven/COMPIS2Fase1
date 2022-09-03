@@ -92,7 +92,7 @@ INSTRUCCION ::= DECLARACION:_D   {:String Fimpr = _D.toString();System.out.print
             | METODOsp:_INS        {:ArrayList<Object> ins = ArrayList.class.cast(_INS);System.out.println("encontro METODOSP");RESULT = ins;:}
             | FUNCIONsp:_INS      {:ArrayList<Object> ins = ArrayList.class.cast(_INS);System.out.println("encontro FUNCIONSP");RESULT = ins;:}
             | CONDICIONIF:_INS   {:ArrayList<Object> ins = ArrayList.class.cast(_INS);System.out.println("encontro CONDICION IF");RESULT = ins;:}
-            | CICLO         {:System.out.println("encontro CICLO");:}
+            | CICLO:_INS         {:ArrayList<Object> ins = ArrayList.class.cast(_INS);System.out.println("encontro CICLO");RESULT = ins;:}
             | RETURN:_C   {:String Fimpr = _C.toString();System.out.println("encontro RETURN");RESULT= Fimpr;:}
             | CALL:_C      {:String Fimpr = _C.toString();System.out.println("encontro LLAMADA");RESULT= Fimpr;:}
             | SWITCH    {:System.out.println("encontro SWITCH");:}
@@ -100,8 +100,8 @@ INSTRUCCION ::= DECLARACION:_D   {:String Fimpr = _D.toString();System.out.print
 ;
 
 //INSTRUCCIONES CICLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOS
-CICLO::= para  E flechita E hasta E hacer INSTRUCCIONES fin_para
-    | para  E flechita E hasta E con_incremental number hacer INSTRUCCIONES fin_para
+CICLO::= para  E:_A flechita E:_B hasta E:_C hacer INSTRUCCIONES:_INS fin_para {:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "for "+_A.toString()+" in range("+_B.toString()+","+_C.toString()+"):";cond.add(ifins);cond.add(ins); RESULT = cond;:}
+    | para  E:_A flechita E:_B hasta E:_C con_incremental number:_D hacer INSTRUCCIONES:_INS fin_para {:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "for "+_A.toString()+" in range("+_B.toString()+","+_C.toString()+","+_D+"):";cond.add(ifins);cond.add(ins); RESULT = cond;:}
     | mientras abre_parentesis COND_WHILE cierra_parentesis hacer INSTRUCCIONES fin_mientras
     | repetir INSTRUCCIONES hasta_que abre_parentesis COND_WHILE cierra_parentesis punto_y_coma
     ;

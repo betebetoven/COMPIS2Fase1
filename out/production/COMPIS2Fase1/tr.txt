@@ -70,4 +70,12 @@ imprimir(ejecutar _kkita_("alberto","hernandez"););
 
 imprimir("regresa indentacion");
 ejecutar _alberto_();
+para _hola_ -> 0 hasta 50  con_incremental
+2 hacer
+imprimir(20.5);
+fin_para
+para _hola_ -> 0 hasta 50  hacer
+imprimir(20.5);
+fin_para
+
 final

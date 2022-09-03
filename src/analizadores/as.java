@@ -979,7 +979,10 @@ class CUP$as$actions {
           case 14: // INSTRUCCION ::= CICLO 
             {
               Object RESULT =null;
-		System.out.println("encontro CICLO");
+		int _INSleft = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).left;
+		int _INSright = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).right;
+		Object _INS = (Object)((java_cup.runtime.Symbol) CUP$as$stack.peek()).value;
+		ArrayList<Object> ins = ArrayList.class.cast(_INS);System.out.println("encontro CICLO");RESULT = ins;
               CUP$as$result = parser.getSymbolFactory().newSymbol("INSTRUCCION",6, ((java_cup.runtime.Symbol)CUP$as$stack.peek()), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;
@@ -1021,7 +1024,19 @@ class CUP$as$actions {
           case 18: // CICLO ::= para E flechita E hasta E hacer INSTRUCCIONES fin_para 
             {
               Object RESULT =null;
-
+		int _Aleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-7)).left;
+		int _Aright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-7)).right;
+		Object _A = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-7)).value;
+		int _Bleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-5)).left;
+		int _Bright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-5)).right;
+		Object _B = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-5)).value;
+		int _Cleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-3)).left;
+		int _Cright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-3)).right;
+		Object _C = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-3)).value;
+		int _INSleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-1)).left;
+		int _INSright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-1)).right;
+		Object _INS = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-1)).value;
+		ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "for "+_A.toString()+" in range("+_B.toString()+","+_C.toString()+"):";cond.add(ifins);cond.add(ins); RESULT = cond;
               CUP$as$result = parser.getSymbolFactory().newSymbol("CICLO",16, ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-8)), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;
@@ -1030,7 +1045,22 @@ class CUP$as$actions {
           case 19: // CICLO ::= para E flechita E hasta E con_incremental number hacer INSTRUCCIONES fin_para 
             {
               Object RESULT =null;
-
+		int _Aleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-9)).left;
+		int _Aright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-9)).right;
+		Object _A = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-9)).value;
+		int _Bleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-7)).left;
+		int _Bright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-7)).right;
+		Object _B = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-7)).value;
+		int _Cleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-5)).left;
+		int _Cright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-5)).right;
+		Object _C = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-5)).value;
+		int _Dleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-3)).left;
+		int _Dright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-3)).right;
+		Object _D = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-3)).value;
+		int _INSleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-1)).left;
+		int _INSright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-1)).right;
+		Object _INS = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-1)).value;
+		ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "for "+_A.toString()+" in range("+_B.toString()+","+_C.toString()+","+_D+"):";cond.add(ifins);cond.add(ins); RESULT = cond;
               CUP$as$result = parser.getSymbolFactory().newSymbol("CICLO",16, ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-10)), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;
