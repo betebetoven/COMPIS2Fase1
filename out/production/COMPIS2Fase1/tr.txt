@@ -55,5 +55,25 @@ si ( _hola_ mayor 10) entonces
     imprimir("si funciona el else simple jeje");
     fin_si
 
+metodo _alberto_()
+ingresar _kk_  como cadena con_valor "hola mundo";
+imprimir("jalou");
+retornar(_kk_);
+fin_metodo
+
+
+
+
+
+
+
+
+funcion _kkita_ cadena con_parametros (cadena _a_, numero _c_)
+ingresar _result_ como cadena con_valor _a_ mas _c_;
+retornar(_result_);
+fin_funcion
+imprimir(ejecutar _kkita_("alberto","hernandez"););
+
+
 imprimir("regresa indentacion");
 final

@@ -22,6 +22,7 @@ public class Main {
             ArrayList<String> popa = new ArrayList<>();
             Object pepe = popa;
             ArrayList<String>segundo = ArrayList.class.cast(pepe);
+
             System.out.println(pepe.toString());
             al lexico = new al(new BufferedReader(new FileReader("C:\\Users\\Alberto\\Desktop\\cys\\COMPIS2Fase1\\src\\tr.txt")));
 
