@@ -1015,7 +1015,10 @@ class CUP$as$actions {
           case 17: // INSTRUCCION ::= SWITCH 
             {
               Object RESULT =null;
-		System.out.println("encontro SWITCH");
+		int _INSleft = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).left;
+		int _INSright = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).right;
+		Object _INS = (Object)((java_cup.runtime.Symbol) CUP$as$stack.peek()).value;
+		ArrayList<Object> ins = ArrayList.class.cast(_INS);System.out.println("encontro SWITCH");RESULT = ins;
               CUP$as$result = parser.getSymbolFactory().newSymbol("INSTRUCCION",6, ((java_cup.runtime.Symbol)CUP$as$stack.peek()), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;
@@ -1129,7 +1132,16 @@ class CUP$as$actions {
           case 25: // SWITCH ::= segun E hacer OPCIONES de_lo_contrario entonces INSTRUCCIONES fin_segun 
             {
               Object RESULT =null;
-
+		int _Eleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-6)).left;
+		int _Eright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-6)).right;
+		Object _E = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-6)).value;
+		int _OPSleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-4)).left;
+		int _OPSright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-4)).right;
+		Object _OPS = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-4)).value;
+		int _INSleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-1)).left;
+		int _INSright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-1)).right;
+		Object _INS = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-1)).value;
+		ArrayList<Object> condan= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String primer = "k2 = "+_E.toString();condan.add(primer); condan.addAll(ArrayList.class.cast(_OPS));String elsa = "else:";condan.add(elsa); condan.add(ins);;RESULT = condan;
               CUP$as$result = parser.getSymbolFactory().newSymbol("SWITCH",4, ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-7)), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;
@@ -1138,7 +1150,13 @@ class CUP$as$actions {
           case 26: // OPCIONES ::= OPCIONES OPCION 
             {
               Object RESULT =null;
-
+		int _OPSleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-1)).left;
+		int _OPSright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-1)).right;
+		Object _OPS = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-1)).value;
+		int _OPleft = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).left;
+		int _OPright = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).right;
+		Object _OP = (Object)((java_cup.runtime.Symbol) CUP$as$stack.peek()).value;
+		ArrayList<Object> condan= ArrayList.class.cast(_OPS); ArrayList<Object> ins = ArrayList.class.cast(_OP);String ifins = "elif( k2 =="+ins.get(0).toString()+"):";condan.add(ifins);condan.add(ArrayList.class.cast(ins.get(1))); RESULT = condan;
               CUP$as$result = parser.getSymbolFactory().newSymbol("OPCIONES",5, ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-1)), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;
@@ -1147,7 +1165,10 @@ class CUP$as$actions {
           case 27: // OPCIONES ::= OPCION 
             {
               Object RESULT =null;
-
+		int _OPleft = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).left;
+		int _OPright = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).right;
+		Object _OP = (Object)((java_cup.runtime.Symbol) CUP$as$stack.peek()).value;
+		ArrayList<Object> contr= new ArrayList<>();ArrayList<Object> ins = ArrayList.class.cast(_OP);String ifins = "if( k2 =="+ins.get(0).toString()+"):";contr.add(ifins);contr.add( ArrayList.class.cast(ins.get(1))); RESULT = contr;
               CUP$as$result = parser.getSymbolFactory().newSymbol("OPCIONES",5, ((java_cup.runtime.Symbol)CUP$as$stack.peek()), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;
@@ -1156,7 +1177,13 @@ class CUP$as$actions {
           case 28: // OPCION ::= abre_pregunta E cierra_pregunta entonces INSTRUCCIONES 
             {
               Object RESULT =null;
-
+		int _Eleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-3)).left;
+		int _Eright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-3)).right;
+		Object _E = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-3)).value;
+		int _INSleft = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).left;
+		int _INSright = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).right;
+		Object _INS = (Object)((java_cup.runtime.Symbol) CUP$as$stack.peek()).value;
+		ArrayList<Object> contr= new ArrayList<>();ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = _E.toString();contr.add(ifins);contr.add(ins); RESULT = contr;
               CUP$as$result = parser.getSymbolFactory().newSymbol("OPCION",2, ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-4)), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;

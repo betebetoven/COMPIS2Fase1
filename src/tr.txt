@@ -92,4 +92,26 @@ imprimir( "pepe " mas _pepe_);
 _pepe_ -> _pepe_ mas 1;
 hasta_que (_pepe_ es_igual 25);
 
+ingresar _varaux_ como numero con_valor 10 mod 2;
+	segun _varaux_ hacer
+		¿ 0 ? entonces
+			imprimir_nl ("el valor es mayor a 0 y menos a 2");
+		¿ 2 ? entonces
+			imprimir_nl ("el valor es mayor a 2");
+			de_lo_contrario entonces
+            imprimir("me lleva la verga");
+	fin_segun
+
+_entrada_ -> "papaya";
+segun _entrada_ hacer
+  ¿ 10 ? entonces
+  imprimir("me lleva la verga numero");
+  ¿ "papaya" ? entonces
+  imprimir("me lleva la verga string");
+  ¿verdadero ? entonces
+  imprimir("me lleva la verga boolean");
+  de_lo_contrario entonces
+imprimir("me lleva la verga");
+fin_segun
+
 final

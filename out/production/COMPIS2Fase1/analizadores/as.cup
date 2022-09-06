@@ -95,7 +95,7 @@ INSTRUCCION ::= DECLARACION:_D   {:String Fimpr = _D.toString();System.out.print
             | CICLO:_INS         {:ArrayList<Object> ins = ArrayList.class.cast(_INS);System.out.println("encontro CICLO");RESULT = ins;:}
             | RETURN:_C   {:String Fimpr = _C.toString();System.out.println("encontro RETURN");RESULT= Fimpr;:}
             | CALL:_C      {:String Fimpr = _C.toString();System.out.println("encontro LLAMADA");RESULT= Fimpr;:}
-            | SWITCH    {:System.out.println("encontro SWITCH");:}
+            | SWITCH:_INS    {:ArrayList<Object> ins = ArrayList.class.cast(_INS);System.out.println("encontro SWITCH");RESULT = ins;:}
 
 ;
 
@@ -109,12 +109,12 @@ COND_WHILE::= verdadero  {:String Fe = " True "; RESULT = Fe;:}
           | falso    {:String Fe = " False "; RESULT = Fe;:}
           |  COMPARACIONES:_E   {:String Fe = _E.toString(); RESULT = Fe;:}
 ;
-SWITCH ::= segun E  hacer OPCIONES de_lo_contrario entonces INSTRUCCIONES fin_segun
+SWITCH ::= segun E:_E  hacer OPCIONES:_OPS de_lo_contrario entonces INSTRUCCIONES:_INS fin_segun {:ArrayList<Object> condan= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String primer = "k2 = "+_E.toString();condan.add(primer); condan.addAll(ArrayList.class.cast(_OPS));String elsa = "else:";condan.add(elsa); condan.add(ins);;RESULT = condan;:}
 ;
-OPCIONES::= OPCIONES OPCION
-            | OPCION
+OPCIONES::= OPCIONES:_OPS OPCION:_OP  {:ArrayList<Object> condan= ArrayList.class.cast(_OPS); ArrayList<Object> ins = ArrayList.class.cast(_OP);String ifins = "elif( k2 =="+ins.get(0).toString()+"):";condan.add(ifins);condan.add(ArrayList.class.cast(ins.get(1))); RESULT = condan;:}
+            | OPCION:_OP  {:ArrayList<Object> contr= new ArrayList<>();ArrayList<Object> ins = ArrayList.class.cast(_OP);String ifins = "if( k2 =="+ins.get(0).toString()+"):";contr.add(ifins);contr.add( ArrayList.class.cast(ins.get(1))); RESULT = contr;:}
 ;
-OPCION ::= abre_pregunta  E cierra_pregunta entonces INSTRUCCIONES
+OPCION ::= abre_pregunta  E:_E cierra_pregunta entonces INSTRUCCIONES:_INS {:ArrayList<Object> contr= new ArrayList<>();ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = _E.toString();contr.add(ifins);contr.add(ins); RESULT = contr;:}
 ;
 
 
