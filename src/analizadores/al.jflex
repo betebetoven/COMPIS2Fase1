@@ -37,12 +37,19 @@
 
     comilla = \u0022
     cejilla = \u0027
-
+    arroba = "@"
+    dolar = "$"
+    numeral = "#"
+    punto ="."
+    acorch = "{"
+    ccorch ="}"
+    ptc = ";"
+    com = ","
     id = ({letra}|{digito})+
     //Identifier = [:jletter:]+ [:jletterdigit:]* [:jletter:]*
-    frase = {comilla} ({letra}|{digito}|{WhiteSpace})*{comilla}
+    frase = {comilla} ({letra}|{digito}|{WhiteSpace}|{punto}|{ptc}|{com}|{numeral}|{arroba})*{comilla}
 
-    frasecita = {cejilla} ({letra}|{digito}) {cejilla}
+    frasecita = {cejilla} (({letra}|{digito})|({dolar}{acorch}{digito}+{ccorch})) {cejilla}
     DecIntegerLiteral = 0 | [1-9][0-9]*
     number = {DecIntegerLiteral}+"."?{DecIntegerLiteral}?
 
@@ -137,15 +144,15 @@
   <YYINITIAL>     "falso"                  { return new Symbol(Simbolos.falso,yycolumn, yyline, yytext()); }
   <YYINITIAL>     "caracter"                  { return new Symbol(Simbolos.caracter,yycolumn, yyline, yytext()); }
  <YYINITIAL>      {frasecita}                   { return new Symbol(Simbolos.frasecita,yycolumn, yyline, yytext()); }
-  <YYINITIAL>     "mas"                  { return new Symbol(Simbolos.mas,yycolumn, yyline, yytext()); }
- <YYINITIAL>      "menos"                  { return new Symbol(Simbolos.menos,yycolumn, yyline, yytext()); }
+  <YYINITIAL>     "+"                  { return new Symbol(Simbolos.mas,yycolumn, yyline, yytext()); }
+ <YYINITIAL>      "-"                  { return new Symbol(Simbolos.menos,yycolumn, yyline, yytext()); }
 
- <YYINITIAL>      "por"                   { return new Symbol(Simbolos.por,yycolumn, yyline, yytext()); }
-  <YYINITIAL>     "dividido"                  { return new Symbol(Simbolos.dividido,yycolumn, yyline, yytext()); }
+ <YYINITIAL>      "*"                   { return new Symbol(Simbolos.por,yycolumn, yyline, yytext()); }
+  <YYINITIAL>     "/"                  { return new Symbol(Simbolos.dividido,yycolumn, yyline, yytext()); }
   <YYINITIAL>     "["                   { return new Symbol(Simbolos.abre_corchete,yycolumn, yyline, yytext()); }
   <YYINITIAL>     "]"                   { return new Symbol(Simbolos.cierra_corchete,yycolumn, yyline, yytext()); }
   <YYINITIAL>     "potencia"                   { return new Symbol(Simbolos.potencia,yycolumn, yyline, yytext()); }
-   <YYINITIAL>    "mod"                   { return new Symbol(Simbolos.mod,yycolumn, yyline, yytext()); }
+   <YYINITIAL>    "%"                   { return new Symbol(Simbolos.mod,yycolumn, yyline, yytext()); }
   <YYINITIAL>     "("                   { return new Symbol(Simbolos.abre_parentesis,yycolumn, yyline, yytext()); }
   <YYINITIAL>     ")"                   { return new Symbol(Simbolos.cierra_parentesis,yycolumn, yyline, yytext()); }
   <YYINITIAL>     "mayor"                   { return new Symbol(Simbolos.mayor,yycolumn, yyline, yytext()); }

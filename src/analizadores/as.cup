@@ -70,7 +70,7 @@ terminal inicio;
       terminal con_incremental;
       terminal segun;
 
-non terminal INIT, INSTRUCCIONES,OPCION,IFANIDADOS, SWITCH,OPCIONES, INSTRUCCION, DECLARACION ,IMPRIMIR, IMPRIMIRLN, ASIGNACION,METODO,FUNCION,METODOsp,FUNCIONsp,CONDICIONIF,CICLO,RETURN,CALL,E,COND_WHILE, COMPARACIONES,TIPODATO_DECLARACION,PARAMETROS,PARS,PAR,PARAMETROSLL,PARSLL,IDS,COMP,F,VARIABLE,BLOQUE_PRINCIPAL;
+non terminal INIT,Term, Factor, INSTRUCCIONES,OPCION,IFANIDADOS, SWITCH,OPCIONES, INSTRUCCION, DECLARACION ,IMPRIMIR, IMPRIMIRLN, ASIGNACION,METODO,FUNCION,METODOsp,FUNCIONsp,CONDICIONIF,CICLO,RETURN,CALL,E,COND_WHILE, COMPARACIONES,TIPODATO_DECLARACION,PARAMETROS,PARS,PAR,PARAMETROSLL,PARSLL,IDS,COMP,F,VARIABLE,BLOQUE_PRINCIPAL;
 start with INIT;
 INIT::= BLOQUE_PRINCIPAL {:System.out.println("Fin de analisis de entrada");:} ;
 
@@ -218,6 +218,16 @@ ASIGNACION ::= IDS:_IDS flechita E:_E punto_y_coma{:
     }
 
     String FIM = instruccion+_E.toString(); RESULT = FIM;:}
+    | IDS:_IDS flechita COMPARACIONES:_E punto_y_coma{:
+          String instruccion="";
+          ArrayList<Object> ides = ArrayList.class.cast(_IDS);
+          for (Object c: ides )
+          {
+              instruccion+= c.toString()+"=";
+              System.out.println(instruccion);
+          }
+
+          String FIM = instruccion+_E.toString(); RESULT = FIM;:}
     ;
 
 //DECLARACION DE VARIABLES NO DECLARADAS SINGULAR O EN CONJUNTO, FINALES O NO FINALES, INCLUYE EXPRESIONES
@@ -241,6 +251,17 @@ for (Object c: ides )
     }
 
 String FIM = instruccion+_E.toString(); RESULT = FIM;:}
+            | ingresar IDS:_IDS  como TIPODATO_DECLARACION con_valor COMPARACIONES:_E punto_y_coma{:
+    String instruccion="";
+    ArrayList<Object> ides = ArrayList.class.cast(_IDS);
+    for (Object c: ides )
+    {
+        instruccion+= c.toString()+"=";
+        System.out.println(instruccion);
+    }
+
+    String FIM = instruccion+_E.toString(); RESULT = FIM;:}
+
             ;
 
 IDS ::= IDS:_IDS coma E:_E {:ArrayList<Object> ides = ArrayList.class.cast(_IDS); ides.add(_E.toString());RESULT = ides;:}
@@ -259,15 +280,24 @@ COMP::=  E:_E menor E:_F {:String FE = _E.toString()+ "<"+_F.toString(); RESULT 
     |  E:_E mayor E:_F {:String FE = _E.toString()+ ">"+_F.toString(); RESULT = FE;:}
     |  E:_E es_diferente E:_F {:String FE = _E.toString()+ "!="+_F.toString(); RESULT = FE;:}
     |  E:_E es_igual E:_F {:String FE = _E.toString()+ "=="+_F.toString(); RESULT = FE;:}
+
 ;
-E::= E:_E mas F:_F {:String FE = _E.toString()+ "+"+_F.toString(); RESULT = FE;:}
-    |  E:_E menos F:_F {:String FE = _E.toString()+ "-"+_F.toString(); RESULT = FE;:}
-    |  E:_E potencia abre_corchete F:_F cierra_corchete {:String FE = _E.toString()+ "**"+_F.toString(); RESULT = FE;:}
-    |  E:_E por F:_F {:String FE = _E.toString()+ "*"+_F.toString(); RESULT = FE;:}
-    |  E:_E dividido F:_F {:String FE = _E.toString()+ "/"+_F.toString(); RESULT = FE;:}
-    |  E:_E mod F:_F {:String FE = _E.toString()+ "%"+_F.toString(); RESULT = FE;:}
-    |  F:_F        {:String FE = _F.toString(); RESULT = FE;:}
+E::=E:_E mas Term:_F {:String FE = _E.toString()+ "+"+_F.toString(); RESULT = FE;:}
+|E:_E menos Term:_F {:String FE = _E.toString()+ "-"+_F.toString(); RESULT = FE;:}
+|menos Term:_F {:String FE = "-"+_F.toString(); RESULT = FE;:}
+|Term:_F  {:String FE = _F.toString(); RESULT = FE;:}
 ;
+Term::=Term:_E por Factor:_F {:String FE = _E.toString()+ "*"+_F.toString(); RESULT = FE;:}
+|Term:_E dividido Factor:_F {:String FE = _E.toString()+ "/"+_F.toString(); RESULT = FE;:}
+| Term:_E mod Factor:_F  {:String FE = _E.toString()+ "%"+_F.toString(); RESULT = FE;:}
+|  Term:_E potencia abre_corchete E:_F cierra_corchete {:String FE = _E.toString()+ "**("+_F.toString()+")"; RESULT = FE;:}
+|Factor:_F {:String FE = _F.toString(); RESULT = FE;:}
+;
+Factor::= abre_parentesis E:_E cierra_parentesis  {:String FE ="(" +_E.toString()+")"; RESULT = FE;:}
+|F:_F  {:String FE = _F.toString(); RESULT = FE;:}
+
+;
+
 
 F::= number:_number                      {:String FVR = _number.toString(); RESULT = FVR;:}
     |verdadero:_verdadero       {:String FVR = "True"; RESULT = FVR;:}
