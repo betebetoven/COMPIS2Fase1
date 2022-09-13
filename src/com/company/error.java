@@ -14,6 +14,7 @@ public class error {
         this.columna = columna;
 
     }
+    public static String arbol_sintactico = "";
     public void imprime(ArrayList p, int indent)
     {
         for(Object k: p )
@@ -28,6 +29,10 @@ public class error {
                 System.out.println(inde+k.toString());
             }
         }
+    }
+    public void imprime_arbol_sintactico()
+    {
+        System.out.println(arbol_sintactico);
     }
 
     @Override
