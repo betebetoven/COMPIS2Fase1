@@ -12,12 +12,15 @@ public class Main {
     public static void main(String[] args) {
 
         try {
+            //error.arbol_sintactico.add("DEBERIA DE AGREGAR ESTO");
+
             //String j;
             //j.getBytes(StandardCharsets.UTF_8)
             String p = "";
             Object j = p ;
             String no = j.toString();
             j.getClass().cast(j);
+            error pop = new error("","","",2,2);
 
             ArrayList<String> popa = new ArrayList<>();
             Object pepe = popa;
@@ -34,6 +37,7 @@ public class Main {
 
 
             sintactico.parse();
+            pop.imprime_arbol_sintactico();
         } catch (Exception e) {
             System.out.println("se fue al catch");
         }

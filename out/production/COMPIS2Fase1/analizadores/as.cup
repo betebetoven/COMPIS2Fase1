@@ -77,7 +77,7 @@ INIT::= BLOQUE_PRINCIPAL {:System.out.println("Fin de analisis de entrada");:}
 
  ;
 
-BLOQUE_PRINCIPAL ::= inicio INSTRUCCIONES:_INSTRUCCIONES finall {:System.out.println(_INSTRUCCIONES.toString()); error imprime = new error("lexema","tipo","descripcion",3,3);imprime.imprime(ArrayList.class.cast(_INSTRUCCIONES),0);:}
+BLOQUE_PRINCIPAL ::= inicio{:error.arbol_sintactico.add("INICIO");:} INSTRUCCIONES:_INSTRUCCIONES finall {:System.out.println(_INSTRUCCIONES.toString()); error imprime = new error("lexema","tipo","descripcion",3,3);imprime.imprime(ArrayList.class.cast(_INSTRUCCIONES),0);error.arbol_sintactico.add("FIN");:}
 
 ;
 
@@ -316,12 +316,12 @@ Factor::= abre_parentesis E:_E cierra_parentesis  {:String FE ="(" +_E.toString(
 ;
 
 
-F::= number:_number                      {:String FVR = _number.toString(); RESULT = FVR;:}
-    |verdadero:_verdadero       {:String FVR = "True"; RESULT = FVR;:}
-    |falso:_falso           {:String FFS = "False"; RESULT = FFS;:}
-    |frase:_frase           {:String FFR = _frase.toString(); RESULT = FFR;:}
-    |frasecita:_frasecita {:String FF = _frasecita.toString(); RESULT = FF;:}
-    | VARIABLE:_VARIABLE {:String FV = _VARIABLE.toString(); RESULT = FV;:}
+F::= number:_number                      {:String FVR = _number.toString(); RESULT = FVR;error.arbol_sintactico.add("NUMERO");:}
+    |verdadero:_verdadero       {:String FVR = "True"; RESULT = FVR;error.arbol_sintactico.add("VERDADERO");:}
+    |falso:_falso           {:String FFS = "False"; RESULT = FFS;error.arbol_sintactico.add("FALSO");:}
+    |frase:_frase           {:String FFR = _frase.toString(); RESULT = FFR;error.arbol_sintactico.add("FRASE");:}
+    |frasecita:_frasecita {:String FF = _frasecita.toString(); RESULT = FF;error.arbol_sintactico.add("FRASECITA");:}
+    | VARIABLE:_VARIABLE {:String FV = _VARIABLE.toString(); RESULT = FV;error.arbol_sintactico.add("VARIABLE");:}
 ;
 // INSSTRUCCION FOR
 
