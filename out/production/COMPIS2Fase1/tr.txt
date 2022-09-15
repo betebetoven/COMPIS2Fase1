@@ -1,10 +1,11 @@
 inicio
 
 
-imprimir("hola mundo1");
-imprimir("hola mundo2");
-imprimir("hola mundo3");
-imprimir("hola mundo4");
-imprimir("hola mundo5");
-imprimir("hola mundo6");
+
+ingresar _flag1_ como boolean  con_valor verdadero;
+imprimir (_anio1_) ;
+
+
+
+
 final

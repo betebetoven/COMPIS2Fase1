@@ -17,6 +17,7 @@ public class error {
     public static ArrayList<String> arbol_sintactico = new ArrayList<>();
     public void imprime(ArrayList p, int indent)
     {
+
         for(Object k: p )
         {
             if (k.getClass()== ArrayList.class)
@@ -32,8 +33,21 @@ public class error {
     }
     public void imprime_arbol_sintactico()
     {
+        String init = "digraph G\n" +
+                "{label=\"expresion regular\"\n" +
+                "        node[shape = circle]\n" +
+                "        node[style = filled]\n" +
+                "        node[fillcolor = \"#EEEEE\"]\n" +
+                "        node[color = \"#EEEEE\"]\n" +
+                "        node[color = \"#31CEF0\"]\n"
+              ;
 
-        System.out.println(arbol_sintactico);
+        for (String p: arbol_sintactico) {
+            init+= "\n "+ p.hashCode()+"[label=\""+p+"\"]";
+        }
+
+        String end= "\n }";
+        System.out.println(init+end);
     }
 
     @Override
