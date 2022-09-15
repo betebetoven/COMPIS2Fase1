@@ -38,6 +38,9 @@ public class Main {
 
             sintactico.parse();
             pop.imprime_arbol_sintactico();
+
+
+
         } catch (Exception e) {
             System.out.println("se fue al catch");
         }

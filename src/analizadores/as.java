@@ -1017,7 +1017,7 @@ class CUP$as$actions {
           case 2: // NT$0 ::= 
             {
               Object RESULT =null;
-error.arbol_sintactico.add("GLOBALA");error.arbol_sintactico.add("INICIO");
+error.arbol_sintactico.add("FIN");
               CUP$as$result = parser.getSymbolFactory().newSymbol("NT$0",38, ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;
@@ -1043,7 +1043,7 @@ error.arbol_sintactico.add("BLOQUE_INSTRUCCIONES");
 		int _INSTRUCCIONESleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-2)).left;
 		int _INSTRUCCIONESright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-2)).right;
 		Object _INSTRUCCIONES = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-2)).value;
-		System.out.println(_INSTRUCCIONES.toString()); error imprime = new error("lexema","tipo","descripcion",3,3);imprime.imprime(ArrayList.class.cast(_INSTRUCCIONES),0);error.arbol_sintactico.add("FIN");
+		System.out.println(_INSTRUCCIONES.toString()); error imprime = new error("lexema","tipo","descripcion",3,3);imprime.imprime(ArrayList.class.cast(_INSTRUCCIONES),0);error.arbol_sintactico.add("INICIO");error.arbol_sintactico.add("GLOBALA");
               CUP$as$result = parser.getSymbolFactory().newSymbol("BLOQUE_PRINCIPAL",37, ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-4)), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;

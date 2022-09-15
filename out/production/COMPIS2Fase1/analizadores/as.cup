@@ -77,7 +77,7 @@ INIT::= BLOQUE_PRINCIPAL {:System.out.println("Fin de analisis de entrada");:}
 
  ;
 
-BLOQUE_PRINCIPAL ::= inicio{:error.arbol_sintactico.add("GLOBALA");error.arbol_sintactico.add("INICIO");:} INSTRUCCIONES:_INSTRUCCIONES{:error.arbol_sintactico.add("BLOQUE_INSTRUCCIONES");:} finall {:System.out.println(_INSTRUCCIONES.toString()); error imprime = new error("lexema","tipo","descripcion",3,3);imprime.imprime(ArrayList.class.cast(_INSTRUCCIONES),0);error.arbol_sintactico.add("FIN");:}
+BLOQUE_PRINCIPAL ::= inicio{:error.arbol_sintactico.add("FIN");:} INSTRUCCIONES:_INSTRUCCIONES{:error.arbol_sintactico.add("BLOQUE_INSTRUCCIONES");:} finall {:System.out.println(_INSTRUCCIONES.toString()); error imprime = new error("lexema","tipo","descripcion",3,3);imprime.imprime(ArrayList.class.cast(_INSTRUCCIONES),0);error.arbol_sintactico.add("INICIO");error.arbol_sintactico.add("GLOBALA");:}
 
 ;
 
