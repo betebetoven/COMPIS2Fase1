@@ -63,8 +63,7 @@ public class error {
 
 
 
-        String end= "\n }";
-        System.out.println(init+general+end);
+
 
 
         //GLOBALA
@@ -117,31 +116,40 @@ public class error {
                         "AND",
                         "OR",
                         "INSTRUCCION_CALL")));
+        conexiones = "";
+        String generalpre = general.toString();
         try {
             conecta(general.First, general.First.Next);
+
         }
         catch (Exception e)
         {
             System.out.println("se va al catch por conecta");
         }
+        String end= "\n }";
+        System.out.println(init+generalpre+conexiones+end);
+
 
     }
 
     public void conecta(nodo x, nodo c)
     {
-        if (x.value == c.value) return;
+        if (x.value == c.value && x.Next != null) return;
         if (apuntadores.get(x.value) != null) {
             if (apuntadores.get(x.value).contains(c.value)) {
                 if (!flechitas.contains("\n"+x.hashCode() +"->"+c.hashCode()+";")) {
                     flechitas.add("\n"+x.hashCode() +"->"+c.hashCode()+";");
-                    System.out.println("\n" + x.hashCode() + "->" + c.hashCode() + ";");
+                    conexiones+= "\n"+x.hashCode() +"->"+c.hashCode()+";";
+                    //System.out.println("\n" + x.hashCode() + "->" + c.hashCode() + ";");
                 }
 
                 if (apuntadores.get(c.value) == null)
                 {
                     general.remove(c);
-                    c = x.Next;
-                    conecta(x,c);
+                    if (x.Next!=null) {
+                        c = x.Next;
+                        conecta(x, c);
+                    }
                 }
                 else if (c.Next != null)
                     conecta(c,c.Next);
