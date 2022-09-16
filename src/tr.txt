@@ -2,7 +2,43 @@ inicio
 
 
 
-ingresar _flag1_ como boolean  con_valor verdadero;
+//ingresar _flag1_ como boolean  con_valor verdadero;
+imprimir (_anio1_) ;
+imprimir (_anio1_) ;
+imprimir (_anio1_) ;
+imprimir (_anio1_) ;imprimir (_anio1_) ;
+imprimir (_anio1_) ;
+imprimir (_anio1_) ;
+imprimir (_anio1_) ;imprimir (_anio1_) ;
+imprimir (_anio1_) ;
+imprimir (_anio1_) ;
+imprimir (_anio1_) ;imprimir (_anio1_) ;
+imprimir (_anio1_) ;
+imprimir (_anio1_) ;
+imprimir (_anio1_) ;imprimir (_anio1_) ;
+imprimir (_anio1_) ;
+imprimir (_anio1_) ;
+imprimir (_anio1_) ;imprimir (_anio1_) ;
+imprimir (_anio1_) ;
+imprimir (_anio1_) ;
+imprimir (_anio1_) ;imprimir (_anio1_) ;
+imprimir (_anio1_) ;
+imprimir (_anio1_) ;
+imprimir (_anio1_) ;imprimir (_anio1_) ;
+imprimir (_anio1_) ;
+imprimir (_anio1_) ;
+imprimir (_anio1_) ;imprimir (_anio1_) ;
+imprimir (_anio1_) ;
+imprimir (_anio1_) ;
+imprimir (_anio1_) ;imprimir (_anio1_) ;
+imprimir (_anio1_) ;
+imprimir (_anio1_) ;
+imprimir (_anio1_) ;imprimir (_anio1_) ;
+imprimir (_anio1_) ;
+imprimir (_anio1_) ;
+imprimir (_anio1_) ;imprimir (_anio1_) ;
+imprimir (_anio1_) ;
+imprimir (_anio1_) ;
 imprimir (_anio1_) ;
 
 

@@ -4,8 +4,11 @@ import java.awt.image.AreaAveragingScaleFilter;
 import java.util.*;
 
 public class error {
-    String lexema, tipo, descripcion;
+    String lexema, tipo, descripcion,conexiones;
     int linea, columna;
+    listaenlazada general = new listaenlazada();
+    HashMap<String, ArrayList<String>> apuntadores = new HashMap<>();
+    ArrayList<String> flechitas = new ArrayList<>();
     public error(String lexema, String tipo, String descripcion, int linea, int columna)
     {
         this.lexema = lexema;
@@ -45,13 +48,24 @@ public class error {
 
         Collections.reverse(arbol_sintactico);
         for (String p: arbol_sintactico) {
-            init+= "\n "+ p.hashCode()+"[label=\""+p+"\"]";
+            //init+= "\n "+ p.hashCode()+"[label=\""+p+"\"]";
+        general.agrega(new nodo(p));
+
         }
+       /*nodo g = general.First;
+        while (g.Next!=null) {
+            if (g.value == "VARIABLE") {
+                general.remove(g);
+                break;
+            }
+            g = g.Next;
+        }*/
+
 
 
         String end= "\n }";
-        System.out.println(init+end);
-        HashMap<String, ArrayList<String>> apuntadores = new HashMap<>();
+        System.out.println(init+general+end);
+
 
         //GLOBALA
         apuntadores.put("GLOBALA",new ArrayList<String>(
@@ -65,11 +79,72 @@ public class error {
         //BLOQUE_INSTRUCCION
         apuntadores.put("BLOQUE_INSTRUCCION",new ArrayList<String>(
                 Arrays.asList("INSTRUCCION_IMPRIMIR","INSTRUCCCION_IMPRIMIR_NL","INSTRUCCION_DECLARACION")));
-
+        //INSTRUCCION_IMPRIMIR
+        apuntadores.put("INSTRUCCION_IMPRIMIR",new ArrayList<String>(
+                Arrays.asList("IMPRIMIR",
+                        "NUMERO",
+                        "VERDADERO",
+                        "FALSO",
+                        "FRASE",
+                        "FRASECITA",
+                        "VARIABLE",
+                        "POR",
+                        "DIVIDIDO",
+                        "MOD",
+                        "POTENCIA",
+                        "ABRE_CORCHETE",
+                        "CIERRA_CORCHETE",
+                        "ABRE_PARENTESIS",
+                        "CIERRA_PARENTESIS",
+                        "MAS",
+                        "MENOS",
+                        "MENOR",
+                        "MAYOR_O_IGUAL",
+                        "MENOR_O_IGUAL",
+                        "MAYOR",
+                        "ES_DIFERENTE",
+                        "ES_IGUAL",
+                        "NOT",
+                        "AND",
+                        "OR",
+                        "INSTRUCCION_CALL",
+                        "PUNTO_Y_COMA"
+                        )));
+        try {
+            conecta(general.First, general.First.Next);
+        }
+        catch (Exception e)
+        {
+            System.out.println("se va al catch por conecta");
+        }
 
     }
 
+    public void conecta(nodo x, nodo c)
+    {
+        if (x.value == c.value) return;
+        if (apuntadores.get(x.value) != null) {
+            if (apuntadores.get(x.value).contains(c.value)) {
+                if (!flechitas.contains("\n"+x.hashCode() +"->"+c.hashCode()+";")) {
+                    flechitas.add("\n"+x.hashCode() +"->"+c.hashCode()+";");
+                    System.out.println("\n" + x.hashCode() + "->" + c.hashCode() + ";");
+                }
 
+                if (apuntadores.get(c.value) == null)
+                {
+                    general.remove(c);
+                    c = x.Next;
+                    conecta(x,c);
+                }
+                else if (c.Next != null)
+                    conecta(c,c.Next);
+            }
+            if (c.Next != null)
+                conecta(x,c.Next);
+        }
+
+
+    }
 
 
     @Override

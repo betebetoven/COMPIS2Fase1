@@ -98,7 +98,7 @@ INSTRUCCION ::= DECLARACION:_D    {:String Fimpr = _D.toString();System.out.prin
             | CONDICIONIF:_INS   {:ArrayList<Object> ins = ArrayList.class.cast(_INS);System.out.println("encontro CONDICION IF");RESULT = ins;:}
             | CICLO:_INS        {:ArrayList<Object> ins = ArrayList.class.cast(_INS);System.out.println("encontro CICLO");RESULT = ins;:}
             | RETURN:_C   {:String Fimpr = _C.toString();System.out.println("encontro RETURN");RESULT= Fimpr;:}
-            | CALL:_C      {:String Fimpr = _C.toString();System.out.println("encontro LLAMADA");RESULT= Fimpr;:}
+            | CALL:_C      {:String Fimpr = _C.toString();System.out.println("encontro LLAMADA");RESULT= Fimpr;error.arbol_sintactico.add("INSTRUCCION_CALL");:}
             | SWITCH:_INS    {:ArrayList<Object> ins = ArrayList.class.cast(_INS);System.out.println("encontro SWITCH");RESULT = ins;:}
             | error:e  {:int columna = eright+1;
              int fila = eleft +1;
@@ -121,10 +121,10 @@ CICLO::= para  E:_A flechita E:_B hasta E:_C hacer INSTRUCCIONES:_INS fin_para {
     | mientras abre_parentesis ETS:_C cierra_parentesis hacer INSTRUCCIONES:_INS fin_mientras {:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "while( "+_C.toString()+"):";cond.add(ifins);cond.add(ins); RESULT = cond;:}
     | repetir INSTRUCCIONES:_INS hasta_que abre_parentesis ETS:_C cierra_parentesis punto_y_coma {:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "while(True):";cond.add(ifins);cond.add(ins);String fifi = "     if ("+_C.toString()+"):";String brek= "          break";cond.add(fifi);cond.add(brek); RESULT = cond;:}
     ;
-COND_WHILE::= verdadero  {:String Fe = " True "; RESULT = Fe;:}
-          | falso    {:String Fe = " False "; RESULT = Fe;:}
-          |  COMPARACIONES:_E   {:String Fe = _E.toString(); RESULT = Fe;:}
-;
+//COND_WHILE::= verdadero  {:String Fe = " True "; RESULT = Fe;:}
+         // | falso    {:String Fe = " False "; RESULT = Fe;:}
+        //  |  COMPARACIONES:_E   {:String Fe = _E.toString(); RESULT = Fe;:}
+//;
 SWITCH ::= segun E:_E  hacer OPCIONES:_OPS de_lo_contrario entonces INSTRUCCIONES:_INS fin_segun {:ArrayList<Object> condan= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String primer = "k2 = "+_E.toString();condan.add(primer); condan.addAll(ArrayList.class.cast(_OPS));String elsa = "else:";condan.add(elsa); condan.add(ins);;RESULT = condan;:}
 ;
 OPCIONES::= OPCIONES:_OPS OPCION:_OP  {:ArrayList<Object> condan= ArrayList.class.cast(_OPS); ArrayList<Object> ins = ArrayList.class.cast(_OP);String ifins = "elif( k2 =="+ins.get(0).toString()+"):";condan.add(ifins);condan.add(ArrayList.class.cast(ins.get(1))); RESULT = condan;:}
@@ -223,9 +223,9 @@ IMPRIMIR ::= imprimir{:error.arbol_sintactico.add("IMPRIMIR");:}  abre_parentesi
 IMPRIMIRLN ::= imprimir_nl{:error.arbol_sintactico.add("IMPRIMIR_NL");:} abre_parentesis{:error.arbol_sintactico.add("ABRE_PARENTESIS");:} ETS:_E cierra_parentesis{:error.arbol_sintactico.add("CIERRA_PARENTESIS");:} punto_y_coma {:String FIML = "print("+_E.toString()+")"; RESULT = FIML;error.arbol_sintactico.add("PUNTO_Y_COMA");:}
 
 ;
-PRETS ::= E:_E {:RESULT = _E;:}
-        | CALL:_E{:RESULT = _E; :}
-;
+//PRETS ::= E:_E {:RESULT = _E;:}
+       // | CALL:_E{:RESULT = _E; :}
+//;
 
 
 //ASIGNACION DE VARIABLES YA DECLARADAS (CAMBIO DE VALOR)
@@ -267,12 +267,12 @@ String FIM = instruccion+_E.toString(); RESULT = FIM;error.arbol_sintactico.add(
 
 ETS ::= COMPARACIONES:_E {:RESULT = _E; :}
         | E:_E {:RESULT = _E; :}
-        | CALL:_E{:RESULT = _E; :}
+        | CALL:_E{:RESULT = _E;error.arbol_sintactico.add("INSTRUCCION_CALL"); :}
 ;
 IDS ::= IDS:_IDS coma E:_E {:ArrayList<Object> ides = ArrayList.class.cast(_IDS); ides.add(_E.toString());RESULT = ides;:}
     | E:_E {: ArrayList<Object> ides = new ArrayList<>(); ides.add(_E.toString());RESULT = ides;:}
     ;
-VARIABLE ::= variable:_variable{:String r = _variable.toString(); RESULT = r;error.arbol_sintactico.add("_VARIABLE_");:}
+VARIABLE ::= variable:_variable{:String r = _variable.toString(); RESULT = r;:}
 ;
 COMPARACIONES::= not{:error.arbol_sintactico.add("NOT");:} abre_parentesis{:error.arbol_sintactico.add("ABRE_PARENTESIS");:} COMPARACIONES:_E cierra_parentesis {:String FE ="not("+ _E.toString()+ ")"; RESULT = FE;error.arbol_sintactico.add("CIERRA_PARENTESIS");:}
             |  COMPARACIONES:_E and{:error.arbol_sintactico.add("AND");:} COMP:_F {:String FE = _E.toString()+ "and"+_F.toString(); RESULT = FE;:}
