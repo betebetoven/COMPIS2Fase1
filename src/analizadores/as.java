@@ -1843,7 +1843,7 @@ error.arbol_sintactico.add("CIERRA_PARENTESIS_IMP");
 		int _Eleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-4)).left;
 		int _Eright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-4)).right;
 		Object _E = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-4)).value;
-		String FIM = "print("+_E.toString()+")"; RESULT = FIM;error.arbol_sintactico.add("PUNTO_Y_COMA");
+		String FIM = "print("+_E.toString()+")"; RESULT = FIM;error.arbol_sintactico.add("PUNTO_Y_COMA_IMP");
               CUP$as$result = parser.getSymbolFactory().newSymbol("IMPRIMIR",13, ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-8)), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;
@@ -1899,7 +1899,7 @@ error.arbol_sintactico.add("CIERRA_PARENTESIS_IMP_NL");
 		int _Eleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-4)).left;
 		int _Eright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-4)).right;
 		Object _E = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-4)).value;
-		String FIML = "print("+_E.toString()+")"; RESULT = FIML;error.arbol_sintactico.add("PUNTO_Y_COMA");
+		String FIML = "print("+_E.toString()+")"; RESULT = FIML;error.arbol_sintactico.add("PUNTO_Y_COMA_IMP_NL");
               CUP$as$result = parser.getSymbolFactory().newSymbol("IMPRIMIRLN",14, ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-8)), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;

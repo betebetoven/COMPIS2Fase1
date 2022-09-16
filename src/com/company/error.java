@@ -8,6 +8,7 @@ public class error {
     int linea, columna;
     listaenlazada general = new listaenlazada();
     HashMap<String, ArrayList<String>> apuntadores = new HashMap<>();
+    HashMap<String, Integer> grado= new HashMap<>();
     ArrayList<String> flechitas = new ArrayList<>();
     public error(String lexema, String tipo, String descripcion, int linea, int columna)
     {
@@ -64,7 +65,8 @@ public class error {
 
 
 
-
+        grado.put("INSTRUCCION_IMPRIMIR",3);
+        grado.put("INSTRUCCION_IMPRIMIR_NL",3);
 
         //GLOBALA
         apuntadores.put("GLOBALA",new ArrayList<String>(
@@ -74,18 +76,24 @@ public class error {
                 Arrays.asList("BLOQUE_INSTRUCCION")));
         //BLOQUE_INSTRUCCION
         apuntadores.put("BLOQUE_INSTRUCCION",new ArrayList<String>(
-                Arrays.asList("INSTRUCCION_IMPRIMIR","INSTRUCCCION_IMPRIMIR_NL","INSTRUCCION_DECLARACION")));
-        //BLOQUE_INSTRUCCION
-        apuntadores.put("BLOQUE_INSTRUCCION",new ArrayList<String>(
-                Arrays.asList("INSTRUCCION_IMPRIMIR","INSTRUCCCION_IMPRIMIR_NL","INSTRUCCION_DECLARACION")));
+                Arrays.asList("INSTRUCCION_IMPRIMIR","INSTRUCCION_IMPRIMIR_NL","INSTRUCCION_DECLARACION")));
+        //INSTRUCCION_IMPRIMIR
+        apuntadores.put("INSTRUCCION_IMPRIMIR_NL",new ArrayList<String>(
+                Arrays.asList("IMPRIMIR_NL",
+                        //"ABRE_PARENTESIS",
+                        "CIERRA_PARENTESIS_IMP_NL",
+                        "ETS",
+                        "ABRE_PARENTESIS_IMP_NL",
+                        "PUNTO_Y_COMA_IMP_NL"
+                        )));
         //INSTRUCCION_IMPRIMIR
         apuntadores.put("INSTRUCCION_IMPRIMIR",new ArrayList<String>(
                 Arrays.asList("IMPRIMIR",
-                        "ABRE_PARENTESIS",
+                        //"ABRE_PARENTESIS",
                         "CIERRA_PARENTESIS_IMP",
                         "ETS",
                         "ABRE_PARENTESIS_IMP",
-                        "PUNTO_Y_COMA"
+                        "PUNTO_Y_COMA_IMP"
                         )));
         //ETS
         apuntadores.put("ETS",new ArrayList<String>(
@@ -116,6 +124,7 @@ public class error {
                         "AND",
                         "OR",
                         "INSTRUCCION_CALL")));
+
         conexiones = "";
         String generalpre = general.toString();
         try {
@@ -134,7 +143,8 @@ public class error {
 
     public void conecta(nodo x, nodo c)
     {
-        if (x.value == c.value && x.Next != null) return;
+        if ((x.value == c.value && x.Next != null) || (grado.get(x.value)!= null && grado.get(c.value)!=null &&grado.get(x.value)==grado.get(c.value))) return;
+
         if (apuntadores.get(x.value) != null) {
             if (apuntadores.get(x.value).contains(c.value)) {
                 if (!flechitas.contains("\n"+x.hashCode() +"->"+c.hashCode()+";")) {
@@ -153,6 +163,7 @@ public class error {
                 }
                 else if (c.Next != null)
                     conecta(c,c.Next);
+
             }
             if (c.Next != null)
                 conecta(x,c.Next);
