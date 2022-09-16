@@ -4,42 +4,9 @@ inicio
 
 //ingresar _flag1_ como boolean  con_valor verdadero;
 imprimir (_anio1_) ;
-imprimir (_anio1_) ;
-imprimir (_anio1_) ;
-imprimir (_anio1_) ;imprimir (_anio1_) ;
-imprimir (_anio1_) ;
-imprimir (_anio1_) ;
-imprimir (_anio1_) ;imprimir (_anio1_) ;
-imprimir (_anio1_) ;
-imprimir (_anio1_) ;
-imprimir (_anio1_) ;imprimir (_anio1_) ;
-imprimir (_anio1_) ;
-imprimir (_anio1_) ;
-imprimir (_anio1_) ;imprimir (_anio1_) ;
-imprimir (_anio1_) ;
-imprimir (_anio1_) ;
-imprimir (_anio1_) ;imprimir (_anio1_) ;
-imprimir (_anio1_) ;
-imprimir (_anio1_) ;
-imprimir (_anio1_) ;imprimir (_anio1_) ;
-imprimir (_anio1_) ;
-imprimir (_anio1_) ;
-imprimir (_anio1_) ;imprimir (_anio1_) ;
-imprimir (_anio1_) ;
-imprimir (_anio1_) ;
-imprimir (_anio1_) ;imprimir (_anio1_) ;
-imprimir (_anio1_) ;
-imprimir (_anio1_) ;
-imprimir (_anio1_) ;imprimir (_anio1_) ;
-imprimir (_anio1_) ;
-imprimir (_anio1_) ;
-imprimir (_anio1_) ;imprimir (_anio1_) ;
-imprimir (_anio1_) ;
-imprimir (_anio1_) ;
-imprimir (_anio1_) ;imprimir (_anio1_) ;
-imprimir (_anio1_) ;
-imprimir (_anio1_) ;
-imprimir (_anio1_) ;
+imprimir ((25*8)) ;
+imprimir (verdadero) ;
+imprimir("hola papito");
 
 
 

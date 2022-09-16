@@ -216,11 +216,11 @@ CALL::= ejecutar E:_E PARAMETROSLL:_C punto_y_coma {:String FIM = _E.toString()+
 
 //INSTRUCCION IMPRIMIR UNA Y VARIAS LINEAS
 
-IMPRIMIR ::= imprimir{:error.arbol_sintactico.add("IMPRIMIR");:}  abre_parentesis{:error.arbol_sintactico.add("ABRE_PARENTESIS");:} ETS:_E cierra_parentesis{:error.arbol_sintactico.add("CIERRA_PARENTESIS");:} punto_y_coma {:String FIM = "print("+_E.toString()+")"; RESULT = FIM;error.arbol_sintactico.add("PUNTO_Y_COMA");:}
+IMPRIMIR ::= imprimir{:error.arbol_sintactico.add("IMPRIMIR");:}  abre_parentesis{:error.arbol_sintactico.add("ABRE_PARENTESIS_IMP");:} ETS:_E{:error.arbol_sintactico.add("ETS");:} cierra_parentesis{:error.arbol_sintactico.add("CIERRA_PARENTESIS_IMP");:} punto_y_coma {:String FIM = "print("+_E.toString()+")"; RESULT = FIM;error.arbol_sintactico.add("PUNTO_Y_COMA");:}
 
 
 ;
-IMPRIMIRLN ::= imprimir_nl{:error.arbol_sintactico.add("IMPRIMIR_NL");:} abre_parentesis{:error.arbol_sintactico.add("ABRE_PARENTESIS");:} ETS:_E cierra_parentesis{:error.arbol_sintactico.add("CIERRA_PARENTESIS");:} punto_y_coma {:String FIML = "print("+_E.toString()+")"; RESULT = FIML;error.arbol_sintactico.add("PUNTO_Y_COMA");:}
+IMPRIMIRLN ::= imprimir_nl{:error.arbol_sintactico.add("IMPRIMIR_NL");:} abre_parentesis{:error.arbol_sintactico.add("ABRE_PARENTESIS_IMP_NL");:} ETS:_E{:error.arbol_sintactico.add("ETS");:} cierra_parentesis{:error.arbol_sintactico.add("CIERRA_PARENTESIS_IMP_NL");:} punto_y_coma {:String FIML = "print("+_E.toString()+")"; RESULT = FIML;error.arbol_sintactico.add("PUNTO_Y_COMA");:}
 
 ;
 //PRETS ::= E:_E {:RESULT = _E;:}
@@ -274,7 +274,7 @@ IDS ::= IDS:_IDS coma E:_E {:ArrayList<Object> ides = ArrayList.class.cast(_IDS)
     ;
 VARIABLE ::= variable:_variable{:String r = _variable.toString(); RESULT = r;:}
 ;
-COMPARACIONES::= not{:error.arbol_sintactico.add("NOT");:} abre_parentesis{:error.arbol_sintactico.add("ABRE_PARENTESIS");:} COMPARACIONES:_E cierra_parentesis {:String FE ="not("+ _E.toString()+ ")"; RESULT = FE;error.arbol_sintactico.add("CIERRA_PARENTESIS");:}
+COMPARACIONES::= not{:error.arbol_sintactico.add("NOT");:} abre_parentesis{:error.arbol_sintactico.add("ABRE_PARENTESIS_T");:} COMPARACIONES:_E cierra_parentesis {:String FE ="not("+ _E.toString()+ ")"; RESULT = FE;error.arbol_sintactico.add("CIERRA_PARENTESIS_T");:}
             |  COMPARACIONES:_E and{:error.arbol_sintactico.add("AND");:} COMP:_F {:String FE = _E.toString()+ "and"+_F.toString(); RESULT = FE;:}
             |  COMPARACIONES:_E or{:error.arbol_sintactico.add("OR");:} COMP:_F {:String FE = _E.toString()+ "or"+_F.toString(); RESULT = FE;:}
             |   COMP:_E {:String FE = _E.toString(); RESULT = FE;:}
@@ -298,7 +298,7 @@ Term::=Term:_E por{:error.arbol_sintactico.add("POR");:} Factor:_F {:String FE =
 |  Term:_E potencia{:error.arbol_sintactico.add("POTENCIA");:} abre_corchete{:error.arbol_sintactico.add("ABRE_CORCHETE");:} E:_F cierra_corchete {:String FE = _E.toString()+ "**("+_F.toString()+")"; RESULT = FE;error.arbol_sintactico.add("CIERRA_CORCHETE");:}
 |Factor:_F {:String FE = _F.toString(); RESULT = FE;:}
 ;
-Factor::= abre_parentesis{:error.arbol_sintactico.add("ABRE_PARENTESIS");:} E:_E cierra_parentesis  {:String FE ="(" +_E.toString()+")"; RESULT = FE;error.arbol_sintactico.add("CIERRA_PARENTESIS");:}
+Factor::= abre_parentesis{:error.arbol_sintactico.add("ABRE_PARENTESIS_T");:} E:_E cierra_parentesis  {:String FE ="(" +_E.toString()+")"; RESULT = FE;error.arbol_sintactico.add("CIERRA_PARENTESIS_T");:}
 |F:_F  {:String FE = _F.toString(); RESULT = FE;:}
 
 ;

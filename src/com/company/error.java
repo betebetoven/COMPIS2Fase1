@@ -82,6 +82,15 @@ public class error {
         //INSTRUCCION_IMPRIMIR
         apuntadores.put("INSTRUCCION_IMPRIMIR",new ArrayList<String>(
                 Arrays.asList("IMPRIMIR",
+                        "ABRE_PARENTESIS",
+                        "CIERRA_PARENTESIS_IMP",
+                        "ETS",
+                        "ABRE_PARENTESIS_IMP",
+                        "PUNTO_Y_COMA"
+                        )));
+        //ETS
+        apuntadores.put("ETS",new ArrayList<String>(
+                Arrays.asList(
                         "NUMERO",
                         "VERDADERO",
                         "FALSO",
@@ -94,8 +103,8 @@ public class error {
                         "POTENCIA",
                         "ABRE_CORCHETE",
                         "CIERRA_CORCHETE",
-                        "ABRE_PARENTESIS",
-                        "CIERRA_PARENTESIS",
+                        "ABRE_PARENTESIS_T",
+                        "CIERRA_PARENTESIS_T",
                         "MAS",
                         "MENOS",
                         "MENOR",
@@ -107,9 +116,7 @@ public class error {
                         "NOT",
                         "AND",
                         "OR",
-                        "INSTRUCCION_CALL",
-                        "PUNTO_Y_COMA"
-                        )));
+                        "INSTRUCCION_CALL")));
         try {
             conecta(general.First, general.First.Next);
         }
