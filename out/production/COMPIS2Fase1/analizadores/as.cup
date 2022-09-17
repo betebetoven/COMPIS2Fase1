@@ -77,19 +77,19 @@ INIT::= BLOQUE_PRINCIPAL {:System.out.println("Fin de analisis de entrada");:}
 
  ;
 
-BLOQUE_PRINCIPAL ::= inicio{:error.arbol_sintactico.add("FIN");:} INSTRUCCIONES:_INSTRUCCIONES{:error.arbol_sintactico.add("BLOQUE_INSTRUCCIONES");:} finall {:System.out.println(_INSTRUCCIONES.toString()); error imprime = new error("lexema","tipo","descripcion",3,3);imprime.imprime(ArrayList.class.cast(_INSTRUCCIONES),0);error.arbol_sintactico.add("INICIO");error.arbol_sintactico.add("GLOBALA");:}
+BLOQUE_PRINCIPAL ::= inicio INSTRUCCIONES:_INSTRUCCIONES finall {:System.out.println(_INSTRUCCIONES.toString()); error imprime = new error("lexema","tipo","descripcion",3,3);imprime.imprime(ArrayList.class.cast(_INSTRUCCIONES),0);:}
 
 ;
 
-INSTRUCCIONES ::=   INSTRUCCIONES:_Aray INSTRUCCION:_INSTRUCCION2 {:ArrayList<Object> instrucciones = ArrayList.class.cast(_Aray);if (_INSTRUCCION2.getClass() == ArrayList.class) instrucciones.addAll(ArrayList.class.cast(_INSTRUCCION2)); else  instrucciones.add(_INSTRUCCION2);RESULT = instrucciones;error.arbol_sintactico.add("BLOQUE_INSTRUCCION");:}
-              |   INSTRUCCION:_INSTRUCCION {: ArrayList<Object> instrucciones = new ArrayList<>();if (_INSTRUCCION.getClass() == ArrayList.class) instrucciones.addAll(ArrayList.class.cast(_INSTRUCCION)); else instrucciones.add(_INSTRUCCION);RESULT = instrucciones;error.arbol_sintactico.add("BLOQUE_INSTRUCCION");:}
+INSTRUCCIONES ::=   INSTRUCCIONES:_Aray INSTRUCCION:_INSTRUCCION2 {:ArrayList<Object> instrucciones = ArrayList.class.cast(_Aray);if (_INSTRUCCION2.getClass() == ArrayList.class) instrucciones.addAll(ArrayList.class.cast(_INSTRUCCION2)); else  instrucciones.add(_INSTRUCCION2);RESULT = instrucciones;:}
+              |   INSTRUCCION:_INSTRUCCION {: ArrayList<Object> instrucciones = new ArrayList<>();if (_INSTRUCCION.getClass() == ArrayList.class) instrucciones.addAll(ArrayList.class.cast(_INSTRUCCION)); else instrucciones.add(_INSTRUCCION);RESULT = instrucciones;:}
 
               ;
 
 
-INSTRUCCION ::= DECLARACION:_D    {:String Fimpr = _D.toString();System.out.println("ENCONTRO DECLARACION"); RESULT= Fimpr;error.arbol_sintactico.add("INSTRUCCION_DECLARACION");:}
-            | IMPRIMIR:_IMPRIMIR      {:String Fimpr = _IMPRIMIR.toString(); System.out.println("encontro impresion linea simple"); RESULT= Fimpr;error.arbol_sintactico.add("INSTRUCCION_IMPRIMIR"); :}
-            | IMPRIMIRLN:_IMPRIMIRLN    {:String Fimpr = _IMPRIMIRLN.toString();System.out.println("encontro impresion multipe linea");RESULT= Fimpr;error.arbol_sintactico.add("INSTRUCCION_IMPRIMIR_NL");:}
+INSTRUCCION ::= DECLARACION:_D    {:String Fimpr = _D.toString();System.out.println("ENCONTRO DECLARACION"); RESULT= Fimpr;:}
+            | IMPRIMIR:_IMPRIMIR      {:String Fimpr = _IMPRIMIR.toString(); System.out.println("encontro impresion linea simple"); RESULT= Fimpr; :}
+            | IMPRIMIRLN:_IMPRIMIRLN    {:String Fimpr = _IMPRIMIRLN.toString();System.out.println("encontro impresion multipe linea");RESULT= Fimpr;:}
             | ASIGNACION:_D    {:String Fimpr = _D.toString();System.out.println("encontro ASIGNACION");RESULT= Fimpr;:}
             | METODO:_INS      {:ArrayList<Object> ins = ArrayList.class.cast(_INS);System.out.println("encontro METODO");RESULT = ins;:}
             | FUNCION:_INS       {:ArrayList<Object> ins = ArrayList.class.cast(_INS);System.out.println("encontro FUNCION");RESULT = ins;:}
@@ -97,8 +97,8 @@ INSTRUCCION ::= DECLARACION:_D    {:String Fimpr = _D.toString();System.out.prin
             | FUNCIONsp:_INS      {:ArrayList<Object> ins = ArrayList.class.cast(_INS);System.out.println("encontro FUNCIONSP");RESULT = ins;:}
             | CONDICIONIF:_INS   {:ArrayList<Object> ins = ArrayList.class.cast(_INS);System.out.println("encontro CONDICION IF");RESULT = ins;:}
             | CICLO:_INS        {:ArrayList<Object> ins = ArrayList.class.cast(_INS);System.out.println("encontro CICLO");RESULT = ins;:}
-            | RETURN:_C   {:String Fimpr = _C.toString();System.out.println("encontro RETURN");RESULT= Fimpr;error.arbol_sintactico.add("INSTRUCCION_CALL"); :}
-            | CALL:_C      {:String Fimpr = _C.toString();System.out.println("encontro LLAMADA");RESULT= Fimpr;error.arbol_sintactico.add("INSTRUCCION_CALL");:}
+            | RETURN:_C   {:String Fimpr = _C.toString();System.out.println("encontro RETURN");RESULT= Fimpr; :}
+            | CALL:_C      {:String Fimpr = _C.toString();System.out.println("encontro LLAMADA");RESULT= Fimpr;:}
             | SWITCH:_INS    {:ArrayList<Object> ins = ArrayList.class.cast(_INS);System.out.println("encontro SWITCH");RESULT = ins;:}
             | error:e  {:int columna = eright+1;
              int fila = eleft +1;
@@ -216,11 +216,11 @@ CALL::= ejecutar E:_E PARAMETROSLL:_C punto_y_coma {:String FIM = _E.toString()+
 
 //INSTRUCCION IMPRIMIR UNA Y VARIAS LINEAS
 
-IMPRIMIR ::= imprimir{:error.arbol_sintactico.add("IMPRIMIR");:}  abre_parentesis{:error.arbol_sintactico.add("ABRE_PARENTESIS_IMP");:} ETS:_E{:error.arbol_sintactico.add("ETS");:} cierra_parentesis{:error.arbol_sintactico.add("CIERRA_PARENTESIS_IMP");:} punto_y_coma {:String FIM = "print("+_E.toString()+")"; RESULT = FIM;error.arbol_sintactico.add("PUNTO_Y_COMA_IMP");:}
+IMPRIMIR ::= imprimir  abre_parentesis ETS:_E cierra_parentesis punto_y_coma {:String FIM = "print("+_E.toString()+")"; RESULT = FIM;:}
 
 
 ;
-IMPRIMIRLN ::= imprimir_nl{:error.arbol_sintactico.add("IMPRIMIR_NL");:} abre_parentesis{:error.arbol_sintactico.add("ABRE_PARENTESIS_IMP_NL");:} ETS:_E{:error.arbol_sintactico.add("ETS");:} cierra_parentesis{:error.arbol_sintactico.add("CIERRA_PARENTESIS_IMP_NL");:} punto_y_coma {:String FIML = "print("+_E.toString()+")"; RESULT = FIML;error.arbol_sintactico.add("PUNTO_Y_COMA_IMP_NL");:}
+IMPRIMIRLN ::= imprimir_nl abre_parentesis ETS:_E cierra_parentesis punto_y_coma {:String FIML = "print("+_E.toString()+")"; RESULT = FIML;:}
 
 ;
 //PRETS ::= E:_E {:RESULT = _E;:}
@@ -247,13 +247,13 @@ ASIGNACION ::= IDS:_IDS flechita ETS:_E punto_y_coma{:
 
 
 
-TIPODATO_DECLARACION  ::=  numero{:error.arbol_sintactico.add("INT");:}
-                       | bulean{:error.arbol_sintactico.add("BOOL");:}
-                       | cadena{:error.arbol_sintactico.add("STRING");:}
-                       | caracter{:error.arbol_sintactico.add("CHAR");:}
+TIPODATO_DECLARACION  ::=  numero
+                       | bulean
+                       | cadena
+                       | caracter
                        ;
 
-DECLARACION ::= ingresar{:error.arbol_sintactico.add("INGRESAR");:} IDS:_IDS  como {:error.arbol_sintactico.add("COMO");:} TIPODATO_DECLARACION con_valor{:error.arbol_sintactico.add("CON VALOR");:} ETS:_E{:error.arbol_sintactico.add("ETS");:} punto_y_coma {:
+DECLARACION ::= ingresar IDS:_IDS  como  TIPODATO_DECLARACION con_valor ETS:_E punto_y_coma {:
 String instruccion="";
 ArrayList<Object> ides = ArrayList.class.cast(_IDS);
 for (Object c: ides )
@@ -262,54 +262,54 @@ for (Object c: ides )
     System.out.println(instruccion);
     }
 
-String FIM = instruccion+_E.toString(); RESULT = FIM;error.arbol_sintactico.add("PUNTO_Y_COMA");:}
+String FIM = instruccion+_E.toString(); RESULT = FIM;:}
             ;
 
 ETS ::= COMPARACIONES:_E {:RESULT = _E; :}
         | E:_E {:RESULT = _E; :}
-        | INSTRUCCION:_E{:RESULT = _E;error.arbol_sintactico.add("BLOQUE_INSTRUCCION");error.arbol_sintactico.add("BLOQUE_INSTRUCCIONES"); :}
+        | INSTRUCCION:_E{:RESULT = _E;:}
 ;
 IDS ::= IDS:_IDS coma E:_E {:ArrayList<Object> ides = ArrayList.class.cast(_IDS); ides.add(_E.toString());RESULT = ides;:}
     | E:_E {: ArrayList<Object> ides = new ArrayList<>(); ides.add(_E.toString());RESULT = ides;:}
     ;
 VARIABLE ::= variable:_variable{:String r = _variable.toString(); RESULT = r;:}
 ;
-COMPARACIONES::= not{:error.arbol_sintactico.add("NOT");:} abre_parentesis{:error.arbol_sintactico.add("ABRE_PARENTESIS_T");:} COMPARACIONES:_E cierra_parentesis {:String FE ="not("+ _E.toString()+ ")"; RESULT = FE;error.arbol_sintactico.add("CIERRA_PARENTESIS_T");:}
-            |  COMPARACIONES:_E and{:error.arbol_sintactico.add("AND");:} COMP:_F {:String FE = _E.toString()+ "and"+_F.toString(); RESULT = FE;:}
-            |  COMPARACIONES:_E or{:error.arbol_sintactico.add("OR");:} COMP:_F {:String FE = _E.toString()+ "or"+_F.toString(); RESULT = FE;:}
+COMPARACIONES::= not abre_parentesis COMPARACIONES:_E cierra_parentesis {:String FE ="not("+ _E.toString()+ ")"; RESULT = FE;:}
+            |  COMPARACIONES:_E and COMP:_F {:String FE = _E.toString()+ "and"+_F.toString(); RESULT = FE;:}
+            |  COMPARACIONES:_E or COMP:_F {:String FE = _E.toString()+ "or"+_F.toString(); RESULT = FE;:}
             |   COMP:_E {:String FE = _E.toString(); RESULT = FE;:}
 ;
-COMP::=  E:_E menor{:error.arbol_sintactico.add("MENOR");:} E:_F {:String FE = _E.toString()+ "<"+_F.toString(); RESULT = FE;:}
-    |  E:_E mayor_o_igual{:error.arbol_sintactico.add("MAYOR_O_IGUAL");:} E:_F {:String FE = _E.toString()+ ">="+_F.toString(); RESULT = FE;:}
-    |  E:_E menor_o_igual{:error.arbol_sintactico.add("MENOR_O_IGUAL");:} E:_F {:String FE = _E.toString()+ "<="+_F.toString(); RESULT = FE;:}
-    |  E:_E mayor{:error.arbol_sintactico.add("MAYOR");:} E:_F {:String FE = _E.toString()+ ">"+_F.toString(); RESULT = FE;:}
-    |  E:_E es_diferente{:error.arbol_sintactico.add("ES_DIFERENTE");:} E:_F {:String FE = _E.toString()+ "!="+_F.toString(); RESULT = FE;:}
-    |  E:_E es_igual{:error.arbol_sintactico.add("ES_IGUAL");:} E:_F {:String FE = _E.toString()+ "=="+_F.toString(); RESULT = FE;:}
+COMP::=  E:_E menor E:_F {:String FE = _E.toString()+ "<"+_F.toString(); RESULT = FE;:}
+    |  E:_E mayor_o_igual E:_F {:String FE = _E.toString()+ ">="+_F.toString(); RESULT = FE;:}
+    |  E:_E menor_o_igual E:_F {:String FE = _E.toString()+ "<="+_F.toString(); RESULT = FE;:}
+    |  E:_E mayor E:_F {:String FE = _E.toString()+ ">"+_F.toString(); RESULT = FE;:}
+    |  E:_E es_diferente E:_F {:String FE = _E.toString()+ "!="+_F.toString(); RESULT = FE;:}
+    |  E:_E es_igual E:_F {:String FE = _E.toString()+ "=="+_F.toString(); RESULT = FE;:}
 
 ;
-E::=E:_E mas{:error.arbol_sintactico.add("MAS");:} Term:_F {:String FE = _E.toString()+ "+"+_F.toString(); RESULT = FE;:}
-|E:_E menos{:error.arbol_sintactico.add("MENOS");:} Term:_F {:String FE = _E.toString()+ "-"+_F.toString(); RESULT = FE;:}
-|menos{:error.arbol_sintactico.add("MENOS");:} Term:_F {:String FE = "-"+_F.toString(); RESULT = FE;:}
+E::=E:_E mas Term:_F {:String FE = _E.toString()+ "+"+_F.toString(); RESULT = FE;:}
+|E:_E menos Term:_F {:String FE = _E.toString()+ "-"+_F.toString(); RESULT = FE;:}
+|menos Term:_F {:String FE = "-"+_F.toString(); RESULT = FE;:}
 |Term:_F  {:String FE = _F.toString(); RESULT = FE;:}
 ;
-Term::=Term:_E por{:error.arbol_sintactico.add("POR");:} Factor:_F {:String FE = _E.toString()+ "*"+_F.toString(); RESULT = FE;:}
-|Term:_E dividido{:error.arbol_sintactico.add("DIVIDIDO");:} Factor:_F {:String FE = _E.toString()+ "/"+_F.toString(); RESULT = FE;:}
-| Term:_E mod{:error.arbol_sintactico.add("MOD");:} Factor:_F  {:String FE = _E.toString()+ "%"+_F.toString(); RESULT = FE;:}
-|  Term:_E potencia{:error.arbol_sintactico.add("POTENCIA");:} abre_corchete{:error.arbol_sintactico.add("ABRE_CORCHETE");:} E:_F cierra_corchete {:String FE = _E.toString()+ "**("+_F.toString()+")"; RESULT = FE;error.arbol_sintactico.add("CIERRA_CORCHETE");:}
+Term::=Term:_E por Factor:_F {:String FE = _E.toString()+ "*"+_F.toString(); RESULT = FE;:}
+|Term:_E dividido Factor:_F {:String FE = _E.toString()+ "/"+_F.toString(); RESULT = FE;:}
+| Term:_E mod Factor:_F  {:String FE = _E.toString()+ "%"+_F.toString(); RESULT = FE;:}
+|  Term:_E potencia abre_corchete E:_F cierra_corchete {:String FE = _E.toString()+ "**("+_F.toString()+")"; RESULT = FE;:}
 |Factor:_F {:String FE = _F.toString(); RESULT = FE;:}
 ;
-Factor::= abre_parentesis{:error.arbol_sintactico.add("ABRE_PARENTESIS_T");:} E:_E cierra_parentesis  {:String FE ="(" +_E.toString()+")"; RESULT = FE;error.arbol_sintactico.add("CIERRA_PARENTESIS_T");:}
+Factor::= abre_parentesis E:_E cierra_parentesis  {:String FE ="(" +_E.toString()+")"; RESULT = FE;:}
 |F:_F  {:String FE = _F.toString(); RESULT = FE;:}
 
 ;
 
 
-F::= number:_number                      {:String FVR = _number.toString(); RESULT = FVR;error.arbol_sintactico.add("NUMERO");:}
-    |verdadero:_verdadero       {:String FVR = "True"; RESULT = FVR;error.arbol_sintactico.add("VERDADERO");:}
-    |falso:_falso           {:String FFS = "False"; RESULT = FFS;error.arbol_sintactico.add("FALSO");:}
-    |frase:_frase           {:String FFR = _frase.toString(); RESULT = FFR;error.arbol_sintactico.add("FRASE");:}
-    |frasecita:_frasecita {:String FF = _frasecita.toString(); RESULT = FF;error.arbol_sintactico.add("FRASECITA");:}
-    | VARIABLE:_VARIABLE {:String FV = _VARIABLE.toString(); RESULT = FV;error.arbol_sintactico.add("VARIABLE");:}
+F::= number:_number                      {:String FVR = _number.toString(); RESULT = FVR;:}
+    |verdadero:_verdadero       {:String FVR = "True"; RESULT = FVR;:}
+    |falso:_falso           {:String FFS = "False"; RESULT = FFS;:}
+    |frase:_frase           {:String FFR = _frase.toString(); RESULT = FFR;:}
+    |frasecita:_frasecita {:String FF = _frasecita.toString(); RESULT = FF;:}
+    | VARIABLE:_VARIABLE {:String FV = _VARIABLE.toString(); RESULT = FV;:}
 ;
 // INSSTRUCCION FOR
 

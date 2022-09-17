@@ -2,10 +2,10 @@ inicio
 
 
 
-//ingresar _flag1_ como boolean  con_valor verdadero;
+ingresar _flag1_ como boolean  con_valor verdadero;
 
-//imprimir (_anio1_) ;
-/*
+imprimir (_anio1_) ;
+
 FUNCION _joto_ cadena con_parametros(numero _biyin_, cadena _perez_)
 imprimir ((25*8)) ;
 imprimir (verdadero) ;
@@ -23,8 +23,7 @@ retornar("hola bebe como has estado");
 ingresar _bbllin_ , _BBCITA_ como NUMERO con_valor -2;
 _NUEVO_,_bblin_ -> _BBCITA_;
 fin_metodo
-*/
-/*
+
 metodo _coliflor_ con_parametros(numero _biyin_, cadena _perez_)
 si(_biyin_ mayor 10+5) entonces
 imprimir("si funciona el arbol");
@@ -37,7 +36,7 @@ imprimir("nofuncion");
 
 
 fin_si
-fin_metodo*/
+fin_metodo
 
 segun _varaux_ hacer
 		¿0? entonces
@@ -54,6 +53,17 @@ para _i_ -> 0 hasta _exponente_-1 hacer
     20 hacer
     imprimir(20.5);
     fin_para
+
+_pepe_ -> 0;
+repetir
+imprimir("pepe" + _pepe_);
+_pepe_ -> _pepe_ + 1;
+hasta_que (_hola_ es_igual 25);
+
+mientras (_a_ + _b_ es_igual _c_) hacer
+imprimir(20.5);
+fin_mientras
+
 
 
 
