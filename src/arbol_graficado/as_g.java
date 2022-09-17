@@ -995,7 +995,7 @@ class CUP$as_g$actions {
 		int _Xleft = ((java_cup.runtime.Symbol)CUP$as_g$stack.peek()).left;
 		int _Xright = ((java_cup.runtime.Symbol)CUP$as_g$stack.peek()).right;
 		Object _X = (Object)((java_cup.runtime.Symbol) CUP$as_g$stack.peek()).value;
-		listaenlazada p = new listaenlazada(); p.agrega(new nodo("GLOBALA"));p.agrega(new nodo(listaenlazada.class.cast(_X)));  System.out.println(p.g());System.out.println(p);;
+		listaenlazada p = new listaenlazada(); p.agrega(new nodo("GLOBALA"));p.agrega(new nodo(listaenlazada.class.cast(_X)));  System.out.println(p.g());
               CUP$as_g$result = parser.getSymbolFactory().newSymbol("INIT",0, ((java_cup.runtime.Symbol)CUP$as_g$stack.peek()), ((java_cup.runtime.Symbol)CUP$as_g$stack.peek()), RESULT);
             }
           return CUP$as_g$result;
@@ -1178,7 +1178,7 @@ class CUP$as_g$actions {
 		int _Cleft = ((java_cup.runtime.Symbol)CUP$as_g$stack.peek()).left;
 		int _Cright = ((java_cup.runtime.Symbol)CUP$as_g$stack.peek()).right;
 		Object _C = (Object)((java_cup.runtime.Symbol) CUP$as_g$stack.peek()).value;
-		listaenlazada p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_EJECUTAR"));RESULT = p;
+		listaenlazada p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_EJECUTAR")); p.agrega(new nodo(listaenlazada.class.cast(_C)));RESULT = p;
               CUP$as_g$result = parser.getSymbolFactory().newSymbol("INSTRUCCION",11, ((java_cup.runtime.Symbol)CUP$as_g$stack.peek()), ((java_cup.runtime.Symbol)CUP$as_g$stack.peek()), RESULT);
             }
           return CUP$as_g$result;
@@ -1601,7 +1601,7 @@ class CUP$as_g$actions {
 		int _IDSleft = ((java_cup.runtime.Symbol)CUP$as_g$stack.elementAt(CUP$as_g$top-1)).left;
 		int _IDSright = ((java_cup.runtime.Symbol)CUP$as_g$stack.elementAt(CUP$as_g$top-1)).right;
 		Object _IDS = (Object)((java_cup.runtime.Symbol) CUP$as_g$stack.elementAt(CUP$as_g$top-1)).value;
-
+		listaenlazada p = new listaenlazada();p.agrega(new nodo("ABRE_PARENTESIS"));p.agrega(new nodo("PARSLL")); p.agrega(new nodo(listaenlazada.class.cast(_IDS))); p.agrega(new nodo("CIERRA_PARENTESIS"));RESULT = p;
               CUP$as_g$result = parser.getSymbolFactory().newSymbol("PARAMETROSLL",31, ((java_cup.runtime.Symbol)CUP$as_g$stack.elementAt(CUP$as_g$top-2)), ((java_cup.runtime.Symbol)CUP$as_g$stack.peek()), RESULT);
             }
           return CUP$as_g$result;
@@ -1616,7 +1616,7 @@ class CUP$as_g$actions {
 		int _Eleft = ((java_cup.runtime.Symbol)CUP$as_g$stack.peek()).left;
 		int _Eright = ((java_cup.runtime.Symbol)CUP$as_g$stack.peek()).right;
 		Object _E = (Object)((java_cup.runtime.Symbol) CUP$as_g$stack.peek()).value;
-
+		listaenlazada p = listaenlazada.class.cast(_IDS); p.agrega(new nodo("COMA")); p.concatena(listaenlazada.class.cast(_E));  RESULT = p;RESULT = p;
               CUP$as_g$result = parser.getSymbolFactory().newSymbol("PARSLL",32, ((java_cup.runtime.Symbol)CUP$as_g$stack.elementAt(CUP$as_g$top-2)), ((java_cup.runtime.Symbol)CUP$as_g$stack.peek()), RESULT);
             }
           return CUP$as_g$result;
@@ -1628,7 +1628,7 @@ class CUP$as_g$actions {
 		int _Eleft = ((java_cup.runtime.Symbol)CUP$as_g$stack.peek()).left;
 		int _Eright = ((java_cup.runtime.Symbol)CUP$as_g$stack.peek()).right;
 		Object _E = (Object)((java_cup.runtime.Symbol) CUP$as_g$stack.peek()).value;
-
+		listaenlazada p = listaenlazada.class.cast(_E); RESULT = p;RESULT = p;
               CUP$as_g$result = parser.getSymbolFactory().newSymbol("PARSLL",32, ((java_cup.runtime.Symbol)CUP$as_g$stack.peek()), ((java_cup.runtime.Symbol)CUP$as_g$stack.peek()), RESULT);
             }
           return CUP$as_g$result;
@@ -1670,7 +1670,7 @@ class CUP$as_g$actions {
 		int _Eleft = ((java_cup.runtime.Symbol)CUP$as_g$stack.elementAt(CUP$as_g$top-2)).left;
 		int _Eright = ((java_cup.runtime.Symbol)CUP$as_g$stack.elementAt(CUP$as_g$top-2)).right;
 		Object _E = (Object)((java_cup.runtime.Symbol) CUP$as_g$stack.elementAt(CUP$as_g$top-2)).value;
-
+		listaenlazada p = new listaenlazada(); p.agrega(new nodo("RETORNAR"));p.agrega(new nodo("ABRE_PARENTESIS"));p.agrega(new nodo("ETS")); p.agrega(new nodo(listaenlazada.class.cast(_E))); p.agrega(new nodo("CIERRA_PARENTESIS"));p.agrega(new nodo("PUNTO_Y_COMA"));RESULT = p;
               CUP$as_g$result = parser.getSymbolFactory().newSymbol("RETURN",22, ((java_cup.runtime.Symbol)CUP$as_g$stack.elementAt(CUP$as_g$top-4)), ((java_cup.runtime.Symbol)CUP$as_g$stack.peek()), RESULT);
             }
           return CUP$as_g$result;
@@ -1679,7 +1679,7 @@ class CUP$as_g$actions {
           case 53: // RETURN ::= retornar abre_parentesis cierra_parentesis punto_y_coma 
             {
               Object RESULT =null;
-
+		listaenlazada p = new listaenlazada(); p.agrega(new nodo("RETORNAR"));p.agrega(new nodo("ABRE_PARENTESIS"));p.agrega(new nodo("CIERRA_PARENTESIS"));p.agrega(new nodo("PUNTO_Y_COMA"));RESULT = p;
               CUP$as_g$result = parser.getSymbolFactory().newSymbol("RETURN",22, ((java_cup.runtime.Symbol)CUP$as_g$stack.elementAt(CUP$as_g$top-3)), ((java_cup.runtime.Symbol)CUP$as_g$stack.peek()), RESULT);
             }
           return CUP$as_g$result;
@@ -1694,7 +1694,7 @@ class CUP$as_g$actions {
 		int _Cleft = ((java_cup.runtime.Symbol)CUP$as_g$stack.elementAt(CUP$as_g$top-1)).left;
 		int _Cright = ((java_cup.runtime.Symbol)CUP$as_g$stack.elementAt(CUP$as_g$top-1)).right;
 		Object _C = (Object)((java_cup.runtime.Symbol) CUP$as_g$stack.elementAt(CUP$as_g$top-1)).value;
-
+		listaenlazada p = new listaenlazada(); p.agrega(new nodo("EJECUTAR"));p.agrega(new nodo("E")); p.agrega(new nodo(listaenlazada.class.cast(_E)));p.agrega(new nodo("PARAMETROSLL"));p.agrega(new nodo(listaenlazada.class.cast(_C)));p.agrega(new nodo("PUNTO_Y_COMA"));RESULT = p;
               CUP$as_g$result = parser.getSymbolFactory().newSymbol("CALL",23, ((java_cup.runtime.Symbol)CUP$as_g$stack.elementAt(CUP$as_g$top-3)), ((java_cup.runtime.Symbol)CUP$as_g$stack.peek()), RESULT);
             }
           return CUP$as_g$result;
@@ -1706,7 +1706,7 @@ class CUP$as_g$actions {
 		int _Eleft = ((java_cup.runtime.Symbol)CUP$as_g$stack.elementAt(CUP$as_g$top-3)).left;
 		int _Eright = ((java_cup.runtime.Symbol)CUP$as_g$stack.elementAt(CUP$as_g$top-3)).right;
 		Object _E = (Object)((java_cup.runtime.Symbol) CUP$as_g$stack.elementAt(CUP$as_g$top-3)).value;
-
+		listaenlazada p = new listaenlazada(); p.agrega(new nodo("EJECUTAR"));p.agrega(new nodo("E")); p.agrega(new nodo(listaenlazada.class.cast(_E)));p.agrega(new nodo("ABRE_PARENTESIS")); p.agrega(new nodo("CIERRA_PARENTESIS"));p.agrega(new nodo("PUNTO_Y_COMA"));RESULT = p;
               CUP$as_g$result = parser.getSymbolFactory().newSymbol("CALL",23, ((java_cup.runtime.Symbol)CUP$as_g$stack.elementAt(CUP$as_g$top-4)), ((java_cup.runtime.Symbol)CUP$as_g$stack.peek()), RESULT);
             }
           return CUP$as_g$result;

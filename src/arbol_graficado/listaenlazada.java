@@ -1,4 +1,7 @@
 package arbol_graficado;
+
+import java.util.ArrayList;
+
 public class listaenlazada {
     String completo = "digraph G\n" +
             "{label=\"expresion regular\"\n" +
@@ -65,25 +68,51 @@ public class listaenlazada {
 
 
     }
+    String pepe = "";
+    ArrayList<String> rep = new ArrayList<>();
     public void v(nodo x, nodo c)
     {
+
         while (c!= null)
         {
+            String ind = pepe;
+            //System.out.println(ind+"{_____________ENTRA_A_V_________");
+            //System.out.println(ind+"x: "+x.value.getClass().getSimpleName()+"_"+x.value);
+            //System.out.println(ind+"c: "+c.value.getClass().getSimpleName()+"_"+c.value);
+            System.out.println("{|"+ind+"}");
             if (x.value.getClass() == String.class && c.value.getClass()==listaenlazada.class)
             {
+
                 nodo aptd = listaenlazada.class.cast(c.value).First;
                 while (aptd != null)
                 {
-                    if (aptd.value.getClass()!= listaenlazada.class)
-                        conexiones += "\n"+ x.hashCode() +"->" +aptd.hashCode();
-                    else
-                        v(listaenlazada.class.cast(aptd.value).First,listaenlazada.class.cast(aptd.value).First.Next);
+                    if (aptd.value.getClass()!= listaenlazada.class) {
+
+                        //System.out.println(ind+"_____________APUNTA____________");
+                        //System.out.println(ind+"x: "+x.value.getClass().getSimpleName()+"_"+x.value);
+                        //System.out.println(ind+"APTD: "+aptd.value.getClass().getSimpleName()+"_"+aptd.value);
+                        //System.out.println("{"+ind+"}");
+                        if (!rep.contains("\n" + x.hashCode() + "->" + aptd.hashCode())) {
+                            conexiones += "\n" + x.hashCode() + "->" + aptd.hashCode();
+                            rep.add("\n" + x.hashCode() + "->" + aptd.hashCode());
+                        }
+                    }
+                    else {
+                        pepe += ".";
+
+                        //v(listaenlazada.class.cast(aptd.value).First, listaenlazada.class.cast(aptd.value).First.Next);
+                        v(aptd.Prev, aptd);
+                    }
                     aptd=aptd.Next;
                 }
 
             }
+
             x = x.Next;
             c = c.Next;
+            System.out.println("{"+ind+"|}");
+            pepe+=".";
+            //v(x,c);
         }
 
 
@@ -93,12 +122,13 @@ public class listaenlazada {
     {
         completo = "digraph G\n" +
                 "{label=\"expresion regular\"\n" +
-                "        node[shape = circle]\n" +
+                "        node[shape = octagon]\n" +
                 "        node[style = filled]\n" +
                 "        node[fillcolor = \"#EEEEE\"]\n" +
                 "        node[color = \"#EEEEE\"]\n" +
                 "        node[color = \"#31CEF0\"]";
         conexiones = "";
+        pepe = "";
         v(this.First,this.First.Next);
         imprimirtodo(this);
         return completo+conexiones+"\n }";
@@ -128,7 +158,7 @@ public class listaenlazada {
         nodo m = this.First;
         while (m!= null)
         {
-            retorno+=" "+m.value.toString()+",";
+            retorno+=" '"+m.value.getClass().getSimpleName()+":"+m.value.toString()+"', ";
             m=m.Next;
             cont++;
         }
