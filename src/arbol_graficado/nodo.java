@@ -21,7 +21,19 @@ public class nodo {
     @Override
     public String toString() {
 
-        return  this.hashCode()+"[label=\""+this.value+"\"]";
+        String opt = "";
+        if (this.value.getClass() == String.class && (String.class.cast(this.value).contains("GLOBALA")))
+            opt = ",fillcolor = \"#8B0000\"";
+        else  if (this.value.getClass() == String.class && (String.class.cast(this.value).contains("BLOQUE_INSTRUCCIONES")))
+            opt = ",fillcolor = \"#CD5C5C\"";
+        else  if (this.value.getClass() == String.class && (String.class.cast(this.value).contains("BLOQUE_INSTRUCCION")))
+            opt = ",fillcolor = \"#FFC0CB\"";
+        else  if (this.value.getClass() == String.class && (String.class.cast(this.value).contains("INSTRUCCION_")))
+            opt = ",fillcolor = \"#98FB98\"";
+        else  if (this.value.getClass() == String.class && (String.class.cast(this.value).contains("OPCION")))
+            opt = ",fillcolor = \"#AFEEEE\"";
+            else opt = "";
+        return  this.hashCode()+"[label=\""+this.value+"\""+opt+"]";
 
 
     }

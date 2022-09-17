@@ -4,17 +4,17 @@ inicio
 
 //ingresar _flag1_ como boolean  con_valor verdadero;
 
-imprimir (_anio1_) ;
-
+//imprimir (_anio1_) ;
+/*
 FUNCION _joto_ cadena con_parametros(numero _biyin_, cadena _perez_)
 imprimir ((25*8)) ;
 imprimir (verdadero) ;
 fin_funcion
-/*
+
 imprimir_nl("hola papito");
 imprimir(ejecutar _metodo_1_(5+8 , "BEBECITABEBELIN"););
 ejecutar _metodo_1_();
-retornar();*/
+retornar();
 
 
 metodo _coliflor_ con_parametros(numero _biyin_, cadena _perez_)
@@ -23,5 +23,38 @@ retornar("hola bebe como has estado");
 ingresar _bbllin_ , _BBCITA_ como NUMERO con_valor -2;
 _NUEVO_,_bblin_ -> _BBCITA_;
 fin_metodo
+*/
+/*
+metodo _coliflor_ con_parametros(numero _biyin_, cadena _perez_)
+si(_biyin_ mayor 10+5) entonces
+imprimir("si funciona el arbol");
+o_si(_biyin_) entonces
+imprimir("nofuncion");
+o_si(_biyin_) entonces
+imprimir("nofuncion");
+de_lo_contrario
+imprimir("nofuncion");
+
+
+fin_si
+fin_metodo*/
+
+segun _varaux_ hacer
+		¿0? entonces
+			imprimir_nl ("el valor es mayor a 0 y menos a 2");
+		¿2? entonces
+			imprimir_nl ("el valor es mayor a 2");
+			de_lo_contrario entonces
+			imprimir("esto lo agregue yo");
+	fin_segun
+para _i_ -> 0 hasta _exponente_-1 hacer
+		_acumulado_ -> _acumulado_ + _acumulado_;
+	fin_para
+	para _hola_ -> _hola_ hasta _hola_  con_incremental
+    20 hacer
+    imprimir(20.5);
+    fin_para
+
+
 
 final

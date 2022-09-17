@@ -96,42 +96,42 @@ INSTRUCCION ::= DECLARACION:_D{:listaenlazada p = new listaenlazada(); p.agrega(
             | FUNCION:_INS{:listaenlazada p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_FUNCION")); p.agrega(new nodo(listaenlazada.class.cast(_INS)));RESULT = p;:}
             | METODOsp:_INS{:listaenlazada p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_METODO")); p.agrega(new nodo(listaenlazada.class.cast(_INS)));RESULT = p;:}
             | FUNCIONsp:_INS{:listaenlazada p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_FUNCION")); p.agrega(new nodo(listaenlazada.class.cast(_INS)));RESULT = p;:}
-            | CONDICIONIF:_INS
-            | CICLO:_INS
+            | CONDICIONIF:_INS{:listaenlazada p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_IF")); p.agrega(new nodo(listaenlazada.class.cast(_INS)));RESULT = p;:}
+            | CICLO:_INS {:listaenlazada p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_CICLO")); p.agrega(new nodo(listaenlazada.class.cast(_INS)));RESULT = p;:}
             | RETURN:_C {:listaenlazada p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_RETORNAR")); p.agrega(new nodo(listaenlazada.class.cast(_C)));RESULT = p;:}
             | CALL:_C {:listaenlazada p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_EJECUTAR")); p.agrega(new nodo(listaenlazada.class.cast(_C)));RESULT = p;:}
-            | SWITCH:_INS
+            | SWITCH:_INS{:listaenlazada p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_SWITCH")); p.agrega(new nodo(listaenlazada.class.cast(_INS)));RESULT = p;:}
             | error:e  fin
 ;
 fin::= punto_y_coma|fin_segun|fin_funcion|fin_metodo|fin_mientras|fin_para|fin_si|finall
 ;
 
 //INSTRUCCIONES CICLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOS
-CICLO::= para  E:_A flechita E:_B hasta E:_C hacer INSTRUCCIONES:_INS fin_para
-    | para  E:_A flechita E:_B hasta E:_C con_incremental number:_D hacer INSTRUCCIONES:_INS fin_para
+CICLO::= para  E:_A flechita E:_B hasta E:_C hacer INSTRUCCIONES:_INS fin_para{:listaenlazada p = new listaenlazada(); p.agrega(new nodo("PARA"));p.agrega(new nodo("E"));p.agrega(new nodo(listaenlazada.class.cast(_A)));p.agrega(new nodo("FLECHITA"));p.agrega(new nodo("E"));p.agrega(new nodo(listaenlazada.class.cast(_B)));p.agrega(new nodo("HASTA"));p.agrega(new nodo("E"));p.agrega(new nodo(listaenlazada.class.cast(_C)));p.agrega(new nodo("HACER"));p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));p.agrega(new nodo(listaenlazada.class.cast(_INS)));p.agrega(new nodo("FIN_PARA"));RESULT=p;:}
+    | para  E:_A flechita E:_B hasta E:_C con_incremental ETS:_D hacer INSTRUCCIONES:_INS fin_para{:listaenlazada p = new listaenlazada(); p.agrega(new nodo("PARA"));p.agrega(new nodo("E"));p.agrega(new nodo(listaenlazada.class.cast(_A)));p.agrega(new nodo("FLECHITA"));p.agrega(new nodo("E"));p.agrega(new nodo(listaenlazada.class.cast(_B)));p.agrega(new nodo("HASTA"));p.agrega(new nodo("E"));p.agrega(new nodo(listaenlazada.class.cast(_C)));p.agrega(new nodo("CON_INCREMENTAL"));p.agrega(new nodo("ETS"));p.agrega(new nodo(listaenlazada.class.cast(_D)));p.agrega(new nodo("HACER"));p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));p.agrega(new nodo(listaenlazada.class.cast(_INS)));p.agrega(new nodo("FIN_PARA"));RESULT=p;:}
     | mientras abre_parentesis ETS:_C cierra_parentesis hacer INSTRUCCIONES:_INS fin_mientras
     | repetir INSTRUCCIONES:_INS hasta_que abre_parentesis ETS:_C cierra_parentesis punto_y_coma
     ;
 
-SWITCH ::= segun E:_E  hacer OPCIONES:_OPS de_lo_contrario entonces INSTRUCCIONES:_INS fin_segun
+SWITCH ::= segun ETS:_E  hacer OPCIONES:_OPS de_lo_contrario entonces INSTRUCCIONES:_INS fin_segun{:listaenlazada p = new listaenlazada();p.agrega(new nodo("SEGUN"));p.agrega(new nodo("ETS"));p.agrega(new nodo(listaenlazada.class.cast(_E)));p.agrega(new nodo("HACER"));p.agrega(new nodo("OPCIONES"));p.agrega(new nodo(listaenlazada.class.cast(_OPS)));p.agrega(new nodo("DE_LO_CONTRARIO"));p.agrega(new nodo("ENTONCES"));p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));p.agrega(new nodo(listaenlazada.class.cast(_INS)));p.agrega(new nodo("FIN_SEGUN"));RESULT=p;:}
 ;
-OPCIONES::= OPCIONES:_OPS OPCION:_OP
-            | OPCION:_OP
+OPCIONES::= OPCIONES:_OPS OPCION:_OP{:listaenlazada p = listaenlazada.class.cast(_OPS);p.agrega(new nodo("OPCION"));p.agrega(new nodo(listaenlazada.class.cast(_OP)));RESULT = p;:}
+            | OPCION:_OP{:listaenlazada p = new listaenlazada();p.agrega(new nodo("OPCION"));p.agrega(new nodo(listaenlazada.class.cast(_OP)));RESULT = p;:}
 ;
-OPCION ::= abre_pregunta  E:_E cierra_pregunta entonces INSTRUCCIONES:_INS
+OPCION ::= abre_pregunta  ETS:_E cierra_pregunta entonces INSTRUCCIONES:_INS{:listaenlazada p = new listaenlazada(); p.agrega(new nodo("ABRE_PREGUNTA"));p.agrega(new nodo("ETS"));p.agrega(new nodo(listaenlazada.class.cast(_E)));p.agrega(new nodo("CIERRA_PREGUNTA"));p.agrega(new nodo("ENTONCES"));p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));p.agrega(new nodo(listaenlazada.class.cast(_INS)));RESULT = p;:}
 ;
 
 
 
 
 //CONDICION IF
-CONDICIONIF::= si abre_parentesis ETS:_C cierra_parentesis entonces INSTRUCCIONES:_INS fin_si
-                | si abre_parentesis ETS:_C cierra_parentesis entonces INSTRUCCIONES:_INS IFANIDADOS:_INFANIDADOS fin_si
+CONDICIONIF::= si abre_parentesis ETS:_C cierra_parentesis entonces INSTRUCCIONES:_INS fin_si {:listaenlazada p = new listaenlazada(); p.agrega(new nodo("IF"));p.agrega(new nodo("ABRE_PARENTESIS"));p.agrega(new nodo("ETS")); p.agrega(new nodo(listaenlazada.class.cast(_C))); p.agrega(new nodo("CIERRA_PARENTESIS"));p.agrega(new nodo("ENTONCES"));p.agrega(new nodo("BLOQUE_INSTRUCCIONES")); p.agrega(new nodo(listaenlazada.class.cast(_INS)));p.agrega(new nodo("FIN_IF"));RESULT = p;:}
+                | si abre_parentesis ETS:_C cierra_parentesis entonces INSTRUCCIONES:_INS IFANIDADOS:_INFANIDADOS fin_si{:listaenlazada p = new listaenlazada(); p.agrega(new nodo("IF"));p.agrega(new nodo("ABRE_PARENTESIS"));p.agrega(new nodo("ETS")); p.agrega(new nodo(listaenlazada.class.cast(_C))); p.agrega(new nodo("CIERRA_PARENTESIS"));p.agrega(new nodo("ENTONCES"));p.agrega(new nodo("BLOQUE_INSTRUCCIONES")); p.agrega(new nodo(listaenlazada.class.cast(_INS)));p.concatena(listaenlazada.class.cast(_INFANIDADOS));p.agrega(new nodo("FIN_IF"));RESULT = p;:}
 ;
-IFANIDADOS ::= IFANIDADOS:_INFANIDADOS  o_si abre_parentesis ETS:_C cierra_parentesis entonces INSTRUCCIONES:_INS
-                | IFANIDADOS:_INFANIDADOS  de_lo_contrario INSTRUCCIONES:_INS
-                |  o_si abre_parentesis ETS:_C cierra_parentesis entonces INSTRUCCIONES:_INS
-                | de_lo_contrario INSTRUCCIONES:_INS
+IFANIDADOS ::= IFANIDADOS:_INFANIDADOS  o_si abre_parentesis ETS:_C cierra_parentesis entonces INSTRUCCIONES:_INS{:listaenlazada p =listaenlazada.class.cast(_INFANIDADOS);p.agrega(new nodo("ELSE_IF"));p.agrega(new nodo("ABRE_PARENTESIS"));p.agrega(new nodo("ETS")); p.agrega(new nodo(listaenlazada.class.cast(_C))); p.agrega(new nodo("CIERRA_PARENTESIS_PARENTESIS"));p.agrega(new nodo("ENTONCES"));p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));p.agrega(new nodo(listaenlazada.class.cast(_INS)));RESULT=p;:}
+                | IFANIDADOS:_INFANIDADOS  de_lo_contrario INSTRUCCIONES:_INS{:listaenlazada p = listaenlazada.class.cast(_INFANIDADOS);p.agrega(new nodo("ELSE"));p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));p.agrega(new nodo(listaenlazada.class.cast(_INS)));RESULT=p;:}
+                |  o_si abre_parentesis ETS:_C cierra_parentesis entonces INSTRUCCIONES:_INS{:listaenlazada p = new listaenlazada();p.agrega(new nodo("ELSE_IF"));p.agrega(new nodo("ABRE_PARENTESIS"));p.agrega(new nodo("ETS")); p.agrega(new nodo(listaenlazada.class.cast(_C))); p.agrega(new nodo("CIERRA_PARENTESIS_PARENTESIS"));p.agrega(new nodo("ENTONCES"));p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));p.agrega(new nodo(listaenlazada.class.cast(_INS)));RESULT=p;:}
+                | de_lo_contrario INSTRUCCIONES:_INS{:listaenlazada p = new listaenlazada();p.agrega(new nodo("ELSE"));p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));p.agrega(new nodo(listaenlazada.class.cast(_INS)));RESULT=p;:}
 ;
 
 
