@@ -97,7 +97,7 @@ INSTRUCCION ::= DECLARACION:_D    {:String Fimpr = _D.toString();System.out.prin
             | FUNCIONsp:_INS      {:ArrayList<Object> ins = ArrayList.class.cast(_INS);System.out.println("encontro FUNCIONSP");RESULT = ins;:}
             | CONDICIONIF:_INS   {:ArrayList<Object> ins = ArrayList.class.cast(_INS);System.out.println("encontro CONDICION IF");RESULT = ins;:}
             | CICLO:_INS        {:ArrayList<Object> ins = ArrayList.class.cast(_INS);System.out.println("encontro CICLO");RESULT = ins;:}
-            | RETURN:_C   {:String Fimpr = _C.toString();System.out.println("encontro RETURN");RESULT= Fimpr;:}
+            | RETURN:_C   {:String Fimpr = _C.toString();System.out.println("encontro RETURN");RESULT= Fimpr;error.arbol_sintactico.add("INSTRUCCION_CALL"); :}
             | CALL:_C      {:String Fimpr = _C.toString();System.out.println("encontro LLAMADA");RESULT= Fimpr;error.arbol_sintactico.add("INSTRUCCION_CALL");:}
             | SWITCH:_INS    {:ArrayList<Object> ins = ArrayList.class.cast(_INS);System.out.println("encontro SWITCH");RESULT = ins;:}
             | error:e  {:int columna = eright+1;
@@ -267,7 +267,7 @@ String FIM = instruccion+_E.toString(); RESULT = FIM;error.arbol_sintactico.add(
 
 ETS ::= COMPARACIONES:_E {:RESULT = _E; :}
         | E:_E {:RESULT = _E; :}
-        | CALL:_E{:RESULT = _E;error.arbol_sintactico.add("INSTRUCCION_CALL"); :}
+        | INSTRUCCION:_E{:RESULT = _E;error.arbol_sintactico.add("BLOQUE_INSTRUCCION");error.arbol_sintactico.add("BLOQUE_INSTRUCCIONES"); :}
 ;
 IDS ::= IDS:_IDS coma E:_E {:ArrayList<Object> ides = ArrayList.class.cast(_IDS); ides.add(_E.toString());RESULT = ides;:}
     | E:_E {: ArrayList<Object> ides = new ArrayList<>(); ides.add(_E.toString());RESULT = ides;:}

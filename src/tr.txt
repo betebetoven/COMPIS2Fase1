@@ -4,11 +4,13 @@ inicio
 
 //ingresar _flag1_ como boolean  con_valor verdadero;
 
-imprimir (_anio1_) ;
-imprimir ((25*8)) ;
-imprimir (verdadero) ;
-imprimir_nl("hola papito");
+//imprimir (_anio1_) ;
 
+//imprimir ((25*8)) ;
+imprimir (verdadero) ;
+//imprimir_nl("hola papito");
+//imprimir(ejecutar _metodo_1_(););
+//ejecutar _metodo_1_();
 
 
 

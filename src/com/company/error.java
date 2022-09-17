@@ -67,6 +67,9 @@ public class error {
 
         grado.put("INSTRUCCION_IMPRIMIR",3);
         grado.put("INSTRUCCION_IMPRIMIR_NL",3);
+        grado.put("INSTRUCCION_CALL",3);
+        //grado.put("BLOQUE_INSTRUCCIONES",3);
+        //grado.put("ETS",3);
 
         //GLOBALA
         apuntadores.put("GLOBALA",new ArrayList<String>(
@@ -76,7 +79,7 @@ public class error {
                 Arrays.asList("BLOQUE_INSTRUCCION")));
         //BLOQUE_INSTRUCCION
         apuntadores.put("BLOQUE_INSTRUCCION",new ArrayList<String>(
-                Arrays.asList("INSTRUCCION_IMPRIMIR","INSTRUCCION_IMPRIMIR_NL","INSTRUCCION_DECLARACION")));
+                Arrays.asList("INSTRUCCION_IMPRIMIR","INSTRUCCION_IMPRIMIR_NL","INSTRUCCION_DECLARACION","INSTRUCCION_CALL")));
         //INSTRUCCION_IMPRIMIR
         apuntadores.put("INSTRUCCION_IMPRIMIR_NL",new ArrayList<String>(
                 Arrays.asList("IMPRIMIR_NL",
@@ -95,6 +98,7 @@ public class error {
                         "ABRE_PARENTESIS_IMP",
                         "PUNTO_Y_COMA_IMP"
                         )));
+
         //ETS
         apuntadores.put("ETS",new ArrayList<String>(
                 Arrays.asList(
@@ -123,12 +127,12 @@ public class error {
                         "NOT",
                         "AND",
                         "OR",
-                        "INSTRUCCION_CALL")));
+                        "BLOQUE_INSTRUCCIONES")));
 
         conexiones = "";
         String generalpre = general.toString();
         try {
-            conecta(general.First, general.First.Next);
+            //conecta(general.First, general.First.Next);
 
         }
         catch (Exception e)
@@ -136,8 +140,8 @@ public class error {
             System.out.println("se va al catch por conecta");
         }
         String end= "\n }";
-        System.out.println(init+generalpre+conexiones+end);
-
+        //System.out.println(init+generalpre+conexiones+end);
+        System.out.println();
 
     }
 
@@ -158,6 +162,11 @@ public class error {
                     general.remove(c);
                     if (x.Next!=null) {
                         c = x.Next;
+                        if (x.value == "BLOQUE_INSTRUCCION") {
+                            nodo temp = x.Prev;
+                            general.remove(x);
+                            x = temp;
+                        }
                         conecta(x, c);
                     }
                 }

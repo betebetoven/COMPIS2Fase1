@@ -3,7 +3,7 @@
 // source: al_g.jflex
 
  /* JFlex example: partial Java language lexer specification */
- package analizadores;
+ package arbol_graficado;
  import java_cup.runtime.*;
 
 
@@ -13,7 +13,7 @@
 
 // See https://github.com/jflex-de/jflex/issues/222
 @SuppressWarnings("FallThrough")
-public class al implements java_cup.runtime.Scanner {
+public class al_g implements java_cup.runtime.Scanner {
 
   /** This character denotes the end of file. */
   public static final int YYEOF = -1;
@@ -909,7 +909,7 @@ public class al implements java_cup.runtime.Scanner {
    *
    * @param   in  the java.io.Reader to read input from.
    */
-  public al(java.io.Reader in) {
+  public al_g(java.io.Reader in) {
     this.zzReader = in;
   }
 

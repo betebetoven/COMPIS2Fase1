@@ -7,6 +7,11 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import analizadores.al;
 import analizadores.as;
+import arbol_graficado.al_g;
+import arbol_graficado.as_g;
+import arbol_graficado.listaenlazada;
+
+
 public class Main {
 
     public static void main(String[] args) {
@@ -28,22 +33,29 @@ public class Main {
 
             System.out.println(pepe.toString());
             al lexico = new al(new BufferedReader(new FileReader("C:\\Users\\Alberto\\Desktop\\cys\\COMPIS2Fase1\\src\\tr.txt")));
-
             System.out.println("ahora va al sintactico");
-            //for (int i = 0; i<100;i++)
-            //System.out.println(lexico.next_token());
-
             as sintactico = new as(lexico);
-
-
             sintactico.parse();
-            pop.imprime_arbol_sintactico();
+           // pop.imprime_arbol_sintactico();
+
+            System.out.println(pepe.toString());
+            al_g lexicog = new al_g(new BufferedReader(new FileReader("C:\\Users\\Alberto\\Desktop\\cys\\COMPIS2Fase1\\src\\tr.txt")));
+            System.out.println("ahora va al sintactico");
+            as_g sintacticog = new as_g(lexicog);
+            sintacticog.parse();
+           // pop.imprime_arbol_sintactico();
+            listaenlazada jojo = new listaenlazada();
+            listaenlazada jaja = new listaenlazada();
+
 
 
 
         } catch (Exception e) {
             System.out.println("se fue al catch");
         }
+
+
+
 
 
 

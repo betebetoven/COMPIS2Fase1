@@ -3,7 +3,7 @@
 // source: al_g.jflex
 
  /* JFlex example: partial Java language lexer specification */
- package analizadores;
+ package arbol_graficado;
  import java_cup.runtime.*;
 
 

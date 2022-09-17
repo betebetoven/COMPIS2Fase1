@@ -1,0 +1,258 @@
+package arbol_graficado;
+import java_cup.runtime.Symbol;
+import java.util.ArrayList;
+import java.util.List;
+import com.company.error;
+
+
+terminal inicio;
+    terminal finall;
+      terminal flechita;
+      terminal id   ;
+      terminal variable;
+    terminal guion  ;
+    terminal numero ;
+    terminal number ;
+    terminal cadena ;
+    terminal frase ;
+      terminal bulean ;
+      terminal verdadero ;
+      terminal falso    ;
+      terminal caracter ;
+      terminal frasecita ;
+      terminal mas   ;
+      terminal menos  ;
+      terminal por ;
+      terminal dividido ;
+      terminal abre_corchete  ;
+      terminal cierra_corchete   ;
+      terminal potencia    ;
+      terminal mod    ;
+      terminal abre_parentesis ;
+      terminal cierra_parentesis;
+      terminal mayor;
+      terminal menor;
+      terminal mayor_o_igual ;
+      terminal menor_o_igual ;
+      terminal es_igual ;
+      terminal es_diferente ;
+      terminal or     ;
+      terminal and ;
+      terminal not ;
+      terminal ingresar  ;
+      terminal como;
+      terminal con_valor;
+      terminal punto_y_coma;
+      terminal coma ;
+      terminal si ;
+      terminal o_si  ;
+      terminal abre_pregunta ;
+      terminal cierra_pregunta;
+      terminal de_lo_contrario;
+      terminal entonces;
+      terminal fin_segun ;
+      terminal fin_si;
+      terminal para;
+      terminal hasta ;
+      terminal fin_para;
+      terminal hacer;
+      terminal mientras ;
+      terminal fin_mientras ;
+      terminal repetir ;
+      terminal hasta_que;
+      terminal retornar;
+      terminal metodo ;
+      terminal fin_metodo ;
+      terminal con_parametros ;
+      terminal funcion ;
+      terminal fin_funcion ;
+      terminal ejecutar;
+      terminal imprimir  ;
+      terminal imprimir_nl  ;
+      terminal con_incremental;
+      terminal segun;
+
+non terminal INIT,Term, Factor,fin,ETS,PRETS, INSTRUCCIONES,OPCION,IFANIDADOS, SWITCH,OPCIONES, INSTRUCCION, DECLARACION ,IMPRIMIR, IMPRIMIRLN, ASIGNACION,METODO,FUNCION,METODOsp,FUNCIONsp,CONDICIONIF,CICLO,RETURN,CALL,E,COND_WHILE, COMPARACIONES,TIPODATO_DECLARACION,PARAMETROS,PARS,PAR,PARAMETROSLL,PARSLL,IDS,COMP,F,VARIABLE,BLOQUE_PRINCIPAL;
+start with INIT;
+INIT::= BLOQUE_PRINCIPAL:_X {:listaenlazada p = new listaenlazada(); p.agrega(new nodo("GLOBALA"));p.agrega(new nodo(listaenlazada.class.cast(_X)));  System.out.println(p.g());System.out.println(p);;:}
+
+ ;
+
+BLOQUE_PRINCIPAL ::= inicio INSTRUCCIONES:_INSTRUCCIONES finall {:listaenlazada p = new listaenlazada();p.agrega(new nodo("INICIO")); p.agrega(new nodo("BLOQUE_INSTRUCCIONES")); p.agrega(new nodo(listaenlazada.class.cast(_INSTRUCCIONES)));p.agrega(new nodo("FINAL")); RESULT = p;:}
+
+;
+
+INSTRUCCIONES ::=   INSTRUCCIONES:_Aray INSTRUCCION:_INSTRUCCION {:listaenlazada p = listaenlazada.class.cast(_Aray); p.agrega(new nodo("BLOQUE_INSTRUCCION")); p.agrega(new nodo(listaenlazada.class.cast(_INSTRUCCION))); RESULT = p;:}
+              |   INSTRUCCION:_INSTRUCCION  {:listaenlazada p = new listaenlazada(); p.agrega(new nodo("BLOQUE_INSTRUCCION")); p.agrega(new nodo(listaenlazada.class.cast(_INSTRUCCION)));RESULT = p; :}
+
+              ;
+
+
+INSTRUCCION ::= DECLARACION:_D
+            | IMPRIMIR:_IMPRIMIR{:listaenlazada p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_IMPRIMIR")); p.agrega(new nodo(listaenlazada.class.cast(_IMPRIMIR)));RESULT = p; :}
+            | IMPRIMIRLN:_IMPRIMIRLN
+            | ASIGNACION:_D
+            | METODO:_INS
+            | FUNCION:_INS
+            | METODOsp:_INS
+            | FUNCIONsp:_INS
+            | CONDICIONIF:_INS
+            | CICLO:_INS
+            | RETURN:_C
+            | CALL:_C {:listaenlazada p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_EJECUTAR"));RESULT = p;:}
+            | SWITCH:_INS
+            | error:e  fin
+;
+fin::= punto_y_coma|fin_segun|fin_funcion|fin_metodo|fin_mientras|fin_para|fin_si|finall
+;
+
+//INSTRUCCIONES CICLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOS
+CICLO::= para  E:_A flechita E:_B hasta E:_C hacer INSTRUCCIONES:_INS fin_para
+    | para  E:_A flechita E:_B hasta E:_C con_incremental number:_D hacer INSTRUCCIONES:_INS fin_para
+    | mientras abre_parentesis ETS:_C cierra_parentesis hacer INSTRUCCIONES:_INS fin_mientras
+    | repetir INSTRUCCIONES:_INS hasta_que abre_parentesis ETS:_C cierra_parentesis punto_y_coma
+    ;
+
+SWITCH ::= segun E:_E  hacer OPCIONES:_OPS de_lo_contrario entonces INSTRUCCIONES:_INS fin_segun
+;
+OPCIONES::= OPCIONES:_OPS OPCION:_OP
+            | OPCION:_OP
+;
+OPCION ::= abre_pregunta  E:_E cierra_pregunta entonces INSTRUCCIONES:_INS
+;
+
+
+
+
+//CONDICION IF
+CONDICIONIF::= si abre_parentesis ETS:_C cierra_parentesis entonces INSTRUCCIONES:_INS fin_si
+                | si abre_parentesis ETS:_C cierra_parentesis entonces INSTRUCCIONES:_INS IFANIDADOS:_INFANIDADOS fin_si
+;
+IFANIDADOS ::= IFANIDADOS:_INFANIDADOS  o_si abre_parentesis ETS:_C cierra_parentesis entonces INSTRUCCIONES:_INS
+                | IFANIDADOS:_INFANIDADOS  de_lo_contrario INSTRUCCIONES:_INS
+                |  o_si abre_parentesis ETS:_C cierra_parentesis entonces INSTRUCCIONES:_INS
+                | de_lo_contrario INSTRUCCIONES:_INS
+;
+
+
+
+
+
+
+//FUNCIONES Y METODOS CON PARAMETROS
+FUNCION::= funcion E:_E TIPODATO_DECLARACION  con_parametros PARAMETROS:_C INSTRUCCIONES:_INS fin_funcion
+;
+METODO ::= metodo E:_E con_parametros PARAMETROS:_C INSTRUCCIONES:_INS fin_metodo
+;
+PARAMETROS ::= abre_parentesis PARS:_IDS cierra_parentesis
+;
+PARS ::= PARS:_IDS coma PAR:_E
+     | PAR:_E
+;
+PAR ::= TIPODATO_DECLARACION E:_E
+;
+PARAMETROSLL ::= abre_parentesis PARSLL:_IDS cierra_parentesis
+;
+PARSLL ::= PARSLL:_IDS coma E:_E
+     | E:_E
+;
+
+//sin parametros
+
+FUNCIONsp::= funcion E:_E TIPODATO_DECLARACION  abre_parentesis cierra_parentesis INSTRUCCIONES:_INS fin_funcion
+;
+METODOsp ::= metodo E:_E abre_parentesis cierra_parentesis INSTRUCCIONES:_INS fin_metodo
+;
+//EL RETURN
+
+RETURN ::= retornar abre_parentesis ETS:_E cierra_parentesis punto_y_coma
+        | retornar abre_parentesis cierra_parentesis punto_y_coma
+
+;
+
+
+//LLAMADA DE FUNCION O METODOS
+CALL::= ejecutar E:_E PARAMETROSLL:_C punto_y_coma
+    | ejecutar E:_E abre_parentesis cierra_parentesis punto_y_coma
+
+;
+
+
+
+
+//INSTRUCCION IMPRIMIR UNA Y VARIAS LINEAS
+
+IMPRIMIR ::= imprimir  abre_parentesis ETS:_E cierra_parentesis punto_y_coma{:listaenlazada p = new listaenlazada(); p.agrega(new nodo("IMPRIMIR"));p.agrega(new nodo("ABRE_PARENTESIS"));p.agrega(new nodo("ETS")); p.agrega(new nodo(listaenlazada.class.cast(_E))); p.agrega(new nodo("CIERRA_PARENTESIS"));p.agrega(new nodo("PUNTO_Y_COMA"));RESULT = p;:}
+
+
+;
+IMPRIMIRLN ::= imprimir_nl abre_parentesis ETS:_E cierra_parentesis punto_y_coma
+
+;
+//PRETS ::= E:_E {:RESULT = _E;:}
+       // | CALL:_E{:RESULT = _E; :}
+//;
+
+
+//ASIGNACION DE VARIABLES YA DECLARADAS (CAMBIO DE VALOR)
+ASIGNACION ::= IDS:_IDS flechita ETS:_E punto_y_coma
+
+    ;
+TIPODATO_DECLARACION  ::=  numero {: RESULT = new nodo("TIPO_NUMERO");:}
+                       | bulean{: RESULT = new nodo("TIPO_BOOLEAN");:}
+                       | cadena{: RESULT = new nodo("TIPO_STRING");:}
+                       | caracter{: RESULT = new nodo("TIPO_CHAR");:}
+                       ;
+
+DECLARACION ::= ingresar IDS:_IDS  como  TIPODATO_DECLARACION con_valor ETS:_E punto_y_coma
+            ;
+
+ETS ::= COMPARACIONES:_E {:listaenlazada p = new listaenlazada(); p.agrega(new nodo("COMPARACIONES")); p.agrega(new nodo(listaenlazada.class.cast(_E)));RESULT = p; :}
+        | E:_E {:listaenlazada p = new listaenlazada(); p.agrega(new nodo("E")); p.agrega(new nodo(listaenlazada.class.cast(_E))); RESULT = p;:}
+        | INSTRUCCION:_E{:listaenlazada p = new listaenlazada(); p.agrega(new nodo("BLOQUE_INSTRUCCCION")); p.agrega(new nodo(listaenlazada.class.cast(_E))); RESULT = p;:}
+;
+IDS ::= IDS:_IDS coma E:_E {:listaenlazada p = listaenlazada.class.cast(_IDS); p.agrega(new nodo("COMA")); p.concatena(listaenlazada.class.cast(_E));  RESULT = p;RESULT = p;:}
+    | E:_E {:listaenlazada p = listaenlazada.class.cast(_E); RESULT = p;RESULT = p;:}
+    ;
+VARIABLE ::= variable:_variable
+;
+COMPARACIONES::= not abre_parentesis COMPARACIONES:_E cierra_parentesis {:listaenlazada p = new listaenlazada(); p.agrega(new nodo("NOT")); p.agrega(new nodo("ABRE_PARENTESIS"));  p.concatena(listaenlazada.class.cast(_E)); p.agrega(new nodo("CIERRA_PARENTESIS_PARENTESIS"));RESULT = p;:}
+            |  COMPARACIONES:_E and COMP:_F {:listaenlazada p = listaenlazada.class.cast(_E); p.agrega(new nodo("AND")); p.concatena(listaenlazada.class.cast(_F));  RESULT = p;:}
+            |  COMPARACIONES:_E or COMP:_F {:listaenlazada p = listaenlazada.class.cast(_E); p.agrega(new nodo("OR")); p.concatena(listaenlazada.class.cast(_F));  RESULT = p;:}
+            |   COMP:_E {:listaenlazada p = listaenlazada.class.cast(_E); RESULT = p;:}
+;
+COMP::=  E:_E menor E:_F {:listaenlazada p = listaenlazada.class.cast(_E); p.agrega(new nodo("MENOR")); p.concatena(listaenlazada.class.cast(_F));  RESULT = p;:}
+    |  E:_E mayor_o_igual E:_F {:listaenlazada p = listaenlazada.class.cast(_E); p.agrega(new nodo("MAYOR_O_IGUAL")); p.concatena(listaenlazada.class.cast(_F));  RESULT = p;:}
+    |  E:_E menor_o_igual E:_F {:listaenlazada p = listaenlazada.class.cast(_E); p.agrega(new nodo("MENOR_O_IGUAL")); p.concatena(listaenlazada.class.cast(_F));  RESULT = p;:}
+    |  E:_E mayor E:_F {:listaenlazada p = listaenlazada.class.cast(_E); p.agrega(new nodo("MAYOR")); p.concatena(listaenlazada.class.cast(_F));  RESULT = p;:}
+    |  E:_E es_diferente E:_F {:listaenlazada p = listaenlazada.class.cast(_E); p.agrega(new nodo("ES_DIFERENTE")); p.concatena(listaenlazada.class.cast(_F));  RESULT = p;:}
+    |  E:_E es_igual E:_F {:listaenlazada p = listaenlazada.class.cast(_E); p.agrega(new nodo("ES_IGUAL")); p.concatena(listaenlazada.class.cast(_F));  RESULT = p;:}
+
+;
+E::=E:_E mas Term:_F {:listaenlazada p = listaenlazada.class.cast(_E); p.agrega(new nodo("MAS")); p.concatena(listaenlazada.class.cast(_F));  RESULT = p;:}
+|E:_E menos Term:_F {:listaenlazada p = listaenlazada.class.cast(_E); p.agrega(new nodo("MENOS")); p.concatena(listaenlazada.class.cast(_F));  RESULT = p;:}
+|menos Term:_F {:listaenlazada p = new listaenlazada(); p.agrega(new nodo("MENOS"));  p.concatena(listaenlazada.class.cast(_F)); RESULT = p;:}
+|Term:_F  {:listaenlazada p = listaenlazada.class.cast(_F); RESULT = p;:}
+;
+Term::=Term:_E por Factor:_F {:listaenlazada p = listaenlazada.class.cast(_E); p.agrega(new nodo("POR")); p.concatena(listaenlazada.class.cast(_F));  RESULT = p;:}
+|Term:_E dividido Factor:_F {:listaenlazada p = listaenlazada.class.cast(_E); p.agrega(new nodo("DIVIDIDO")); p.concatena(listaenlazada.class.cast(_F));  RESULT = p;:}
+| Term:_E mod Factor:_F {:listaenlazada p = listaenlazada.class.cast(_E); p.agrega(new nodo("MOD")); p.concatena(listaenlazada.class.cast(_F));  RESULT = p;:}
+|  Term:_E potencia abre_corchete E:_F cierra_corchete {:listaenlazada p = listaenlazada.class.cast(_E); p.agrega(new nodo("POTENCIA")); p.agrega(new nodo("ABRE_CORCHETE"));p.concatena(listaenlazada.class.cast(_F));p.agrega(new nodo("CIERRA_CORCHETE"));  RESULT = p;:}
+|Factor:_F {:listaenlazada p = listaenlazada.class.cast(_F); RESULT = p;:}
+;
+Factor::= abre_parentesis E:_E cierra_parentesis  {:listaenlazada p = new listaenlazada();p.agrega(new nodo("ABRE_ARENTESIS"));p.concatena(listaenlazada.class.cast(_E));p.agrega(new nodo("CIERRA_PARENTESIS"));RESULT = p;:}
+|F:_F  {:listaenlazada FE = new listaenlazada(); FE.agrega(nodo.class.cast(_F));RESULT= FE;:}
+
+;
+
+
+F::= number:_number                      {: RESULT = new nodo("NUMERO");:}
+    |verdadero:_verdadero       {: RESULT = new nodo("VERDADERO");:}
+    |falso:_falso           {: RESULT = new nodo("FALSO");:}
+    |frase:_frase           {: RESULT = new nodo("FRASE");:}
+    |frasecita:_frasecita {: RESULT = new nodo("FRASECITA");:}
+    | VARIABLE:_VARIABLE {: RESULT = new nodo("VARIABLE");:}
+;
+// INSSTRUCCION FOR
+
+
