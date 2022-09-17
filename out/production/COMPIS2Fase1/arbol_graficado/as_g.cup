@@ -90,7 +90,7 @@ INSTRUCCIONES ::=   INSTRUCCIONES:_Aray INSTRUCCION:_INSTRUCCION {:listaenlazada
 
 INSTRUCCION ::= DECLARACION:_D
             | IMPRIMIR:_IMPRIMIR{:listaenlazada p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_IMPRIMIR")); p.agrega(new nodo(listaenlazada.class.cast(_IMPRIMIR)));RESULT = p; :}
-            | IMPRIMIRLN:_IMPRIMIRLN
+            | IMPRIMIRLN:_IMPRIMIRLN {:listaenlazada p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_IMPRIMIR_NL")); p.agrega(new nodo(listaenlazada.class.cast(_IMPRIMIRLN)));RESULT = p; :}
             | ASIGNACION:_D
             | METODO:_INS
             | FUNCION:_INS
@@ -98,7 +98,7 @@ INSTRUCCION ::= DECLARACION:_D
             | FUNCIONsp:_INS
             | CONDICIONIF:_INS
             | CICLO:_INS
-            | RETURN:_C
+            | RETURN:_C {:listaenlazada p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_RETORNAR")); p.agrega(new nodo(listaenlazada.class.cast(_C)));RESULT = p;:}
             | CALL:_C {:listaenlazada p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_EJECUTAR")); p.agrega(new nodo(listaenlazada.class.cast(_C)));RESULT = p;:}
             | SWITCH:_INS
             | error:e  fin
@@ -151,7 +151,7 @@ PARS ::= PARS:_IDS coma PAR:_E
 ;
 PAR ::= TIPODATO_DECLARACION E:_E
 ;
-PARAMETROSLL ::= abre_parentesis PARSLL:_IDS cierra_parentesis{:listaenlazada p = new listaenlazada();p.agrega(new nodo("ABRE_PARENTESIS"));p.agrega(new nodo("PARSLL")); p.agrega(new nodo(listaenlazada.class.cast(_IDS))); p.agrega(new nodo("CIERRA_PARENTESIS"));RESULT = p;:}
+PARAMETROSLL ::= abre_parentesis PARSLL:_IDS cierra_parentesis{:listaenlazada p = new listaenlazada();p.agrega(new nodo("ABRE_PARENTESIS"));p.agrega(new nodo("PARAMETROS")); p.agrega(new nodo(listaenlazada.class.cast(_IDS))); p.agrega(new nodo("CIERRA_PARENTESIS"));RESULT = p;:}
 ;
 PARSLL ::= PARSLL:_IDS coma E:_E {:listaenlazada p = listaenlazada.class.cast(_IDS); p.agrega(new nodo("COMA")); p.concatena(listaenlazada.class.cast(_E));  RESULT = p;RESULT = p;:}
      | E:_E{:listaenlazada p = listaenlazada.class.cast(_E); RESULT = p;RESULT = p;:}
@@ -172,7 +172,7 @@ RETURN ::= retornar abre_parentesis ETS:_E cierra_parentesis punto_y_coma {:list
 
 
 //LLAMADA DE FUNCION O METODOS
-CALL::= ejecutar E:_E PARAMETROSLL:_C punto_y_coma {:listaenlazada p = new listaenlazada(); p.agrega(new nodo("EJECUTAR"));p.agrega(new nodo("E")); p.agrega(new nodo(listaenlazada.class.cast(_E)));p.agrega(new nodo("PARAMETROSLL"));p.agrega(new nodo(listaenlazada.class.cast(_C)));p.agrega(new nodo("PUNTO_Y_COMA"));RESULT = p;:}
+CALL::= ejecutar E:_E PARAMETROSLL:_C punto_y_coma {:listaenlazada p = new listaenlazada(); p.agrega(new nodo("EJECUTAR"));p.agrega(new nodo("E")); p.agrega(new nodo(listaenlazada.class.cast(_E)));p.concatena(listaenlazada.class.cast(_C));p.agrega(new nodo("PUNTO_Y_COMA"));RESULT = p;:}
     | ejecutar E:_E abre_parentesis cierra_parentesis punto_y_coma {:listaenlazada p = new listaenlazada(); p.agrega(new nodo("EJECUTAR"));p.agrega(new nodo("E")); p.agrega(new nodo(listaenlazada.class.cast(_E)));p.agrega(new nodo("ABRE_PARENTESIS")); p.agrega(new nodo("CIERRA_PARENTESIS"));p.agrega(new nodo("PUNTO_Y_COMA"));RESULT = p;:}
 
 ;
@@ -186,7 +186,7 @@ IMPRIMIR ::= imprimir  abre_parentesis ETS:_E cierra_parentesis punto_y_coma{:li
 
 
 ;
-IMPRIMIRLN ::= imprimir_nl abre_parentesis ETS:_E cierra_parentesis punto_y_coma
+IMPRIMIRLN ::= imprimir_nl abre_parentesis ETS:_E cierra_parentesis punto_y_coma {:listaenlazada p = new listaenlazada(); p.agrega(new nodo("IMPRIMIR_NL"));p.agrega(new nodo("ABRE_PARENTESIS"));p.agrega(new nodo("ETS")); p.agrega(new nodo(listaenlazada.class.cast(_E))); p.agrega(new nodo("CIERRA_PARENTESIS"));p.agrega(new nodo("PUNTO_Y_COMA"));RESULT = p;:}
 
 ;
 //PRETS ::= E:_E {:RESULT = _E;:}

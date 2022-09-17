@@ -79,7 +79,7 @@ public class listaenlazada {
             //System.out.println(ind+"{_____________ENTRA_A_V_________");
             //System.out.println(ind+"x: "+x.value.getClass().getSimpleName()+"_"+x.value);
             //System.out.println(ind+"c: "+c.value.getClass().getSimpleName()+"_"+c.value);
-            System.out.println("{|"+ind+"}");
+            //System.out.println("{|"+ind+"}");
             if (x.value.getClass() == String.class && c.value.getClass()==listaenlazada.class)
             {
 
@@ -110,7 +110,7 @@ public class listaenlazada {
 
             x = x.Next;
             c = c.Next;
-            System.out.println("{"+ind+"|}");
+            //System.out.println("{"+ind+"|}");
             pepe+=".";
             //v(x,c);
         }
