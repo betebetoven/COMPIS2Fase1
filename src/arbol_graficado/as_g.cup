@@ -92,8 +92,8 @@ INSTRUCCION ::= DECLARACION:_D{:listaenlazada p = new listaenlazada(); p.agrega(
             | IMPRIMIR:_IMPRIMIR{:listaenlazada p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_IMPRIMIR")); p.agrega(new nodo(listaenlazada.class.cast(_IMPRIMIR)));RESULT = p; :}
             | IMPRIMIRLN:_IMPRIMIRLN {:listaenlazada p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_IMPRIMIR_NL")); p.agrega(new nodo(listaenlazada.class.cast(_IMPRIMIRLN)));RESULT = p; :}
             | ASIGNACION:_D{:listaenlazada p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_ASIGNACION")); p.agrega(new nodo(listaenlazada.class.cast(_D)));RESULT = p;:}
-            | METODO:_INS
-            | FUNCION:_INS
+            | METODO:_INS{:listaenlazada p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_METODO")); p.agrega(new nodo(listaenlazada.class.cast(_INS)));RESULT = p;:}
+            | FUNCION:_INS{:listaenlazada p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_FUNCION")); p.agrega(new nodo(listaenlazada.class.cast(_INS)));RESULT = p;:}
             | METODOsp:_INS{:listaenlazada p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_METODO")); p.agrega(new nodo(listaenlazada.class.cast(_INS)));RESULT = p;:}
             | FUNCIONsp:_INS{:listaenlazada p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_FUNCION")); p.agrega(new nodo(listaenlazada.class.cast(_INS)));RESULT = p;:}
             | CONDICIONIF:_INS
@@ -140,16 +140,16 @@ IFANIDADOS ::= IFANIDADOS:_INFANIDADOS  o_si abre_parentesis ETS:_C cierra_paren
 
 
 //FUNCIONES Y METODOS CON PARAMETROS
-FUNCION::= funcion E:_E TIPODATO_DECLARACION  con_parametros PARAMETROS:_C INSTRUCCIONES:_INS fin_funcion
+FUNCION::= funcion E:_E TIPODATO_DECLARACION:_TD  con_parametros PARAMETROS:_C INSTRUCCIONES:_INS fin_funcion{:listaenlazada p = new listaenlazada(); p.agrega(new nodo("FUNCION"));p.agrega(new nodo("E")); p.agrega(new nodo(listaenlazada.class.cast(_E))); p.agrega(new nodo("TIPO_DATO_DECLARACION"));p.agrega(new nodo(listaenlazada.class.cast(_TD)));p.agrega(new nodo("CON_PARAMETROS"));p.concatena(listaenlazada.class.cast(_C));p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));p.agrega(new nodo(listaenlazada.class.cast(_INS)));p.agrega(new nodo("FIN_FUNCION"));RESULT = p;:}
 ;
-METODO ::= metodo E:_E con_parametros PARAMETROS:_C INSTRUCCIONES:_INS fin_metodo
+METODO ::= metodo E:_E con_parametros PARAMETROS:_C INSTRUCCIONES:_INS fin_metodo{:listaenlazada p = new listaenlazada(); p.agrega(new nodo("METODO"));p.agrega(new nodo("E")); p.agrega(new nodo(listaenlazada.class.cast(_E)));p.agrega(new nodo("CON_PARAMETROS")); p.concatena(listaenlazada.class.cast(_C));p.agrega(new nodo("BLOQUE_INSTRUCCIONES")); p.agrega(new nodo(listaenlazada.class.cast(_INS)));p.agrega(new nodo("FIN_METOOD"));RESULT = p;:}
 ;
-PARAMETROS ::= abre_parentesis PARS:_IDS cierra_parentesis
+PARAMETROS ::= abre_parentesis PARS:_IDS cierra_parentesis{:listaenlazada p = new listaenlazada();p.agrega(new nodo("ABRE_PARENTESIS"));p.agrega(new nodo("PARAMETROS")); p.agrega(new nodo(listaenlazada.class.cast(_IDS))); p.agrega(new nodo("CIERRA_PARENTESIS"));RESULT = p;:}
 ;
-PARS ::= PARS:_IDS coma PAR:_E
-     | PAR:_E
+PARS ::= PARS:_IDS coma PAR:_E{:listaenlazada p = listaenlazada.class.cast(_IDS); p.agrega(new nodo("COMA"));p.agrega(new nodo("PAR")); p.agrega(new nodo(listaenlazada.class.cast(_E)));  RESULT = p;RESULT = p;:}
+     | PAR:_E {:listaenlazada p =new listaenlazada();p.agrega(new nodo("PAR")); p.agrega(new nodo(listaenlazada.class.cast(_E))); RESULT = p;RESULT = p;:}
 ;
-PAR ::= TIPODATO_DECLARACION E:_E
+PAR ::= TIPODATO_DECLARACION:_TD E:_E {:listaenlazada p =new listaenlazada();p.agrega(new nodo("TIPO_DATO")); p.agrega(new nodo(listaenlazada.class.cast(_TD)));p.agrega(new nodo("E")); p.agrega(new nodo(listaenlazada.class.cast(_E))); RESULT = p;RESULT = p;:}
 ;
 PARAMETROSLL ::= abre_parentesis PARSLL:_IDS cierra_parentesis{:listaenlazada p = new listaenlazada();p.agrega(new nodo("ABRE_PARENTESIS"));p.agrega(new nodo("PARAMETROS")); p.agrega(new nodo(listaenlazada.class.cast(_IDS))); p.agrega(new nodo("CIERRA_PARENTESIS"));RESULT = p;:}
 ;

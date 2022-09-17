@@ -6,7 +6,7 @@ inicio
 
 imprimir (_anio1_) ;
 
-FUNCION _joto_ cadena ()
+FUNCION _joto_ cadena con_parametros(numero _biyin_, cadena _perez_)
 imprimir ((25*8)) ;
 imprimir (verdadero) ;
 fin_funcion
@@ -17,7 +17,7 @@ ejecutar _metodo_1_();
 retornar();*/
 
 
-metodo _coliflor_()
+metodo _coliflor_ con_parametros(numero _biyin_, cadena _perez_)
 retornar(ejecutar _metodo_1_(5+8 , "BEBECITABEBELIN"););
 retornar("hola bebe como has estado");
 ingresar _bbllin_ , _BBCITA_ como NUMERO con_valor -2;
