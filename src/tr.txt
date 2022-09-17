@@ -5,16 +5,23 @@ inicio
 //ingresar _flag1_ como boolean  con_valor verdadero;
 
 imprimir (_anio1_) ;
-/*
+
+FUNCION _joto_ cadena ()
 imprimir ((25*8)) ;
 imprimir (verdadero) ;
+fin_funcion
+/*
 imprimir_nl("hola papito");
 imprimir(ejecutar _metodo_1_(5+8 , "BEBECITABEBELIN"););
 ejecutar _metodo_1_();
 retornar();*/
+
+
+metodo _coliflor_()
 retornar(ejecutar _metodo_1_(5+8 , "BEBECITABEBELIN"););
 retornar("hola bebe como has estado");
 ingresar _bbllin_ , _BBCITA_ como NUMERO con_valor -2;
 _NUEVO_,_bblin_ -> _BBCITA_;
+fin_metodo
 
 final

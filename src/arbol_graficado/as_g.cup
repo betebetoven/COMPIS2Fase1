@@ -94,8 +94,8 @@ INSTRUCCION ::= DECLARACION:_D{:listaenlazada p = new listaenlazada(); p.agrega(
             | ASIGNACION:_D{:listaenlazada p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_ASIGNACION")); p.agrega(new nodo(listaenlazada.class.cast(_D)));RESULT = p;:}
             | METODO:_INS
             | FUNCION:_INS
-            | METODOsp:_INS
-            | FUNCIONsp:_INS
+            | METODOsp:_INS{:listaenlazada p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_METODO")); p.agrega(new nodo(listaenlazada.class.cast(_INS)));RESULT = p;:}
+            | FUNCIONsp:_INS{:listaenlazada p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_FUNCION")); p.agrega(new nodo(listaenlazada.class.cast(_INS)));RESULT = p;:}
             | CONDICIONIF:_INS
             | CICLO:_INS
             | RETURN:_C {:listaenlazada p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_RETORNAR")); p.agrega(new nodo(listaenlazada.class.cast(_C)));RESULT = p;:}
@@ -159,9 +159,9 @@ PARSLL ::= PARSLL:_IDS coma E:_E {:listaenlazada p = listaenlazada.class.cast(_I
 
 //sin parametros
 
-FUNCIONsp::= funcion E:_E TIPODATO_DECLARACION  abre_parentesis cierra_parentesis INSTRUCCIONES:_INS fin_funcion
+FUNCIONsp::= funcion E:_E TIPODATO_DECLARACION:_TD  abre_parentesis cierra_parentesis INSTRUCCIONES:_INS fin_funcion {:listaenlazada p = new listaenlazada(); p.agrega(new nodo("FUNCION"));p.agrega(new nodo("E")); p.agrega(new nodo(listaenlazada.class.cast(_E))); p.agrega(new nodo("TIPO_DATO_DECLARACION"));p.agrega(new nodo(listaenlazada.class.cast(_TD)));p.agrega(new nodo("ABRE_PARENTESIS"));p.agrega(new nodo("CIERRA_PARENTESIS"));p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));p.agrega(new nodo(listaenlazada.class.cast(_INS)));p.agrega(new nodo("FIN_FUNCION"));RESULT = p;:}
 ;
-METODOsp ::= metodo E:_E abre_parentesis cierra_parentesis INSTRUCCIONES:_INS fin_metodo
+METODOsp ::= metodo E:_E abre_parentesis cierra_parentesis INSTRUCCIONES:_INS fin_metodo{:listaenlazada p = new listaenlazada(); p.agrega(new nodo("METODO"));p.agrega(new nodo("E")); p.agrega(new nodo(listaenlazada.class.cast(_E))); p.agrega(new nodo("ABRE_PARENTESIS")); p.agrega(new nodo("CIERRA_PARENTESIS"));p.agrega(new nodo("BLOQUE_INSTRUCCIONES")); p.agrega(new nodo(listaenlazada.class.cast(_INS)));p.agrega(new nodo("FIN_METOOD"));RESULT = p;:}
 ;
 //EL RETURN
 
