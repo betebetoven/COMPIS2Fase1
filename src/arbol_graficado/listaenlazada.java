@@ -1,6 +1,13 @@
 package arbol_graficado;
 
 import java.util.ArrayList;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import   java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.io.IOException;
 
 public class listaenlazada {
     String completo = "digraph G\n" +
@@ -131,6 +138,13 @@ public class listaenlazada {
         pepe = "";
         v(this.First,this.First.Next);
         imprimirtodo(this);
+
+
+        StringSelection data = new StringSelection
+                (completo+conexiones+"\n }");
+        Clipboard cb = Toolkit.getDefaultToolkit()
+                .getSystemClipboard();
+        cb.setContents(data, data);
         return completo+conexiones+"\n }";
     }
 

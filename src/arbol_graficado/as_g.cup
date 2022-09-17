@@ -74,7 +74,7 @@ terminal inicio;
 
 non terminal INIT,Term, Factor,fin,ETS,PRETS, INSTRUCCIONES,OPCION,IFANIDADOS, SWITCH,OPCIONES, INSTRUCCION, DECLARACION ,IMPRIMIR, IMPRIMIRLN, ASIGNACION,METODO,FUNCION,METODOsp,FUNCIONsp,CONDICIONIF,CICLO,RETURN,CALL,E,COND_WHILE, COMPARACIONES,TIPODATO_DECLARACION,PARAMETROS,PARS,PAR,PARAMETROSLL,PARSLL,IDS,COMP,F,VARIABLE,BLOQUE_PRINCIPAL;
 start with INIT;
-INIT::= BLOQUE_PRINCIPAL:_X {:listaenlazada p = new listaenlazada(); p.agrega(new nodo("GLOBALA"));p.agrega(new nodo(listaenlazada.class.cast(_X)));  System.out.println(p.g());:}
+INIT::= BLOQUE_PRINCIPAL:_X {:listaenlazada p = new listaenlazada(); p.agrega(new nodo("GLOBALA"));p.agrega(new nodo(listaenlazada.class.cast(_X))); String sale = p.g(); //System.out.println(p.g());:}
 
  ;
 
@@ -88,10 +88,10 @@ INSTRUCCIONES ::=   INSTRUCCIONES:_Aray INSTRUCCION:_INSTRUCCION {:listaenlazada
               ;
 
 
-INSTRUCCION ::= DECLARACION:_D
+INSTRUCCION ::= DECLARACION:_D{:listaenlazada p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_DECLARACION")); p.agrega(new nodo(listaenlazada.class.cast(_D)));RESULT = p;:}
             | IMPRIMIR:_IMPRIMIR{:listaenlazada p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_IMPRIMIR")); p.agrega(new nodo(listaenlazada.class.cast(_IMPRIMIR)));RESULT = p; :}
             | IMPRIMIRLN:_IMPRIMIRLN {:listaenlazada p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_IMPRIMIR_NL")); p.agrega(new nodo(listaenlazada.class.cast(_IMPRIMIRLN)));RESULT = p; :}
-            | ASIGNACION:_D
+            | ASIGNACION:_D{:listaenlazada p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_ASIGNACION")); p.agrega(new nodo(listaenlazada.class.cast(_D)));RESULT = p;:}
             | METODO:_INS
             | FUNCION:_INS
             | METODOsp:_INS
@@ -153,8 +153,8 @@ PAR ::= TIPODATO_DECLARACION E:_E
 ;
 PARAMETROSLL ::= abre_parentesis PARSLL:_IDS cierra_parentesis{:listaenlazada p = new listaenlazada();p.agrega(new nodo("ABRE_PARENTESIS"));p.agrega(new nodo("PARAMETROS")); p.agrega(new nodo(listaenlazada.class.cast(_IDS))); p.agrega(new nodo("CIERRA_PARENTESIS"));RESULT = p;:}
 ;
-PARSLL ::= PARSLL:_IDS coma E:_E {:listaenlazada p = listaenlazada.class.cast(_IDS); p.agrega(new nodo("COMA")); p.concatena(listaenlazada.class.cast(_E));  RESULT = p;RESULT = p;:}
-     | E:_E{:listaenlazada p = listaenlazada.class.cast(_E); RESULT = p;RESULT = p;:}
+PARSLL ::= PARSLL:_IDS coma E:_E {:listaenlazada p = listaenlazada.class.cast(_IDS); p.agrega(new nodo("COMA"));p.agrega(new nodo("E")); p.agrega(new nodo(listaenlazada.class.cast(_E)));  RESULT = p;RESULT = p;:}
+     | E:_E{:listaenlazada p =new listaenlazada();p.agrega(new nodo("E")); p.agrega(new nodo(listaenlazada.class.cast(_E))); RESULT = p;RESULT = p;:}
 ;
 
 //sin parametros
@@ -195,24 +195,24 @@ IMPRIMIRLN ::= imprimir_nl abre_parentesis ETS:_E cierra_parentesis punto_y_coma
 
 
 //ASIGNACION DE VARIABLES YA DECLARADAS (CAMBIO DE VALOR)
-ASIGNACION ::= IDS:_IDS flechita ETS:_E punto_y_coma
+ASIGNACION ::= IDS:_IDS flechita ETS:_E punto_y_coma{:listaenlazada p = new listaenlazada(); p.agrega(new nodo("IDS")); p.agrega(new nodo(listaenlazada.class.cast(_IDS))); p.agrega(new nodo("--FLECHITA-->"));p.agrega(new nodo("ETS"));p.agrega(new nodo(listaenlazada.class.cast(_E)));p.agrega(new nodo("PUNTO_Y_COMA"));RESULT = p;:}
 
     ;
-TIPODATO_DECLARACION  ::=  numero {: RESULT = new nodo("TIPO_NUMERO");:}
-                       | bulean{: RESULT = new nodo("TIPO_BOOLEAN");:}
-                       | cadena{: RESULT = new nodo("TIPO_STRING");:}
-                       | caracter{: RESULT = new nodo("TIPO_CHAR");:}
+TIPODATO_DECLARACION  ::=  numero {:listaenlazada p = new listaenlazada(); p.agrega( new nodo("TIPO_NUMERO")); RESULT = p;:}
+                       | bulean{: listaenlazada p = new listaenlazada(); p.agrega( new nodo("TIPO_BOOLEAN")); RESULT = p;:}
+                       | cadena{:listaenlazada p = new listaenlazada(); p.agrega( new nodo("TIPO_STRING")); RESULT = p;:}
+                       | caracter{: listaenlazada p = new listaenlazada(); p.agrega( new nodo("TIPO_CHAR")); RESULT = p;:}
                        ;
 
-DECLARACION ::= ingresar IDS:_IDS  como  TIPODATO_DECLARACION con_valor ETS:_E punto_y_coma
+DECLARACION ::= ingresar IDS:_IDS  como  TIPODATO_DECLARACION:_TD con_valor ETS:_E punto_y_coma{:listaenlazada p = new listaenlazada(); p.agrega(new nodo("INGRESAR"));p.agrega(new nodo("IDS")); p.agrega(new nodo(listaenlazada.class.cast(_IDS))); p.agrega(new nodo("COMO"));p.agrega(new nodo("TIPO_DATO_DECLARACION"));p.agrega(new nodo(listaenlazada.class.cast(_TD)));p.agrega(new nodo("CON_VALOR"));p.agrega(new nodo("ETS"));p.agrega(new nodo(listaenlazada.class.cast(_E)));p.agrega(new nodo("PUNTO_Y_COMA"));RESULT = p;:}
             ;
 
 ETS ::= COMPARACIONES:_E {:listaenlazada p = new listaenlazada(); p.agrega(new nodo("COMPARACIONES")); p.agrega(new nodo(listaenlazada.class.cast(_E)));RESULT = p; :}
         | E:_E {:listaenlazada p = new listaenlazada(); p.agrega(new nodo("E")); p.agrega(new nodo(listaenlazada.class.cast(_E))); RESULT = p;:}
         | INSTRUCCION:_E{:listaenlazada p = new listaenlazada(); p.agrega(new nodo("BLOQUE_INSTRUCCCION")); p.agrega(new nodo(listaenlazada.class.cast(_E))); RESULT = p;:}
 ;
-IDS ::= IDS:_IDS coma E:_E {:listaenlazada p = listaenlazada.class.cast(_IDS); p.agrega(new nodo("COMA")); p.concatena(listaenlazada.class.cast(_E));  RESULT = p;RESULT = p;:}
-    | E:_E {:listaenlazada p = listaenlazada.class.cast(_E); RESULT = p;RESULT = p;:}
+IDS ::= IDS:_IDS coma E:_E {:listaenlazada p = listaenlazada.class.cast(_IDS); p.agrega(new nodo("COMA"));p.agrega(new nodo("E")); p.agrega(new nodo(listaenlazada.class.cast(_E)));  RESULT = p;RESULT = p;:}
+    | E:_E {:listaenlazada p =new listaenlazada();p.agrega(new nodo("E")); p.agrega(new nodo(listaenlazada.class.cast(_E))); RESULT = p;RESULT = p;:}
     ;
 VARIABLE ::= variable:_variable
 ;
