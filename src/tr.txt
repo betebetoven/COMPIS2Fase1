@@ -1,5 +1,13 @@
 inicio
-ingresar _a_ como cadena con_valor "hola mundo";
-imprimir(_a_);
-imprimir_nl("____BASE_____");
+metodo  _alberto_ con_parametros (numero  _a_)
+imprimir("hola mundo");
+imprimir( _a_ );
+fin_metodo
+funcion  _j_  cadena con_parametros( numero _c_)
+imprimir("hola mundo");
+imprimir(_c_);
+retornar("mama me ama");
+fin_funcion
+ejecutar _alberto_(200000);
+imprimir_nl(ejecutar _j_(50000););
 final

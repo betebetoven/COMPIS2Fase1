@@ -1572,13 +1572,16 @@ int columna = eright+1;
 		int _Eleft = ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-5)).left;
 		int _Eright = ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-5)).right;
 		Object _E = (Object)((java_cup.runtime.Symbol) CUP$as_go$stack.elementAt(CUP$as_go$top-5)).value;
+		int _TDleft = ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-4)).left;
+		int _TDright = ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-4)).right;
+		Object _TD = (Object)((java_cup.runtime.Symbol) CUP$as_go$stack.elementAt(CUP$as_go$top-4)).value;
 		int _Cleft = ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-2)).left;
 		int _Cright = ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-2)).right;
 		Object _C = (Object)((java_cup.runtime.Symbol) CUP$as_go$stack.elementAt(CUP$as_go$top-2)).value;
 		int _INSleft = ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-1)).left;
 		int _INSright = ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-1)).right;
 		Object _INS = (Object)((java_cup.runtime.Symbol) CUP$as_go$stack.elementAt(CUP$as_go$top-1)).value;
-		ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "def "+_E.toString()+"("+_C.toString()+"):";cond.add(ifins);cond.add(ins); RESULT = cond;
+		ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String cie = "}";String ifins = "func "+_E.toString()+"("+_C.toString()+") "+_TD.toString()+ "{";cond.add(ifins);cond.add(ins);cond.add(cie); RESULT = cond;
               CUP$as_go$result = parser.getSymbolFactory().newSymbol("FUNCION",17, ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-6)), ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()), RESULT);
             }
           return CUP$as_go$result;
@@ -1596,7 +1599,7 @@ int columna = eright+1;
 		int _INSleft = ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-1)).left;
 		int _INSright = ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-1)).right;
 		Object _INS = (Object)((java_cup.runtime.Symbol) CUP$as_go$stack.elementAt(CUP$as_go$top-1)).value;
-		ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "def "+_E.toString()+"("+_C.toString()+"):";cond.add(ifins);cond.add(ins); RESULT = cond;
+		ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String cie = "}";String ifins = "func "+_E.toString()+"("+_C.toString()+"){";cond.add(ifins);cond.add(ins);cond.add(cie); RESULT = cond;
               CUP$as_go$result = parser.getSymbolFactory().newSymbol("METODO",16, ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-5)), ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()), RESULT);
             }
           return CUP$as_go$result;
@@ -1655,10 +1658,13 @@ int columna = eright+1;
           case 47: // PAR ::= TIPODATO_DECLARACION E 
             {
               Object RESULT =null;
+		int _Xleft = ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-1)).left;
+		int _Xright = ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-1)).right;
+		Object _X = (Object)((java_cup.runtime.Symbol) CUP$as_go$stack.elementAt(CUP$as_go$top-1)).value;
 		int _Eleft = ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()).left;
 		int _Eright = ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()).right;
 		Object _E = (Object)((java_cup.runtime.Symbol) CUP$as_go$stack.peek()).value;
-		String Fe = _E.toString(); RESULT = Fe;
+		String Fe = _E.toString()+" "+_X.toString(); RESULT = Fe;
               CUP$as_go$result = parser.getSymbolFactory().newSymbol("PAR",30, ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-1)), ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()), RESULT);
             }
           return CUP$as_go$result;
@@ -1720,10 +1726,13 @@ int columna = eright+1;
 		int _Eleft = ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-5)).left;
 		int _Eright = ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-5)).right;
 		Object _E = (Object)((java_cup.runtime.Symbol) CUP$as_go$stack.elementAt(CUP$as_go$top-5)).value;
+		int _TDleft = ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-4)).left;
+		int _TDright = ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-4)).right;
+		Object _TD = (Object)((java_cup.runtime.Symbol) CUP$as_go$stack.elementAt(CUP$as_go$top-4)).value;
 		int _INSleft = ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-1)).left;
 		int _INSright = ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-1)).right;
 		Object _INS = (Object)((java_cup.runtime.Symbol) CUP$as_go$stack.elementAt(CUP$as_go$top-1)).value;
-		ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "def "+_E.toString()+"():";cond.add(ifins);cond.add(ins); RESULT = cond;
+		ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String cie = "}";String ifins = "func "+_E.toString()+"() "+_TD.toString()+ "{";cond.add(ifins);cond.add(ins);cond.add(cie); RESULT = cond;
               CUP$as_go$result = parser.getSymbolFactory().newSymbol("FUNCIONsp",19, ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-6)), ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()), RESULT);
             }
           return CUP$as_go$result;
@@ -1738,7 +1747,7 @@ int columna = eright+1;
 		int _INSleft = ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-1)).left;
 		int _INSright = ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-1)).right;
 		Object _INS = (Object)((java_cup.runtime.Symbol) CUP$as_go$stack.elementAt(CUP$as_go$top-1)).value;
-		ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "def "+_E.toString()+"():";cond.add(ifins);cond.add(ins); RESULT = cond;
+		ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String cie = "}";String ifins = "func "+_E.toString()+"(){";cond.add(ifins);cond.add(ins);cond.add(cie); RESULT = cond;
               CUP$as_go$result = parser.getSymbolFactory().newSymbol("METODOsp",18, ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-5)), ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()), RESULT);
             }
           return CUP$as_go$result;
@@ -1882,7 +1891,7 @@ int columna = eright+1;
 		int _Eleft = ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()).left;
 		int _Eright = ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()).right;
 		Object _E = (Object)((java_cup.runtime.Symbol) CUP$as_go$stack.peek()).value;
-		String FV = "char"; RESULT = FV;
+		String FV = "string"; RESULT = FV;
               CUP$as_go$result = parser.getSymbolFactory().newSymbol("TIPODATO_DECLARACION",27, ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()), ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()), RESULT);
             }
           return CUP$as_go$result;
@@ -1996,7 +2005,7 @@ String FIM = instruccion; RESULT = FIM;
 		int _Eleft = ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-1)).left;
 		int _Eright = ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-1)).right;
 		Object _E = (Object)((java_cup.runtime.Symbol) CUP$as_go$stack.elementAt(CUP$as_go$top-1)).value;
-		String FE ="not("+ _E.toString()+ ")"; RESULT = FE;
+		String FE ="!("+ _E.toString()+ ")"; RESULT = FE;
               CUP$as_go$result = parser.getSymbolFactory().newSymbol("COMPARACIONES",26, ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-3)), ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()), RESULT);
             }
           return CUP$as_go$result;
@@ -2011,7 +2020,7 @@ String FIM = instruccion; RESULT = FIM;
 		int _Fleft = ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()).left;
 		int _Fright = ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()).right;
 		Object _F = (Object)((java_cup.runtime.Symbol) CUP$as_go$stack.peek()).value;
-		String FE = _E.toString()+ "and"+_F.toString(); RESULT = FE;
+		String FE = _E.toString()+ "&&"+_F.toString(); RESULT = FE;
               CUP$as_go$result = parser.getSymbolFactory().newSymbol("COMPARACIONES",26, ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-2)), ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()), RESULT);
             }
           return CUP$as_go$result;
@@ -2026,7 +2035,7 @@ String FIM = instruccion; RESULT = FIM;
 		int _Fleft = ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()).left;
 		int _Fright = ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()).right;
 		Object _F = (Object)((java_cup.runtime.Symbol) CUP$as_go$stack.peek()).value;
-		String FE = _E.toString()+ "or"+_F.toString(); RESULT = FE;
+		String FE = _E.toString()+ "||"+_F.toString(); RESULT = FE;
               CUP$as_go$result = parser.getSymbolFactory().newSymbol("COMPARACIONES",26, ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-2)), ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()), RESULT);
             }
           return CUP$as_go$result;

@@ -149,9 +149,9 @@ IFANIDADOS ::= IFANIDADOS:_INFANIDADOS  o_si abre_parentesis ETS:_C cierra_paren
 
 
 //FUNCIONES Y METODOS CON PARAMETROS
-FUNCION::= funcion E:_E TIPODATO_DECLARACION  con_parametros PARAMETROS:_C INSTRUCCIONES:_INS fin_funcion{:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "def "+_E.toString()+"("+_C.toString()+"):";cond.add(ifins);cond.add(ins); RESULT = cond;:}
+FUNCION::= funcion E:_E TIPODATO_DECLARACION:_TD  con_parametros PARAMETROS:_C INSTRUCCIONES:_INS fin_funcion{:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String cie = "}";String ifins = "func "+_E.toString()+"("+_C.toString()+") "+_TD.toString()+ "{";cond.add(ifins);cond.add(ins);cond.add(cie); RESULT = cond;:}
 ;
-METODO ::= metodo E:_E con_parametros PARAMETROS:_C INSTRUCCIONES:_INS fin_metodo {:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "def "+_E.toString()+"("+_C.toString()+"):";cond.add(ifins);cond.add(ins); RESULT = cond;:}
+METODO ::= metodo E:_E con_parametros PARAMETROS:_C INSTRUCCIONES:_INS fin_metodo {:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String cie = "}";String ifins = "func "+_E.toString()+"("+_C.toString()+"){";cond.add(ifins);cond.add(ins);cond.add(cie); RESULT = cond;:}
 ;
 PARAMETROS ::= abre_parentesis PARS:_IDS cierra_parentesis{:
                                                         String instruccion="";
@@ -169,7 +169,7 @@ PARAMETROS ::= abre_parentesis PARS:_IDS cierra_parentesis{:
 PARS ::= PARS:_IDS coma PAR:_E {:ArrayList<Object> ides = ArrayList.class.cast(_IDS); ides.add(_E.toString());RESULT = ides;:}
      | PAR:_E {: ArrayList<Object> ides = new ArrayList<>(); ides.add(_E.toString());RESULT = ides;:}
 ;
-PAR ::= TIPODATO_DECLARACION E:_E {:String Fe = _E.toString(); RESULT = Fe;:}
+PAR ::= TIPODATO_DECLARACION:_X E:_E {:String Fe = _E.toString()+" "+_X.toString(); RESULT = Fe;:}
 ;
 PARAMETROSLL ::= abre_parentesis PARSLL:_IDS cierra_parentesis {:
                                                               String instruccion="";
@@ -190,9 +190,9 @@ PARSLL ::= PARSLL:_IDS coma E:_E {:ArrayList<Object> ides = ArrayList.class.cast
 
 //sin parametros
 
-FUNCIONsp::= funcion E:_E TIPODATO_DECLARACION  abre_parentesis cierra_parentesis INSTRUCCIONES:_INS fin_funcion {:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "def "+_E.toString()+"():";cond.add(ifins);cond.add(ins); RESULT = cond;:}
+FUNCIONsp::= funcion E:_E TIPODATO_DECLARACION:_TD  abre_parentesis cierra_parentesis INSTRUCCIONES:_INS fin_funcion {:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String cie = "}";String ifins = "func "+_E.toString()+"() "+_TD.toString()+ "{";cond.add(ifins);cond.add(ins);cond.add(cie); RESULT = cond;:}
 ;
-METODOsp ::= metodo E:_E abre_parentesis cierra_parentesis INSTRUCCIONES:_INS fin_metodo{:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "def "+_E.toString()+"():";cond.add(ifins);cond.add(ins); RESULT = cond;:}
+METODOsp ::= metodo E:_E abre_parentesis cierra_parentesis INSTRUCCIONES:_INS fin_metodo{:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String cie = "}";String ifins = "func "+_E.toString()+"(){";cond.add(ifins);cond.add(ins);cond.add(cie); RESULT = cond;:}
 ;
 //EL RETURN
 
@@ -247,7 +247,7 @@ ASIGNACION ::= IDS:_IDS flechita ETS:_E punto_y_coma{:
 TIPODATO_DECLARACION  ::=  numero:_E{:String FV = "int"; RESULT = FV;:}
                        | bulean:_E{:String FV = "bool"; RESULT = FV;:}
                        | cadena:_E{:String FV = "string"; RESULT = FV;:}
-                       | caracter:_E{:String FV = "char"; RESULT = FV;:}
+                       | caracter:_E{:String FV = "string"; RESULT = FV;:}
                        ;
 
 DECLARACION ::= ingresar IDS:_IDS  como  TIPODATO_DECLARACION:_TD con_valor ETS:_E punto_y_coma {:
@@ -271,9 +271,9 @@ IDS ::= IDS:_IDS coma E:_E {:ArrayList<Object> ides = ArrayList.class.cast(_IDS)
     ;
 VARIABLE ::= variable:_variable{:String r = _variable.toString(); RESULT = r;:}
 ;
-COMPARACIONES::= not abre_parentesis COMPARACIONES:_E cierra_parentesis {:String FE ="not("+ _E.toString()+ ")"; RESULT = FE;:}
-            |  COMPARACIONES:_E and COMP:_F {:String FE = _E.toString()+ "and"+_F.toString(); RESULT = FE;:}
-            |  COMPARACIONES:_E or COMP:_F {:String FE = _E.toString()+ "or"+_F.toString(); RESULT = FE;:}
+COMPARACIONES::= not abre_parentesis COMPARACIONES:_E cierra_parentesis {:String FE ="!("+ _E.toString()+ ")"; RESULT = FE;:}
+            |  COMPARACIONES:_E and COMP:_F {:String FE = _E.toString()+ "&&"+_F.toString(); RESULT = FE;:}
+            |  COMPARACIONES:_E or COMP:_F {:String FE = _E.toString()+ "||"+_F.toString(); RESULT = FE;:}
             |   COMP:_E {:String FE = _E.toString(); RESULT = FE;:}
 ;
 COMP::=  E:_E menor E:_F {:String FE = _E.toString()+ "<"+_F.toString(); RESULT = FE;:}
