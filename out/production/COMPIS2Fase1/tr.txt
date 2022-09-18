@@ -2,4 +2,8 @@ inicio
 para _a_ -> 0 hasta 10 hacer
 imprimir("hola mundo");
 fin_para
+
+para _a_ -> 0 hasta 100 con_incremental (2*5) hacer
+imprimir("hola mundo");
+fin_para
 final

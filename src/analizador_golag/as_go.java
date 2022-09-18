@@ -1407,7 +1407,7 @@ int columna = eright+1;
 		int _Cleft = ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-2)).left;
 		int _Cright = ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-2)).right;
 		Object _C = (Object)((java_cup.runtime.Symbol) CUP$as_go$stack.elementAt(CUP$as_go$top-2)).value;
-		ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "while(True):";cond.add(ifins);cond.add(ins);String fifi = "     if ("+_C.toString()+"):";String brek= "          break";cond.add(fifi);cond.add(brek); RESULT = cond;
+		ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "for{";cond.add(ifins);cond.add(ins);String fifi = "     if ("+_C.toString()+"){";String brek= "          break}";cond.add(fifi);cond.add(brek);String cie = "}"; cond.add(cie); RESULT = cond;
               CUP$as_go$result = parser.getSymbolFactory().newSymbol("CICLO",21, ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-6)), ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()), RESULT);
             }
           return CUP$as_go$result;
