@@ -116,9 +116,9 @@ fin::= punto_y_coma|fin_segun|fin_funcion|fin_metodo|fin_mientras|fin_para|fin_s
 ;
 
 //INSTRUCCIONES CICLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOS
-CICLO::= para  E:_A flechita E:_B hasta E:_C hacer INSTRUCCIONES:_INS fin_para {:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "for "+_A.toString()+" in range("+_B.toString()+","+_C.toString()+"):";cond.add(ifins);cond.add(ins); RESULT = cond;:}
-    | para  E:_A flechita E:_B hasta E:_C con_incremental ETS:_D hacer INSTRUCCIONES:_INS fin_para {:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "for "+_A.toString()+" in range("+_B.toString()+","+_C.toString()+","+_D+"):";cond.add(ifins);cond.add(ins); RESULT = cond;:}
-    | mientras abre_parentesis ETS:_C cierra_parentesis hacer INSTRUCCIONES:_INS fin_mientras {:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "while( "+_C.toString()+"):";cond.add(ifins);cond.add(ins); RESULT = cond;:}
+CICLO::= para  E:_A flechita E:_B hasta E:_C hacer INSTRUCCIONES:_INS fin_para {:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "for "+_A.toString()+" := "+_B.toString()+"; "+_A.toString()+" < "+_C.toString()+" ; "+_A.toString()+"++ {";cond.add(ifins);cond.add(ins);String cie = "}"; cond.add(cie); RESULT = cond;:}
+    | para  E:_A flechita E:_B hasta E:_C con_incremental ETS:_D hacer INSTRUCCIONES:_INS fin_para {:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "for "+_A.toString()+" := "+_B.toString()+"; "+_A.toString()+" < "+_C.toString()+" ; "+_A.toString()+"="+_A.toString()+"+("+_D.toString()+") {";cond.add(ifins);cond.add(ins);String cie = "}"; cond.add(cie); RESULT = cond;:}
+    | mientras abre_parentesis ETS:_C cierra_parentesis hacer INSTRUCCIONES:_INS fin_mientras {:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "for( "+_C.toString()+"){";cond.add(ifins);cond.add(ins);String cie = "}";cond.add(cie); RESULT = cond;:}
     | repetir INSTRUCCIONES:_INS hasta_que abre_parentesis ETS:_C cierra_parentesis punto_y_coma {:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "while(True):";cond.add(ifins);cond.add(ins);String fifi = "     if ("+_C.toString()+"):";String brek= "          break";cond.add(fifi);cond.add(brek); RESULT = cond;:}
     ;
 
@@ -231,18 +231,13 @@ ASIGNACION ::= IDS:_IDS flechita ETS:_E punto_y_coma{:
     ArrayList<Object> ides = ArrayList.class.cast(_IDS);
     for (Object c: ides )
     {
-        instruccion+= c.toString()+"=";
+        instruccion+= "\n"+c.toString()+" = "+_E.toString();
         System.out.println(instruccion);
     }
 
-    String FIM = instruccion+_E.toString(); RESULT = FIM;:}
+    String FIM = instruccion; RESULT = FIM;:}
 
     ;
-
-//DECLARACION DE VARIABLES NO DECLARADAS SINGULAR O EN CONJUNTO, FINALES O NO FINALES, INCLUYE EXPRESIONES
-
-
-
 
 TIPODATO_DECLARACION  ::=  numero:_E{:String FV = "int"; RESULT = FV;:}
                        | bulean:_E{:String FV = "bool"; RESULT = FV;:}

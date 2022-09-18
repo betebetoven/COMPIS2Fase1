@@ -1,11 +1,5 @@
 inicio
-ingresar _varB_ como Boolean con_valor falso;
-
-si (_varB_) entonces
-	imprimir_nl ("Estas definiendo bien los valores");
-
-o_si (not(  _varB_ es_igual  falso))  entonces
-	imprimir("No estas definiendo bien los valores");
-de_lo_contrario imprimir("sale poraca");
-fin_si
+para _a_ -> 0 hasta 10 hacer
+imprimir("hola mundo");
+fin_para
 final

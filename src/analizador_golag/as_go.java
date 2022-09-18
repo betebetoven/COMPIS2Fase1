@@ -1353,7 +1353,7 @@ int columna = eright+1;
 		int _INSleft = ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-1)).left;
 		int _INSright = ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-1)).right;
 		Object _INS = (Object)((java_cup.runtime.Symbol) CUP$as_go$stack.elementAt(CUP$as_go$top-1)).value;
-		ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "for "+_A.toString()+" in range("+_B.toString()+","+_C.toString()+"):";cond.add(ifins);cond.add(ins); RESULT = cond;
+		ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "for "+_A.toString()+" := "+_B.toString()+"; "+_A.toString()+" < "+_C.toString()+" ; "+_A.toString()+"++ {";cond.add(ifins);cond.add(ins);String cie = "}"; cond.add(cie); RESULT = cond;
               CUP$as_go$result = parser.getSymbolFactory().newSymbol("CICLO",21, ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-8)), ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()), RESULT);
             }
           return CUP$as_go$result;
@@ -1377,7 +1377,7 @@ int columna = eright+1;
 		int _INSleft = ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-1)).left;
 		int _INSright = ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-1)).right;
 		Object _INS = (Object)((java_cup.runtime.Symbol) CUP$as_go$stack.elementAt(CUP$as_go$top-1)).value;
-		ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "for "+_A.toString()+" in range("+_B.toString()+","+_C.toString()+","+_D+"):";cond.add(ifins);cond.add(ins); RESULT = cond;
+		ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "for "+_A.toString()+" := "+_B.toString()+"; "+_A.toString()+" < "+_C.toString()+" ; "+_A.toString()+"="+_A.toString()+"+("+_D.toString()+") {";cond.add(ifins);cond.add(ins);String cie = "}"; cond.add(cie); RESULT = cond;
               CUP$as_go$result = parser.getSymbolFactory().newSymbol("CICLO",21, ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-10)), ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()), RESULT);
             }
           return CUP$as_go$result;
@@ -1392,7 +1392,7 @@ int columna = eright+1;
 		int _INSleft = ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-1)).left;
 		int _INSright = ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-1)).right;
 		Object _INS = (Object)((java_cup.runtime.Symbol) CUP$as_go$stack.elementAt(CUP$as_go$top-1)).value;
-		ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "while( "+_C.toString()+"):";cond.add(ifins);cond.add(ins); RESULT = cond;
+		ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "for( "+_C.toString()+"){";cond.add(ifins);cond.add(ins);String cie = "}";cond.add(cie); RESULT = cond;
               CUP$as_go$result = parser.getSymbolFactory().newSymbol("CICLO",21, ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-6)), ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()), RESULT);
             }
           return CUP$as_go$result;
@@ -1839,11 +1839,11 @@ int columna = eright+1;
     ArrayList<Object> ides = ArrayList.class.cast(_IDS);
     for (Object c: ides )
     {
-        instruccion+= c.toString()+"=";
+        instruccion+= "\n"+c.toString()+" = "+_E.toString();
         System.out.println(instruccion);
     }
 
-    String FIM = instruccion+_E.toString(); RESULT = FIM;
+    String FIM = instruccion; RESULT = FIM;
               CUP$as_go$result = parser.getSymbolFactory().newSymbol("ASIGNACION",15, ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-3)), ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()), RESULT);
             }
           return CUP$as_go$result;
