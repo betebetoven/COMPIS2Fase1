@@ -134,13 +134,13 @@ OPCION ::= abre_pregunta  ETS:_E cierra_pregunta entonces INSTRUCCIONES:_INS {:A
 
 
 //CONDICION IF
-CONDICIONIF::= si abre_parentesis ETS:_C cierra_parentesis entonces INSTRUCCIONES:_INS fin_si {:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "if("+_C.toString()+"):";cond.add(ifins);cond.add(ins); RESULT = cond;:}
-                | si abre_parentesis ETS:_C cierra_parentesis entonces INSTRUCCIONES:_INS IFANIDADOS:_INFANIDADOS fin_si {:ArrayList<Object> condan= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "if("+_C.toString()+"):";condan.add(ifins);condan.add(ins); condan.addAll(ArrayList.class.cast(_INFANIDADOS));RESULT = condan;:}
+CONDICIONIF::= si abre_parentesis ETS:_C cierra_parentesis entonces INSTRUCCIONES:_INS fin_si {:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String cie = "}";String ifins = "if("+_C.toString()+"){";cond.add(ifins);cond.add(ins);cond.add(cie); RESULT = cond;:}
+                | si abre_parentesis ETS:_C cierra_parentesis entonces INSTRUCCIONES:_INS IFANIDADOS:_INFANIDADOS fin_si {:ArrayList<Object> condan= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String cie = "}";String ifins = "if("+_C.toString()+"){";condan.add(ifins);condan.add(ins);condan.add(cie); condan.addAll(ArrayList.class.cast(_INFANIDADOS));RESULT = condan;:}
 ;
-IFANIDADOS ::= IFANIDADOS:_INFANIDADOS  o_si abre_parentesis ETS:_C cierra_parentesis entonces INSTRUCCIONES:_INS {:ArrayList<Object> condan= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);condan.addAll(ArrayList.class.cast(_INFANIDADOS));String ifins = "elif("+_C.toString()+"):";condan.add(ifins);condan.add(ins); RESULT = condan;:}
-                | IFANIDADOS:_INFANIDADOS  de_lo_contrario INSTRUCCIONES:_INS {:ArrayList<Object> condan= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);condan.addAll(ArrayList.class.cast(_INFANIDADOS));String ifins = "else:";condan.add(ifins);condan.add(ins); RESULT = condan;:}
-                |  o_si abre_parentesis ETS:_C cierra_parentesis entonces INSTRUCCIONES:_INS {:ArrayList<Object> conelse= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "elif("+_C.toString()+"):";conelse.add(ifins);conelse.add(ins); RESULT = conelse;:}
-                | de_lo_contrario INSTRUCCIONES:_INS {:ArrayList<Object> contr= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "else:";contr.add(ifins);contr.add(ins); RESULT = contr;:}
+IFANIDADOS ::= IFANIDADOS:_INFANIDADOS  o_si abre_parentesis ETS:_C cierra_parentesis entonces INSTRUCCIONES:_INS {:ArrayList<Object> condan= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);condan.addAll(ArrayList.class.cast(_INFANIDADOS));String cie = "}";String ifins = "else if("+_C.toString()+"){";condan.add(ifins);condan.add(ins);condan.add(cie); RESULT = condan;:}
+                | IFANIDADOS:_INFANIDADOS  de_lo_contrario INSTRUCCIONES:_INS {:ArrayList<Object> condan= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);condan.addAll(ArrayList.class.cast(_INFANIDADOS));String cie = "}";String ifins = "else{";condan.add(ifins);condan.add(ins);condan.add(cie); RESULT = condan;:}
+                |  o_si abre_parentesis ETS:_C cierra_parentesis entonces INSTRUCCIONES:_INS {:ArrayList<Object> conelse= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String cie = "}";String ifins = "else if("+_C.toString()+"){";conelse.add(ifins);conelse.add(ins);conelse.add(cie); RESULT = conelse;:}
+                | de_lo_contrario INSTRUCCIONES:_INS {:ArrayList<Object> contr= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String cie = "}";String ifins = "else{";contr.add(ifins);contr.add(ins);contr.add(cie); RESULT = contr;:}
 ;
 
 
@@ -302,8 +302,8 @@ Factor::= abre_parentesis E:_E cierra_parentesis  {:String FE ="(" +_E.toString(
 
 
 F::= number:_number                      {:String FVR = _number.toString(); RESULT = FVR;:}
-    |verdadero:_verdadero       {:String FVR = "True"; RESULT = FVR;:}
-    |falso:_falso           {:String FFS = "False"; RESULT = FFS;:}
+    |verdadero:_verdadero       {:String FVR = "true"; RESULT = FVR;:}
+    |falso:_falso           {:String FFS = "false"; RESULT = FFS;:}
     |frase:_frase           {:String FFR = _frase.toString(); RESULT = FFR;:}
     |frasecita:_frasecita {:String FF = _frasecita.toString(); RESULT = FF;:}
     | VARIABLE:_VARIABLE {:String FV = _VARIABLE.toString(); RESULT = FV;:}
