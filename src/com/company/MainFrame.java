@@ -52,7 +52,7 @@ public class MainFrame extends JFrame {
         String salida = "\n" +
                 "package main\n" +
                 "\n" +
-                "import \"fmt\"\n" +
+                "import( \"fmt\"\n \"math\")"+
                 "\n" +
                 "func main() { \n";
         try {

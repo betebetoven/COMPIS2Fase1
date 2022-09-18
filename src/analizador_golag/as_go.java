@@ -1855,7 +1855,7 @@ int columna = eright+1;
 		int _Eleft = ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()).left;
 		int _Eright = ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()).right;
 		Object _E = (Object)((java_cup.runtime.Symbol) CUP$as_go$stack.peek()).value;
-		String FV = "int"; RESULT = FV;
+		String FV = "float64"; RESULT = FV;
               CUP$as_go$result = parser.getSymbolFactory().newSymbol("TIPODATO_DECLARACION",27, ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()), ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()), RESULT);
             }
           return CUP$as_go$result;
@@ -2251,7 +2251,7 @@ String FIM = instruccion; RESULT = FIM;
 		int _Fleft = ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-1)).left;
 		int _Fright = ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-1)).right;
 		Object _F = (Object)((java_cup.runtime.Symbol) CUP$as_go$stack.elementAt(CUP$as_go$top-1)).value;
-		String FE = _E.toString()+ "**("+_F.toString()+")"; RESULT = FE;
+		String FE =  "math.Pow("+_E.toString()+","+_F.toString()+")"; RESULT = FE;
               CUP$as_go$result = parser.getSymbolFactory().newSymbol("Term",1, ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-4)), ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()), RESULT);
             }
           return CUP$as_go$result;
@@ -2347,7 +2347,7 @@ String FIM = instruccion; RESULT = FIM;
 		int _frasecitaleft = ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()).left;
 		int _frasecitaright = ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()).right;
 		Object _frasecita = (Object)((java_cup.runtime.Symbol) CUP$as_go$stack.peek()).value;
-		String FF = _frasecita.toString(); RESULT = FF;
+		String FF = _frasecita.toString();String[]jot = FF.split("'");String sale = "\""+jot[1]+"\""; RESULT = sale;
               CUP$as_go$result = parser.getSymbolFactory().newSymbol("F",35, ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()), ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()), RESULT);
             }
           return CUP$as_go$result;

@@ -239,7 +239,7 @@ ASIGNACION ::= IDS:_IDS flechita ETS:_E punto_y_coma{:
 
     ;
 
-TIPODATO_DECLARACION  ::=  numero:_E{:String FV = "int"; RESULT = FV;:}
+TIPODATO_DECLARACION  ::=  numero:_E{:String FV = "float64"; RESULT = FV;:}
                        | bulean:_E{:String FV = "bool"; RESULT = FV;:}
                        | cadena:_E{:String FV = "string"; RESULT = FV;:}
                        | caracter:_E{:String FV = "string"; RESULT = FV;:}
@@ -287,7 +287,7 @@ E::=E:_E mas Term:_F {:String FE = _E.toString()+ "+"+_F.toString(); RESULT = FE
 Term::=Term:_E por Factor:_F {:String FE = _E.toString()+ "*"+_F.toString(); RESULT = FE;:}
 |Term:_E dividido Factor:_F {:String FE = _E.toString()+ "/"+_F.toString(); RESULT = FE;:}
 | Term:_E mod Factor:_F  {:String FE = _E.toString()+ "%"+_F.toString(); RESULT = FE;:}
-|  Term:_E potencia abre_corchete E:_F cierra_corchete {:String FE = _E.toString()+ "**("+_F.toString()+")"; RESULT = FE;:}
+|  Term:_E potencia abre_corchete E:_F cierra_corchete {:String FE =  "math.Pow("+_E.toString()+","+_F.toString()+")"; RESULT = FE;:}
 |Factor:_F {:String FE = _F.toString(); RESULT = FE;:}
 ;
 Factor::= abre_parentesis E:_E cierra_parentesis  {:String FE ="(" +_E.toString()+")"; RESULT = FE;:}
@@ -300,7 +300,7 @@ F::= number:_number                      {:String FVR = _number.toString(); RESU
     |verdadero:_verdadero       {:String FVR = "true"; RESULT = FVR;:}
     |falso:_falso           {:String FFS = "false"; RESULT = FFS;:}
     |frase:_frase           {:String FFR = _frase.toString(); RESULT = FFR;:}
-    |frasecita:_frasecita {:String FF = _frasecita.toString(); RESULT = FF;:}
+    |frasecita:_frasecita {:String FF = _frasecita.toString();String[]jot = FF.split("'");String sale = "\""+jot[1]+"\""; RESULT = sale;:}
     | VARIABLE:_VARIABLE {:String FV = _VARIABLE.toString(); RESULT = FV;:}
 ;
 // INSSTRUCCION FOR
