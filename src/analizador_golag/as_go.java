@@ -1425,7 +1425,7 @@ int columna = eright+1;
 		int _INSleft = ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-1)).left;
 		int _INSright = ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-1)).right;
 		Object _INS = (Object)((java_cup.runtime.Symbol) CUP$as_go$stack.elementAt(CUP$as_go$top-1)).value;
-		ArrayList<Object> condan= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String primer = "k2 = "+_E.toString();condan.add(primer); condan.addAll(ArrayList.class.cast(_OPS));String elsa = "else:";condan.add(elsa); condan.add(ins);;RESULT = condan;
+		ArrayList<Object> condan= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String primer = "switch "+_E.toString()+" {";condan.add(primer); condan.addAll(ArrayList.class.cast(_OPS));String elsa = "default: ";condan.add(elsa); condan.add(ins);String cie = "}";condan.add(cie);RESULT = condan;
               CUP$as_go$result = parser.getSymbolFactory().newSymbol("SWITCH",9, ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-7)), ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()), RESULT);
             }
           return CUP$as_go$result;
@@ -1440,7 +1440,7 @@ int columna = eright+1;
 		int _OPleft = ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()).left;
 		int _OPright = ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()).right;
 		Object _OP = (Object)((java_cup.runtime.Symbol) CUP$as_go$stack.peek()).value;
-		ArrayList<Object> condan= ArrayList.class.cast(_OPS); ArrayList<Object> ins = ArrayList.class.cast(_OP);String ifins = "elif( k2 =="+ins.get(0).toString()+"):";condan.add(ifins);condan.add(ArrayList.class.cast(ins.get(1))); RESULT = condan;
+		ArrayList<Object> condan= ArrayList.class.cast(_OPS); ArrayList<Object> ins = ArrayList.class.cast(_OP);String ifins = "case "+ins.get(0).toString()+":";condan.add(ifins);condan.add(ArrayList.class.cast(ins.get(1))); RESULT = condan;
               CUP$as_go$result = parser.getSymbolFactory().newSymbol("OPCIONES",10, ((java_cup.runtime.Symbol)CUP$as_go$stack.elementAt(CUP$as_go$top-1)), ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()), RESULT);
             }
           return CUP$as_go$result;
@@ -1452,7 +1452,7 @@ int columna = eright+1;
 		int _OPleft = ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()).left;
 		int _OPright = ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()).right;
 		Object _OP = (Object)((java_cup.runtime.Symbol) CUP$as_go$stack.peek()).value;
-		ArrayList<Object> contr= new ArrayList<>();ArrayList<Object> ins = ArrayList.class.cast(_OP);String ifins = "if( k2 =="+ins.get(0).toString()+"):";contr.add(ifins);contr.add( ArrayList.class.cast(ins.get(1))); RESULT = contr;
+		ArrayList<Object> contr= new ArrayList<>();ArrayList<Object> ins = ArrayList.class.cast(_OP);String ifins = "case "+ins.get(0).toString()+":";contr.add(ifins);contr.add( ArrayList.class.cast(ins.get(1))); RESULT = contr;
               CUP$as_go$result = parser.getSymbolFactory().newSymbol("OPCIONES",10, ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()), ((java_cup.runtime.Symbol)CUP$as_go$stack.peek()), RESULT);
             }
           return CUP$as_go$result;
