@@ -1,21 +1,5 @@
 inicio
-para _hola_ -> _hola_ hasta _hola_  con_incremental
-20 hacer
-imprimir(20.5);
-fin_para
-
-_pepe_ ->  0;
-repetir
-imprimir("pepe" + _pepe_);
-_pepe_ -> _pepe_ + 1;
-hasta_que (_hola_  es_igual  25);
-
-mientras (_a_ + _b_ es_igual  _c_) hacer
-imprimir(20.5);
-fin_mientras
-
-metodo _alberto_ ()
-imprimir(20.5);
-retornar();
-fin_metodo
+ingresar _a_ como cadena con_valor "hola mundo";
+imprimir(_a_);
+imprimir_nl("____BASE_____");
 final

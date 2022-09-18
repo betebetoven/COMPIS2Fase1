@@ -1,0 +1,313 @@
+package analizador_golag;
+import java_cup.runtime.Symbol;
+import java.util.ArrayList;
+import java.util.List;
+import com.company.error;
+
+terminal inicio;
+    terminal finall;
+      terminal flechita;
+      terminal id   ;
+      terminal variable;
+    terminal guion  ;
+    terminal numero ;
+    terminal number ;
+    terminal cadena ;
+    terminal frase ;
+      terminal bulean ;
+      terminal verdadero ;
+      terminal falso    ;
+      terminal caracter ;
+      terminal frasecita ;
+      terminal mas   ;
+      terminal menos  ;
+      terminal por ;
+      terminal dividido ;
+      terminal abre_corchete  ;
+      terminal cierra_corchete   ;
+      terminal potencia    ;
+      terminal mod    ;
+      terminal abre_parentesis ;
+      terminal cierra_parentesis;
+      terminal mayor;
+      terminal menor;
+      terminal mayor_o_igual ;
+      terminal menor_o_igual ;
+      terminal es_igual ;
+      terminal es_diferente ;
+      terminal or     ;
+      terminal and ;
+      terminal not ;
+      terminal ingresar  ;
+      terminal como;
+      terminal con_valor;
+      terminal punto_y_coma;
+      terminal coma ;
+      terminal si ;
+      terminal o_si  ;
+      terminal abre_pregunta ;
+      terminal cierra_pregunta;
+      terminal de_lo_contrario;
+      terminal entonces;
+      terminal fin_segun ;
+      terminal fin_si;
+      terminal para;
+      terminal hasta ;
+      terminal fin_para;
+      terminal hacer;
+      terminal mientras ;
+      terminal fin_mientras ;
+      terminal repetir ;
+      terminal hasta_que;
+      terminal retornar;
+      terminal metodo ;
+      terminal fin_metodo ;
+      terminal con_parametros ;
+      terminal funcion ;
+      terminal fin_funcion ;
+      terminal ejecutar;
+      terminal imprimir  ;
+      terminal imprimir_nl  ;
+      terminal con_incremental;
+      terminal segun;
+
+non terminal INIT,Term, Factor,fin,ETS,PRETS, INSTRUCCIONES,OPCION,IFANIDADOS, SWITCH,OPCIONES, INSTRUCCION, DECLARACION ,IMPRIMIR, IMPRIMIRLN, ASIGNACION,METODO,FUNCION,METODOsp,FUNCIONsp,CONDICIONIF,CICLO,RETURN,CALL,E,COND_WHILE, COMPARACIONES,TIPODATO_DECLARACION,PARAMETROS,PARS,PAR,PARAMETROSLL,PARSLL,IDS,COMP,F,VARIABLE,BLOQUE_PRINCIPAL;
+start with INIT;
+INIT::= BLOQUE_PRINCIPAL:_X {:System.out.println("Fin de analisis de entrada");/*System.out.println(_X.toString());*/error.resultado_sintactico= _X.toString();RESULT = _X;:}
+
+ ;
+
+BLOQUE_PRINCIPAL ::= inicio INSTRUCCIONES:_INSTRUCCIONES finall {:/*System.out.println(_INSTRUCCIONES.toString());*/ error imprime = new error("lexema","tipo","descripcion",3,3);imprime.imprime(ArrayList.class.cast(_INSTRUCCIONES),0);RESULT = imprime.resultado;:}
+
+;
+
+INSTRUCCIONES ::=   INSTRUCCIONES:_Aray INSTRUCCION:_INSTRUCCION2 {:ArrayList<Object> instrucciones = ArrayList.class.cast(_Aray);if (_INSTRUCCION2.getClass() == ArrayList.class) instrucciones.addAll(ArrayList.class.cast(_INSTRUCCION2)); else  instrucciones.add(_INSTRUCCION2);RESULT = instrucciones;:}
+              |   INSTRUCCION:_INSTRUCCION {: ArrayList<Object> instrucciones = new ArrayList<>();if (_INSTRUCCION.getClass() == ArrayList.class) instrucciones.addAll(ArrayList.class.cast(_INSTRUCCION)); else instrucciones.add(_INSTRUCCION);RESULT = instrucciones;:}
+
+              ;
+
+
+INSTRUCCION ::= DECLARACION:_D    {:String Fimpr = _D.toString();System.out.println("ENCONTRO DECLARACION"); RESULT= Fimpr;:}
+            | IMPRIMIR:_IMPRIMIR      {:String Fimpr = _IMPRIMIR.toString(); System.out.println("encontro impresion linea simple"); RESULT= Fimpr; :}
+            | IMPRIMIRLN:_IMPRIMIRLN    {:String Fimpr = _IMPRIMIRLN.toString();System.out.println("encontro impresion multipe linea");RESULT= Fimpr;:}
+            | ASIGNACION:_D    {:String Fimpr = _D.toString();System.out.println("encontro ASIGNACION");RESULT= Fimpr;:}
+            | METODO:_INS      {:ArrayList<Object> ins = ArrayList.class.cast(_INS);System.out.println("encontro METODO");RESULT = ins;:}
+            | FUNCION:_INS       {:ArrayList<Object> ins = ArrayList.class.cast(_INS);System.out.println("encontro FUNCION");RESULT = ins;:}
+            | METODOsp:_INS        {:ArrayList<Object> ins = ArrayList.class.cast(_INS);System.out.println("encontro METODOSP");RESULT = ins;:}
+            | FUNCIONsp:_INS      {:ArrayList<Object> ins = ArrayList.class.cast(_INS);System.out.println("encontro FUNCIONSP");RESULT = ins;:}
+            | CONDICIONIF:_INS   {:ArrayList<Object> ins = ArrayList.class.cast(_INS);System.out.println("encontro CONDICION IF");RESULT = ins;:}
+            | CICLO:_INS        {:ArrayList<Object> ins = ArrayList.class.cast(_INS);System.out.println("encontro CICLO");RESULT = ins;:}
+            | RETURN:_C   {:String Fimpr = _C.toString();System.out.println("encontro RETURN");RESULT= Fimpr; :}
+            | CALL:_C      {:String Fimpr = _C.toString();System.out.println("encontro LLAMADA");RESULT= Fimpr;:}
+            | SWITCH:_INS    {:ArrayList<Object> ins = ArrayList.class.cast(_INS);System.out.println("encontro SWITCH");RESULT = ins;:}
+            | error:e  {:int columna = eright+1;
+             int fila = eleft +1;
+             String er = "\nLinea: "+fila+"\nColumna: "+columna;
+
+             /*for (Integer id : expected_token_ids() ) {
+                 System.out.println(id);
+             }*/
+
+
+             System.out.println("______ENCONTRO ERROR_________: "+er); System.out.println(e); :}
+             fin {:String c = "";RESULT = c;:}
+;
+fin::= punto_y_coma|fin_segun|fin_funcion|fin_metodo|fin_mientras|fin_para|fin_si|finall
+;
+
+//INSTRUCCIONES CICLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOS
+CICLO::= para  E:_A flechita E:_B hasta E:_C hacer INSTRUCCIONES:_INS fin_para {:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "for "+_A.toString()+" in range("+_B.toString()+","+_C.toString()+"):";cond.add(ifins);cond.add(ins); RESULT = cond;:}
+    | para  E:_A flechita E:_B hasta E:_C con_incremental ETS:_D hacer INSTRUCCIONES:_INS fin_para {:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "for "+_A.toString()+" in range("+_B.toString()+","+_C.toString()+","+_D+"):";cond.add(ifins);cond.add(ins); RESULT = cond;:}
+    | mientras abre_parentesis ETS:_C cierra_parentesis hacer INSTRUCCIONES:_INS fin_mientras {:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "while( "+_C.toString()+"):";cond.add(ifins);cond.add(ins); RESULT = cond;:}
+    | repetir INSTRUCCIONES:_INS hasta_que abre_parentesis ETS:_C cierra_parentesis punto_y_coma {:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "while(True):";cond.add(ifins);cond.add(ins);String fifi = "     if ("+_C.toString()+"):";String brek= "          break";cond.add(fifi);cond.add(brek); RESULT = cond;:}
+    ;
+
+SWITCH ::= segun ETS:_E  hacer OPCIONES:_OPS de_lo_contrario entonces INSTRUCCIONES:_INS fin_segun {:ArrayList<Object> condan= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String primer = "k2 = "+_E.toString();condan.add(primer); condan.addAll(ArrayList.class.cast(_OPS));String elsa = "else:";condan.add(elsa); condan.add(ins);;RESULT = condan;:}
+;
+OPCIONES::= OPCIONES:_OPS OPCION:_OP  {:ArrayList<Object> condan= ArrayList.class.cast(_OPS); ArrayList<Object> ins = ArrayList.class.cast(_OP);String ifins = "elif( k2 =="+ins.get(0).toString()+"):";condan.add(ifins);condan.add(ArrayList.class.cast(ins.get(1))); RESULT = condan;:}
+            | OPCION:_OP  {:ArrayList<Object> contr= new ArrayList<>();ArrayList<Object> ins = ArrayList.class.cast(_OP);String ifins = "if( k2 =="+ins.get(0).toString()+"):";contr.add(ifins);contr.add( ArrayList.class.cast(ins.get(1))); RESULT = contr;:}
+;
+OPCION ::= abre_pregunta  ETS:_E cierra_pregunta entonces INSTRUCCIONES:_INS {:ArrayList<Object> contr= new ArrayList<>();ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = _E.toString();contr.add(ifins);contr.add(ins); RESULT = contr;:}
+;
+
+
+
+
+//CONDICION IF
+CONDICIONIF::= si abre_parentesis ETS:_C cierra_parentesis entonces INSTRUCCIONES:_INS fin_si {:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "if("+_C.toString()+"):";cond.add(ifins);cond.add(ins); RESULT = cond;:}
+                | si abre_parentesis ETS:_C cierra_parentesis entonces INSTRUCCIONES:_INS IFANIDADOS:_INFANIDADOS fin_si {:ArrayList<Object> condan= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "if("+_C.toString()+"):";condan.add(ifins);condan.add(ins); condan.addAll(ArrayList.class.cast(_INFANIDADOS));RESULT = condan;:}
+;
+IFANIDADOS ::= IFANIDADOS:_INFANIDADOS  o_si abre_parentesis ETS:_C cierra_parentesis entonces INSTRUCCIONES:_INS {:ArrayList<Object> condan= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);condan.addAll(ArrayList.class.cast(_INFANIDADOS));String ifins = "elif("+_C.toString()+"):";condan.add(ifins);condan.add(ins); RESULT = condan;:}
+                | IFANIDADOS:_INFANIDADOS  de_lo_contrario INSTRUCCIONES:_INS {:ArrayList<Object> condan= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);condan.addAll(ArrayList.class.cast(_INFANIDADOS));String ifins = "else:";condan.add(ifins);condan.add(ins); RESULT = condan;:}
+                |  o_si abre_parentesis ETS:_C cierra_parentesis entonces INSTRUCCIONES:_INS {:ArrayList<Object> conelse= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "elif("+_C.toString()+"):";conelse.add(ifins);conelse.add(ins); RESULT = conelse;:}
+                | de_lo_contrario INSTRUCCIONES:_INS {:ArrayList<Object> contr= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "else:";contr.add(ifins);contr.add(ins); RESULT = contr;:}
+;
+
+
+
+
+
+
+//FUNCIONES Y METODOS CON PARAMETROS
+FUNCION::= funcion E:_E TIPODATO_DECLARACION  con_parametros PARAMETROS:_C INSTRUCCIONES:_INS fin_funcion{:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "def "+_E.toString()+"("+_C.toString()+"):";cond.add(ifins);cond.add(ins); RESULT = cond;:}
+;
+METODO ::= metodo E:_E con_parametros PARAMETROS:_C INSTRUCCIONES:_INS fin_metodo {:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "def "+_E.toString()+"("+_C.toString()+"):";cond.add(ifins);cond.add(ins); RESULT = cond;:}
+;
+PARAMETROS ::= abre_parentesis PARS:_IDS cierra_parentesis{:
+                                                        String instruccion="";
+                                                        ArrayList<Object> ides = ArrayList.class.cast(_IDS);
+                                                        for (Object c: ides )
+                                                        {
+                                                            if (ides.get(ides.size()-1).toString()!=c.toString())
+                                                                instruccion+= c.toString()+",";
+                                                            else  instruccion+= c.toString();
+
+                                                        }
+
+                                                        String FIM = instruccion; RESULT = FIM;:}
+;
+PARS ::= PARS:_IDS coma PAR:_E {:ArrayList<Object> ides = ArrayList.class.cast(_IDS); ides.add(_E.toString());RESULT = ides;:}
+     | PAR:_E {: ArrayList<Object> ides = new ArrayList<>(); ides.add(_E.toString());RESULT = ides;:}
+;
+PAR ::= TIPODATO_DECLARACION E:_E {:String Fe = _E.toString(); RESULT = Fe;:}
+;
+PARAMETROSLL ::= abre_parentesis PARSLL:_IDS cierra_parentesis {:
+                                                              String instruccion="";
+                                                              ArrayList<Object> ides = ArrayList.class.cast(_IDS);
+                                                              for (Object c: ides )
+                                                              {
+                                                                  if (ides.get(ides.size()-1).toString()!=c.toString())
+                                                                  instruccion+= c.toString()+",";
+                                                                  else  instruccion+= c.toString();
+
+                                                              }
+
+                                                              String FIM = instruccion; RESULT = FIM;:}
+;
+PARSLL ::= PARSLL:_IDS coma E:_E {:ArrayList<Object> ides = ArrayList.class.cast(_IDS); ides.add(_E.toString());RESULT = ides;:}
+     | E:_E  {: ArrayList<Object> ides = new ArrayList<>(); ides.add(_E.toString());RESULT = ides;:}
+;
+
+//sin parametros
+
+FUNCIONsp::= funcion E:_E TIPODATO_DECLARACION  abre_parentesis cierra_parentesis INSTRUCCIONES:_INS fin_funcion {:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "def "+_E.toString()+"():";cond.add(ifins);cond.add(ins); RESULT = cond;:}
+;
+METODOsp ::= metodo E:_E abre_parentesis cierra_parentesis INSTRUCCIONES:_INS fin_metodo{:ArrayList<Object> cond= new ArrayList<>(); ArrayList<Object> ins = ArrayList.class.cast(_INS);String ifins = "def "+_E.toString()+"():";cond.add(ifins);cond.add(ins); RESULT = cond;:}
+;
+//EL RETURN
+
+RETURN ::= retornar abre_parentesis ETS:_E cierra_parentesis punto_y_coma{:String FIM = "return("+_E.toString()+")"; RESULT = FIM;:}
+        | retornar abre_parentesis cierra_parentesis punto_y_coma{:String FIM = "return()"; RESULT = FIM;:}
+
+;
+
+
+//LLAMADA DE FUNCION O METODOS
+CALL::= ejecutar E:_E PARAMETROSLL:_C punto_y_coma {:String FIM = _E.toString()+"("+_C.toString()+")"; RESULT = FIM;:}
+    | ejecutar E:_E abre_parentesis cierra_parentesis punto_y_coma {:String FIM = _E.toString()+"()"; RESULT = FIM;:}
+
+;
+
+
+
+
+//INSTRUCCION IMPRIMIR UNA Y VARIAS LINEAS
+
+IMPRIMIR ::= imprimir  abre_parentesis ETS:_E cierra_parentesis punto_y_coma {:String FIM = "fmt.Print("+_E.toString()+")"; RESULT = FIM;:}
+
+
+;
+IMPRIMIRLN ::= imprimir_nl abre_parentesis ETS:_E cierra_parentesis punto_y_coma {:String FIML = "fmt.Println("+_E.toString()+")"; RESULT = FIML;:}
+
+;
+//PRETS ::= E:_E {:RESULT = _E;:}
+       // | CALL:_E{:RESULT = _E; :}
+//;
+
+
+//ASIGNACION DE VARIABLES YA DECLARADAS (CAMBIO DE VALOR)
+ASIGNACION ::= IDS:_IDS flechita ETS:_E punto_y_coma{:
+    String instruccion="";
+    ArrayList<Object> ides = ArrayList.class.cast(_IDS);
+    for (Object c: ides )
+    {
+        instruccion+= c.toString()+"=";
+        System.out.println(instruccion);
+    }
+
+    String FIM = instruccion+_E.toString(); RESULT = FIM;:}
+
+    ;
+
+//DECLARACION DE VARIABLES NO DECLARADAS SINGULAR O EN CONJUNTO, FINALES O NO FINALES, INCLUYE EXPRESIONES
+
+
+
+
+TIPODATO_DECLARACION  ::=  numero:_E{:String FV = "int"; RESULT = FV;:}
+                       | bulean:_E{:String FV = "bool"; RESULT = FV;:}
+                       | cadena:_E{:String FV = "string"; RESULT = FV;:}
+                       | caracter:_E{:String FV = "char"; RESULT = FV;:}
+                       ;
+
+DECLARACION ::= ingresar IDS:_IDS  como  TIPODATO_DECLARACION:_TD con_valor ETS:_E punto_y_coma {:
+String instruccion="";
+ArrayList<Object> ides = ArrayList.class.cast(_IDS);
+for (Object c: ides )
+{
+    instruccion+= "\nvar "+c.toString()+" "+_TD.toString()+ " = "+_E.toString();
+    System.out.println(instruccion);
+    }
+
+String FIM = instruccion; RESULT = FIM;:}
+            ;
+
+ETS ::= COMPARACIONES:_E {:RESULT = _E; :}
+        | E:_E {:RESULT = _E; :}
+        | INSTRUCCION:_E{:RESULT = _E;:}
+;
+IDS ::= IDS:_IDS coma E:_E {:ArrayList<Object> ides = ArrayList.class.cast(_IDS); ides.add(_E.toString());RESULT = ides;:}
+    | E:_E {: ArrayList<Object> ides = new ArrayList<>(); ides.add(_E.toString());RESULT = ides;:}
+    ;
+VARIABLE ::= variable:_variable{:String r = _variable.toString(); RESULT = r;:}
+;
+COMPARACIONES::= not abre_parentesis COMPARACIONES:_E cierra_parentesis {:String FE ="not("+ _E.toString()+ ")"; RESULT = FE;:}
+            |  COMPARACIONES:_E and COMP:_F {:String FE = _E.toString()+ "and"+_F.toString(); RESULT = FE;:}
+            |  COMPARACIONES:_E or COMP:_F {:String FE = _E.toString()+ "or"+_F.toString(); RESULT = FE;:}
+            |   COMP:_E {:String FE = _E.toString(); RESULT = FE;:}
+;
+COMP::=  E:_E menor E:_F {:String FE = _E.toString()+ "<"+_F.toString(); RESULT = FE;:}
+    |  E:_E mayor_o_igual E:_F {:String FE = _E.toString()+ ">="+_F.toString(); RESULT = FE;:}
+    |  E:_E menor_o_igual E:_F {:String FE = _E.toString()+ "<="+_F.toString(); RESULT = FE;:}
+    |  E:_E mayor E:_F {:String FE = _E.toString()+ ">"+_F.toString(); RESULT = FE;:}
+    |  E:_E es_diferente E:_F {:String FE = _E.toString()+ "!="+_F.toString(); RESULT = FE;:}
+    |  E:_E es_igual E:_F {:String FE = _E.toString()+ "=="+_F.toString(); RESULT = FE;:}
+
+;
+E::=E:_E mas Term:_F {:String FE = _E.toString()+ "+"+_F.toString(); RESULT = FE;:}
+|E:_E menos Term:_F {:String FE = _E.toString()+ "-"+_F.toString(); RESULT = FE;:}
+|menos Term:_F {:String FE = "-"+_F.toString(); RESULT = FE;:}
+|Term:_F  {:String FE = _F.toString(); RESULT = FE;:}
+;
+Term::=Term:_E por Factor:_F {:String FE = _E.toString()+ "*"+_F.toString(); RESULT = FE;:}
+|Term:_E dividido Factor:_F {:String FE = _E.toString()+ "/"+_F.toString(); RESULT = FE;:}
+| Term:_E mod Factor:_F  {:String FE = _E.toString()+ "%"+_F.toString(); RESULT = FE;:}
+|  Term:_E potencia abre_corchete E:_F cierra_corchete {:String FE = _E.toString()+ "**("+_F.toString()+")"; RESULT = FE;:}
+|Factor:_F {:String FE = _F.toString(); RESULT = FE;:}
+;
+Factor::= abre_parentesis E:_E cierra_parentesis  {:String FE ="(" +_E.toString()+")"; RESULT = FE;:}
+|F:_F  {:String FE = _F.toString(); RESULT = FE;:}
+
+;
+
+
+F::= number:_number                      {:String FVR = _number.toString(); RESULT = FVR;:}
+    |verdadero:_verdadero       {:String FVR = "True"; RESULT = FVR;:}
+    |falso:_falso           {:String FFS = "False"; RESULT = FFS;:}
+    |frase:_frase           {:String FFR = _frase.toString(); RESULT = FFR;:}
+    |frasecita:_frasecita {:String FF = _frasecita.toString(); RESULT = FF;:}
+    | VARIABLE:_VARIABLE {:String FV = _VARIABLE.toString(); RESULT = FV;:}
+;
+// INSSTRUCCION FOR
+
+

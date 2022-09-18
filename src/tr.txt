@@ -1,11 +1,5 @@
 inicio
-
-
-metodo _alberto_()
-ingresar _kk_  como cadena con_valor "hola mundo";
-imprimir("jalou");
-retornar(_kk_);
-fin_metodo
-ejecutar _alberto_();
-
+ingresar _a_ como cadena con_valor "hola mundo";
+imprimir(_a_);
+imprimir_nl("____BASE_____");
 final

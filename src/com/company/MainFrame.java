@@ -13,6 +13,8 @@ import analizadores.al;
 import analizadores.as;
 import arbol_graficado.al_g;
 import arbol_graficado.as_g;
+import analizador_golag.al_go;
+import analizador_golag.as_go;
 import arbol_graficado.listaenlazada;
 import javax.swing.*;
 import java.awt.*;
@@ -42,6 +44,29 @@ public class MainFrame extends JFrame {
         catch (Exception e) {
             System.out.println("se fue al catch");
         }
+        return salida;
+
+    }
+    public String analizador_go()
+    {
+        String salida = "\n" +
+                "package main\n" +
+                "\n" +
+                "import \"fmt\"\n" +
+                "\n" +
+                "func main() { \n";
+        try {
+            al_go lexico = new al_go(new BufferedReader(new FileReader("C:\\Users\\Alberto\\Desktop\\cys\\COMPIS2Fase1\\src\\tr.txt")));
+            as_go sintactico = new as_go(lexico);
+            sintactico.parse();
+            System.out.println("ESTO VIENE DESDE LA INTERFAZ WUJU");
+            System.out.println(error.resultado_sintactico);
+            salida += error.resultado_sintactico;
+        }
+        catch (Exception e) {
+            System.out.println("se fue al catch");
+        }
+        salida+="\n}";
         return salida;
 
     }
@@ -95,7 +120,15 @@ public class MainFrame extends JFrame {
         BGO.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("aun no hay nada aqui jeje");
+                escribe(entrada.getText());
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+                System.out.println("ESTO VIENE DESDE EL STRING");
+                System.out.println(error.resultado_sintactico);
+                salidago.setText(analizador_go());
             }
         });
         BREPButton.addActionListener(new ActionListener() {

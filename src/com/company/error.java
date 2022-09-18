@@ -23,6 +23,25 @@ public class error {
     public static ArrayList<String> arbol_sintactico = new ArrayList<>();
 
     public String resultado = "";
+    public void imprime_go(ArrayList p, int indent)
+    {
+        for(Object k: p )
+        {
+            if (k.getClass()== ArrayList.class)
+                imprime(ArrayList.class.cast(k),indent+1);
+            else
+            {
+                String inde = "";
+                for(int i = 0;i<indent;i++)
+                    inde+="     ";
+                //System.out.println(inde+k.toString());
+                resultado += "\n"+inde+k.toString();
+            }
+        }
+
+    }
+
+
     public void imprime(ArrayList p, int indent)
     {
 
