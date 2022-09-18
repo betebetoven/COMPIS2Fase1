@@ -73,11 +73,11 @@ terminal inicio;
 
 non terminal INIT,Term, Factor,fin,ETS,PRETS, INSTRUCCIONES,OPCION,IFANIDADOS, SWITCH,OPCIONES, INSTRUCCION, DECLARACION ,IMPRIMIR, IMPRIMIRLN, ASIGNACION,METODO,FUNCION,METODOsp,FUNCIONsp,CONDICIONIF,CICLO,RETURN,CALL,E,COND_WHILE, COMPARACIONES,TIPODATO_DECLARACION,PARAMETROS,PARS,PAR,PARAMETROSLL,PARSLL,IDS,COMP,F,VARIABLE,BLOQUE_PRINCIPAL;
 start with INIT;
-INIT::= BLOQUE_PRINCIPAL {:System.out.println("Fin de analisis de entrada");:}
+INIT::= BLOQUE_PRINCIPAL:_X {:System.out.println("Fin de analisis de entrada");/*System.out.println(_X.toString());*/error.resultado_sintactico= _X.toString();RESULT = _X;:}
 
  ;
 
-BLOQUE_PRINCIPAL ::= inicio INSTRUCCIONES:_INSTRUCCIONES finall {:System.out.println(_INSTRUCCIONES.toString()); error imprime = new error("lexema","tipo","descripcion",3,3);imprime.imprime(ArrayList.class.cast(_INSTRUCCIONES),0);:}
+BLOQUE_PRINCIPAL ::= inicio INSTRUCCIONES:_INSTRUCCIONES finall {:/*System.out.println(_INSTRUCCIONES.toString());*/ error imprime = new error("lexema","tipo","descripcion",3,3);imprime.imprime(ArrayList.class.cast(_INSTRUCCIONES),0);RESULT = imprime.resultado;:}
 
 ;
 

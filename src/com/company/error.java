@@ -4,6 +4,7 @@ import java.awt.image.AreaAveragingScaleFilter;
 import java.util.*;
 
 public class error {
+    public static String resultado_sintactico = "";
     String lexema, tipo, descripcion,conexiones;
     int linea, columna;
     listaenlazada general = new listaenlazada();
@@ -20,6 +21,8 @@ public class error {
 
     }
     public static ArrayList<String> arbol_sintactico = new ArrayList<>();
+
+    public String resultado = "";
     public void imprime(ArrayList p, int indent)
     {
 
@@ -32,7 +35,8 @@ public class error {
                 String inde = "";
                 for(int i = 0;i<indent;i++)
                     inde+="     ";
-                System.out.println(inde+k.toString());
+                //System.out.println(inde+k.toString());
+                resultado += "\n"+inde+k.toString();
             }
         }
     }

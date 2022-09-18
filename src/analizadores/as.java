@@ -1027,7 +1027,10 @@ class CUP$as$actions {
           case 1: // INIT ::= BLOQUE_PRINCIPAL 
             {
               Object RESULT =null;
-		System.out.println("Fin de analisis de entrada");
+		int _Xleft = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).left;
+		int _Xright = ((java_cup.runtime.Symbol)CUP$as$stack.peek()).right;
+		Object _X = (Object)((java_cup.runtime.Symbol) CUP$as$stack.peek()).value;
+		System.out.println("Fin de analisis de entrada");/*System.out.println(_X.toString());*/error.resultado_sintactico= _X.toString();RESULT = _X;
               CUP$as$result = parser.getSymbolFactory().newSymbol("INIT",0, ((java_cup.runtime.Symbol)CUP$as$stack.peek()), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;
@@ -1039,7 +1042,7 @@ class CUP$as$actions {
 		int _INSTRUCCIONESleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-1)).left;
 		int _INSTRUCCIONESright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-1)).right;
 		Object _INSTRUCCIONES = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-1)).value;
-		System.out.println(_INSTRUCCIONES.toString()); error imprime = new error("lexema","tipo","descripcion",3,3);imprime.imprime(ArrayList.class.cast(_INSTRUCCIONES),0);
+		/*System.out.println(_INSTRUCCIONES.toString());*/ error imprime = new error("lexema","tipo","descripcion",3,3);imprime.imprime(ArrayList.class.cast(_INSTRUCCIONES),0);RESULT = imprime.resultado;
               CUP$as$result = parser.getSymbolFactory().newSymbol("BLOQUE_PRINCIPAL",37, ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-2)), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;
