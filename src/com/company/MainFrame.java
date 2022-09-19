@@ -1,25 +1,18 @@
 package com.company;
 
-import javax.print.event.PrintServiceAttributeListener;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.ArrayList;
+
 import analizadores.al;
 import analizadores.as;
 import arbol_graficado.al_g;
 import arbol_graficado.as_g;
 import analizador_golag.al_go;
 import analizador_golag.as_go;
-import arbol_graficado.listaenlazada;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class MainFrame extends JFrame {
     private JTextArea entrada;
@@ -29,6 +22,7 @@ public class MainFrame extends JFrame {
     private JButton BGO;
     private JButton BREPButton;
     private JPanel mainPanel;
+    private JButton abrir;
 
     public String analizadores()
     {
@@ -96,6 +90,59 @@ public class MainFrame extends JFrame {
         }
     }
 
+    public static String getDir()throws IOException
+    {
+        String dir = "";
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+        int result = fileChooser.showOpenDialog(fileChooser.getParent());
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            dir = selectedFile.getAbsolutePath();
+            System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+
+        }
+        return dir;
+
+    }
+
+    public static String getContentOfFile(String pathname) {
+        File archivo = null;
+        FileReader fr = null;
+        BufferedReader br = null;
+
+        try {
+            // Apertura del fichero y creacion de BufferedReader para poder
+            // hacer una lectura comoda (disponer del metodo readLine()).
+            //para el commit final
+            archivo = new File(pathname);
+            fr = new FileReader(archivo);
+            br = new BufferedReader(fr);
+            // Lectura del fichero
+            String content = "";
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                content += linea + "\n";
+            }
+            return content;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // En el finally cerramos el fichero, para asegurarnos
+            //otro cambio solo para hacerlo bien
+            // que se cierra tanto si todo va bien como si salta
+            // una excepcion.
+            try {
+                if (null != fr) {
+                    fr.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+        return "";
+    }
+
     public MainFrame()  {
         setContentPane(mainPanel);
         setSize(600,600);
@@ -141,6 +188,18 @@ public class MainFrame extends JFrame {
                     ex.printStackTrace();
                 }
                 String j = arbol();
+            }
+        });
+        abrir.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    entrada.setText(getContentOfFile(getDir()));
+                }
+                catch (Exception f)
+                {
+                    System.out.println("la cago");
+                }
             }
         });
     }

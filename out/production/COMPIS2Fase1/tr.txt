@@ -30,7 +30,7 @@ ingresar _name7_          como caracter con_valor '${100}';
 ingresar _name8_          como caracter con_valor '${111}';
 
 
-
+@
 
 ingresar _operaciones1Basica_      como numero con_valor 1+(1);               //2 el resultado
 ingresar _operaciones1Basica2_      como numero con_valor _operaciones1Basica_+_operaciones1Basica_;               //

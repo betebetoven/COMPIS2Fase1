@@ -211,4 +211,4 @@
 
     /* error fallback */
     .                              { System.out.println("Illegal character <"+
-                                                        yytext()+">"); }
+                                                        yytext()+"> en: linea:"+yyline+" columna: "+yycolumn); }
