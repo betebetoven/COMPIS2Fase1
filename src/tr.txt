@@ -1,15 +1,15 @@
 inicio
-imprimir_nl("alabaro");
+imprimir("alabaro");
 metodo _potenciaManual_ con_parametros (numero _base_ ,numero _exponente_ )
 	ingresar _i_ como Numero con_valor 0;
 	ingresar _acumulado_ como Numero con_valor 0;
 	para _i_ -> 0 hasta _exponente_-1 hacer
 		_acumulado_ -> _acumulado_ + _acumulado_;
 	fin_para
-	imprimir_nl (_acumulado_);
+	imprimir (_acumulado_);
 	imprimir_nl (" Esta es la potencia Manual");
 fin_metodo
-
+#
 funcion _potenciaFuncion_  Numero con_parametros (numero _base_ ,numero _exponente_ )
 	ingresar _potencia_ como Numero con_valor _base_ potencia [_exponente_];
 	retornar (_potencia_);

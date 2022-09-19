@@ -23,6 +23,7 @@ public class MainFrame extends JFrame {
     private JButton BREPButton;
     private JPanel mainPanel;
     private JButton abrir;
+    private JButton errores;
 
     public String analizadores()
     {
@@ -151,7 +152,8 @@ public class MainFrame extends JFrame {
         BPY.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                error.errores_lexicos.clear();
+                error.errores_sintacticos.clear();
                 escribe(entrada.getText());
                 try {
                     Thread.sleep(1000);
@@ -200,6 +202,19 @@ public class MainFrame extends JFrame {
                 {
                     System.out.println("la cago");
                 }
+            }
+        });
+        errores.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String erroes = "ERROES_LEXICOS:";
+                if(error.errores_lexicos.size()!=0);
+                for (String c: error.errores_lexicos
+                     ) {
+                    erroes+= "\n"+c;
+
+                }
+                salidapy.setText(erroes);
             }
         });
     }

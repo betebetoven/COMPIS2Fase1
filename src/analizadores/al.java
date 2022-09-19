@@ -5,6 +5,7 @@
  /* JFlex example: partial Java language lexer specification */
  package analizadores;
  import java_cup.runtime.*;
+ import com.company.error;
 
 
     /*
@@ -1323,7 +1324,7 @@ public class al implements java_cup.runtime.Scanner {
           case 70: break;
           case 3:
             { System.out.println("Illegal character <"+
-                                                        yytext()+"> en: linea:"+yyline+" columna: "+yycolumn);
+                                                        yytext()+"> en: linea:"+yyline+" columna: "+yycolumn); error.errores_lexicos.add("Illegal character <"+yytext()+"> en: linea:"+yyline+" columna: "+yycolumn);
             }
             // fall through
           case 71: break;

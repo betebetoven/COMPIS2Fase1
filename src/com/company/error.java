@@ -6,6 +6,8 @@ import java.util.*;
 public class error {
     public static String resultado_sintactico = "";
     String lexema, tipo, descripcion,conexiones;
+    public static ArrayList<String> errores_lexicos = new ArrayList<>();
+    public  static  ArrayList<String> errores_sintacticos = new ArrayList<>();
     int linea, columna;
     listaenlazada general = new listaenlazada();
     HashMap<String, ArrayList<String>> apuntadores = new HashMap<>();

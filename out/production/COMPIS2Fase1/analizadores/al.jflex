@@ -1,6 +1,7 @@
  /* JFlex example: partial Java language lexer specification */
  package analizadores;
  import java_cup.runtime.*;
+ import com.company.error;
 
 
     /*
@@ -211,4 +212,4 @@
 
     /* error fallback */
     .                              { System.out.println("Illegal character <"+
-                                                        yytext()+"> en: linea:"+yyline+" columna: "+yycolumn); }
+                                                        yytext()+"> en: linea:"+yyline+" columna: "+yycolumn); error.errores_lexicos.add("Illegal character <"+yytext()+"> en: linea:"+yyline+" columna: "+yycolumn); }
