@@ -24,6 +24,7 @@ public class MainFrame extends JFrame {
     private JPanel mainPanel;
     private JButton abrir;
     private JButton errores;
+    private JScrollPane jsp1;
 
     public String analizadores()
     {
@@ -144,11 +145,18 @@ public class MainFrame extends JFrame {
         return "";
     }
 
+    NumeroLinea numeroLinea;
+
+
+
     public MainFrame()  {
         setContentPane(mainPanel);
         setSize(600,600);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        numeroLinea = new NumeroLinea(entrada);
+        jsp1.setRowHeaderView(numeroLinea);
         setVisible(true);
+
         BPY.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
