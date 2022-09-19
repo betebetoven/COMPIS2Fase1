@@ -1,6 +1,7 @@
 package com.company;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
@@ -155,6 +156,12 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         numeroLinea = new NumeroLinea(entrada);
         jsp1.setRowHeaderView(numeroLinea);
+        Font f = new Font("Cascadia Code", Font.BOLD,13);
+        entrada.setFont(f);
+        entrada.setForeground(Color.LIGHT_GRAY);
+        entrada.setBackground(Color.darkGray);
+        entrada.setCaretColor(Color.white);
+
         setVisible(true);
 
         BPY.addActionListener(new ActionListener() {
