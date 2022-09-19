@@ -1245,8 +1245,8 @@ int columna = eright+1;
                  System.out.println(id);
              }*/
 
-
-             System.out.println("______ENCONTRO ERROR_________: "+er); System.out.println(e); 
+             error.errores_sintacticos.add(er);
+             System.out.println("______ENCONTRO ERROR_________: "+er);/* System.out.println(e);*/ 
               CUP$as$result = parser.getSymbolFactory().newSymbol("NT$0",38, ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;
@@ -1260,7 +1260,7 @@ int columna = eright+1;
 		int eleft = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-2)).left;
 		int eright = ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-2)).right;
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$as$stack.elementAt(CUP$as$top-2)).value;
-		String c = "";RESULT = c;
+		String c = "#error";RESULT = c;
               CUP$as$result = parser.getSymbolFactory().newSymbol("INSTRUCCION",11, ((java_cup.runtime.Symbol)CUP$as$stack.elementAt(CUP$as$top-2)), ((java_cup.runtime.Symbol)CUP$as$stack.peek()), RESULT);
             }
           return CUP$as$result;

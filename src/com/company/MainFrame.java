@@ -152,6 +152,7 @@ public class MainFrame extends JFrame {
         BPY.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                System.out.println("NUEVA CORRIDA__________________________________________________");
                 error.errores_lexicos.clear();
                 error.errores_sintacticos.clear();
                 escribe(entrada.getText());
@@ -214,6 +215,14 @@ public class MainFrame extends JFrame {
                     erroes+= "\n"+c;
 
                 }
+                 erroes += "\nERROES_LEXICOS:";
+                if(error.errores_sintacticos.size()!=0);
+                for (String c: error.errores_sintacticos
+                     ) {
+                    erroes+= "\n"+c;
+
+                }
+
                 salidapy.setText(erroes);
             }
         });

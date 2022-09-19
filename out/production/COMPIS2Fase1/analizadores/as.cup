@@ -108,9 +108,9 @@ INSTRUCCION ::= DECLARACION:_D    {:String Fimpr = _D.toString();System.out.prin
                  System.out.println(id);
              }*/
 
-
-             System.out.println("______ENCONTRO ERROR_________: "+er); System.out.println(e); :}
-             fin {:String c = "";RESULT = c;:}
+             error.errores_sintacticos.add(er);
+             System.out.println("______ENCONTRO ERROR_________: "+er);/* System.out.println(e);*/ :}
+             fin {:String c = "#error";RESULT = c;:}
 ;
 fin::= punto_y_coma|fin_segun|fin_funcion|fin_metodo|fin_mientras|fin_para|fin_si|finall
 ;

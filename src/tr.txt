@@ -9,12 +9,12 @@ metodo _potenciaManual_ con_parametros (numero _base_ ,numero _exponente_ )
 	imprimir (_acumulado_);
 	imprimir_nl (" Esta es la potencia Manual");
 fin_metodo
-#
+
 funcion _potenciaFuncion_  Numero con_parametros (numero _base_ ,numero _exponente_ )
 	ingresar _potencia_ como Numero con_valor _base_ potencia [_exponente_];
 	retornar (_potencia_);
 fin_funcion
-
+@
 metodo _metodo_1_() //ACA HAY QUE AGREGAR DE LO DE ENCERRA LOS GUIONES TAMBIEN
 	imprimir_nl ("estamos entrando al metodo 1");
 	ejecutar _potenciaManual_(3*1+4/2, 3+2);
