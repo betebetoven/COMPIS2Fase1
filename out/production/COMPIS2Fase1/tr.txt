@@ -1,26 +1,117 @@
 inicio
-imprimir("alabaro");
-metodo _potenciaManual_ con_parametros (numero _base_ ,numero _exponente_ )
-	ingresar _i_ como Numero con_valor 0;
-	ingresar _acumulado_ como Numero con_valor 0;
-	para _i_ -> 0 hasta _exponente_-1 hacer
-		_acumulado_ -> _acumulado_ + _acumulado_;
-	fin_para
-	imprimir (_acumulado_);
-	imprimir_nl (" Esta es la potencia Manual");
+imprimir("hola mundo");
+imprimir("esta es ");
+imprimir("la primera");
+imprimir("prueba de todo junto");
+
+ingresar _HOLA_ como boolean con_valor falso;
+ingresar _hola_, _perez_, _ruano_ como numero con_valor 10;
+ingresar _hola_  como numero con_valor 10.5;
+ingresar _hola_  como numero con_valor 10;
+ingresar _hola_  como cadena con_valor "hola mundo";
+ingresar _hola_  como caracter con_valor 'p';
+imprimir_nl(_hola_);
+
+ _ruano_  -> 10.5 + 6 ;
+  _hola_, _perez_ -> _ruano_;
+  imprimir_nl(_hola_);
+  si ( _hola_ mayor 10) entonces
+  si ( _hola_ mayor 10) entonces
+    imprimir("si funciono");
+    fin_si
+    si ( _hola_ mayor 10) entonces
+        imprimir("si funciono");
+        fin_si
+        si ( _hola_ mayor 10) entonces
+            imprimir("si funciono");
+            fin_si
+
+    fin_si
+si ( _hola_ mayor 10) entonces
+  si ( _hola_ mayor 10) entonces
+    imprimir("si funciono");
+    fin_si
+    si ( _hola_ mayor 10) entonces
+        imprimir("si funciono");
+        fin_si
+        si ( _hola_ menor 10) entonces
+            imprimir("si funciono");
+        o_si(_hola_ mayor 10) entonces
+            imprimir("si funciono el else");
+         o_si(_hola_ mayor 10) entonces
+                    imprimir("si funciono el else");
+          o_si(_hola_ mayor 10) entonces
+                     imprimir("si funciono el else");
+          de_lo_contrario
+            imprimir("esto no tiene que salir");
+            fin_si
+
+    fin_si
+    si ( _hola_ menor 10) entonces
+    imprimir("aca no tiene que pasar");
+    o_si( _hola_ es_igual 100) entonces
+    imprimir("aca no tiene que pasar");
+    de_lo_contrario
+    imprimir("si funciona el else simple jeje");
+    fin_si
+
+metodo _alberto_()
+ingresar _kk_  como cadena con_valor "hola mundo";
+imprimir("jalou");
+retornar(_kk_);
 fin_metodo
-funcion _potenciaFuncion_  Numero con_parametros (numero _base_ ,numero _exponente_ )
-	ingresar _potencia_ como Numero con_valor _base_ potencia [_exponente_];
-	retornar (_potencia_);
+
+funcion _kkita_ cadena con_parametros (cadena _a_, numero _c_)
+ingresar _result_ como cadena con_valor _a_ + _c_;
+retornar(_result_);
 fin_funcion
+imprimir(ejecutar _kkita_("alberto","hernandez"););
 
-metodo _metodo_1_() //ACA HAY QUE AGREGAR DE LO DE ENCERRA LOS GUIONES TAMBIEN
-	imprimir_nl ("estamos entrando al metodo 1");
-	ejecutar _potenciaManual_(3*1+4/2, 3+2);
-	imprimir (ejecutar _potenciaFuncion_(3*1+4/2, 3+2););
-	imprimiR_nl (" Esta es la potencia Funcion");
-fin_metodo
 
-ejecutar _metodo_1_();
+imprimir("regresa indentacion");
+ejecutar _alberto_();
+para _hola_ -> 0 hasta 50  con_incremental
+2 hacer
+imprimir(20.5);
+fin_para
+para _hola_ -> 0 hasta 50  hacer
+imprimir(20.5);
+fin_para
+_a_ -> 20;
+_b_ -> 1;
+_c_ -> 40;
+mientras ( _a_ + _b_ menor _c_ ) hacer
+imprimir(_a_ + _b_);
+_a_ -> _a_ + _b_;
+fin_mientras
+
+
+_pepe_ -> 0;
+repetir
+imprimir( "pepe " + _pepe_);
+_pepe_ -> _pepe_ + 1;
+hasta_que (_pepe_ es_igual 25);
+
+ingresar _varaux_ como numero con_valor 10 % 2;
+	segun _varaux_ hacer
+		¿ 0 ? entonces
+			imprimir_nl ("el valor es mayor a 0 y menos a 2");
+		¿ 2 ? entonces
+			imprimir_nl ("el valor es mayor a 2");
+			de_lo_contrario entonces
+            imprimir("me lleva la verga");
+	fin_segun
+
+_entrada_ -> "papaya";
+segun _entrada_ hacer
+  ¿ 10 ? entonces
+  imprimir("me lleva la verga numero");
+  ¿ "papaya" ? entonces
+  imprimir("me lleva la verga string");
+  ¿verdadero ? entonces
+  imprimir("me lleva la verga boolean");
+  de_lo_contrario entonces
+imprimir("me lleva la verga");
+fin_segun
 
 final
